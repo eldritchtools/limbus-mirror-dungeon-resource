@@ -20,7 +20,7 @@ function LinkIcons() {
 
     return <div className="side-panel-icons">
         <a
-            href="https://github.com/Kylesky/limbus-mirror-dungeon-resource"
+            href="https://github.com/eldritchtools/limbus-mirror-dungeon-resource"
             target="_blank"
             rel="noopener noreferrer"
             style={iconStyle}
