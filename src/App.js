@@ -8,6 +8,8 @@ import AboutTab from './AboutTab';
 import data from './data/data.json';
 import achievements from './data/achievements.json';
 import identities from './data/identities.json';
+import rewards from './data/rewards.json';
+
 import { useEffect, useMemo, useState } from 'react';
 
 function preprocessData(data) {
@@ -30,7 +32,7 @@ function preprocessData(data) {
     Object.entries(floorsPerPack.normal).forEach(([pack, floors]) => data["theme_packs"][pack]["normalFloors"] = floors);
     Object.entries(floorsPerPack.hard).forEach(([pack, floors]) => data["theme_packs"][pack]["hardFloors"] = floors);
 
-    return { ...data, identities: identities };
+    return { ...data, identities: identities, rewards: rewards };
 }
 
 function defaultTracking(achievements) {

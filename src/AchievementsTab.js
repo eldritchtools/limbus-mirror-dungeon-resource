@@ -83,6 +83,74 @@ function AchievementTab({ data, achievements, sortClearedToBottom, category, tra
     }
 }
 
+function RewardsTab({ data, totalPoints, columns = 2 }) {
+    const currentLevel = Math.floor(totalPoints / 100);
+    const [rewardsDone, rewardsTodo, levelComponents] = Object.entries(data.rewards).reduce((acc, [level, reward]) => {
+        if (parseInt(level) <= currentLevel) {
+            if (reward.item in acc[0]) acc[0][reward.item] += reward.count;
+            else acc[0][reward.item] = reward.count;
+            
+            acc[2].push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
+                <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{level}</span>
+                <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{reward.count}x {reward.item}</span>
+            </div>);
+        } else {
+            if (reward.item in acc[1]) acc[1][reward.item] += reward.count;
+            else acc[1][reward.item] = reward.count;
+
+            acc[2].push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
+                <span style={{ padding: "0.1rem", border: "1px #666 dotted" }}>{level}</span>
+                <span style={{ padding: "0.1rem", border: "1px #666 dotted" }}>{reward.count}x {reward.item}</span>
+            </div>);
+        }
+
+        return acc;
+    }, [{}, {}, []]);
+
+
+    const colLengths = Array.from({ length: columns }, (_, i) => Math.floor(levelComponents.length / columns) + (i < levelComponents.length % columns ? 1 : 0));
+    const colStarts = colLengths.reduce((acc, length) => { acc.push(acc[acc.length - 1] + length); return acc; }, [0]);
+
+    const reorderedComponents = [];
+    for (let i = 0; i < colLengths[0]; i++) {
+        for (let j = 0; j < columns; j++) {
+            if (i >= colLengths[j]) break;
+            const num = colStarts[j] + i;
+            if (num >= levelComponents.length) break;
+            reorderedComponents.push(levelComponents[num]);
+        }
+    }
+
+    const headers = [];
+    for (let i = 0; i < columns; i++) {
+        headers.push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
+            <span style={{ fontWeight: "bold", padding: "0.1rem", border: "1px #666 dotted" }}>Level</span>
+            <span style={{ fontWeight: "bold", padding: "0.1rem", border: "1px #666 dotted" }}>Reward</span>
+        </div>);
+    }
+
+    return <div style={{ display: "flex", flexDirection: "column", gap: "0.5em", overflowY: "auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+            <div>
+                <div style={{ fontWeight: "bold" }}>Rewards Obtained:</div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    {Object.entries(rewardsDone).map(([item, count]) => <span>{count}x {item}</span>)}
+                </div>
+            </div>
+            <div>
+                <div style={{ fontWeight: "bold" }}>Rewards To Get:</div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    {Object.entries(rewardsTodo).map(([item, count]) => <span>{count}x {item}</span>)}
+                </div>
+            </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${columns}, 1fr)`}}>
+            {headers}
+            {reorderedComponents}
+        </div>
+    </div>;
+}
+
 function AchievementsTab({ data, achievements, tracking, setTracking, totalPoints, setTotalPoints }) {
     const [sortClearedToBottom, setSortClearedToBottom] = useState(false);
 
@@ -124,12 +192,16 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
             <TabList className="tab-list">
                 {Object.entries(achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
+                <Tab className="tab">Rewards</Tab>
             </TabList>
 
             {Object.entries(achievements).map(([category, list]) =>
                 <TabPanel className="tab-panel" style={{ height: "85vh" }}>
                     <AchievementTab data={data} achievements={list} sortClearedToBottom={sortClearedToBottom} category={category} tracking={tracking[category]} setAchievementTracking={setAchievementTracking} />
                 </TabPanel>)}
+            <TabPanel className="tab-panel" style={{ height: "85vh" }}>
+                <RewardsTab data={data} totalPoints={totalPoints} />
+            </TabPanel>
         </Tabs>
     </div>
 }
