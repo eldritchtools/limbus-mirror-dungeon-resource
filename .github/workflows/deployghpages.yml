@@ -31,6 +31,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git remote set-url origin https://eldritchtools:${{secrets.GITHUB_TOKEN}}@github.com/eldritchtools/limbus-mirror-dungeon-resource
-          cd frontend
           npm install
           npm run deploy
