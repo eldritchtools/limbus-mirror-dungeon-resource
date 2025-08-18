@@ -47,8 +47,18 @@ function rescaleThemePack(scale) {
     return {width: `${380*scale}px`, height: `${690*scale}px`};
 }
 
-function ThemePackImg({themePack, scale=1}) {
-    return <img src={`${ASSETS_ROOT}/theme_packs/${themePack.image}.png`} alt={themePack.name} title={themePack.name} style={rescaleThemePack(scale)}/>;
+function ThemePackImg({themePack, displayName=false, scale=1}) {
+    const scaledStyle = rescaleThemePack(scale);
+    const img = <img src={`${ASSETS_ROOT}/theme_packs/${themePack.image}.png`} alt={themePack.name} title={themePack.name} style={rescaleThemePack(scale)}/>;
+
+    if (displayName) {
+        return <div style={{display: "flex", flexDirection: "column", textAlign: "center", width: scaledStyle.width}}>
+            {img}
+            <span>{themePack.name}</span>
+        </div>
+    } else {
+        return img;
+    }
 }
 
 function rescaleIdentity(scale) {

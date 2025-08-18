@@ -111,7 +111,9 @@ function ShowThemePacksTip({ data, tip }) {
     const themePacks = Object.values(data["theme_packs"]).filter((themePack) => themePack.tags.includes(tip.tag));
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
-        {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}><ThemePackImg themePack={pack} scale={.5} /><span>{pack.name}</span></div>)}
+        {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+            <ThemePackImg themePack={pack} displayName={true} scale={.5} />
+        </div>)}
     </div>
 }
 
@@ -141,7 +143,7 @@ function ShowThemePacksByFloorTip({ data, tip }) {
         components.push(<div style={{ ...centerStyle, display: "flex", flexDirection: "column", padding: "0.2rem" }}>
             {packsByFloor[floor].map(id => {
                 if ("highlight" in tip && floor in tip.highlight && tip.highlight[floor].includes(id))
-                    return <ThemePackNameWithTooltip data={data} id={id} style={{fontWeight: "bold", color: "#4ade80"}} />
+                    return <ThemePackNameWithTooltip data={data} id={id} style={{ fontWeight: "bold", color: "#4ade80" }} />
                 else
                     return <ThemePackNameWithTooltip data={data} id={id} />
             })}

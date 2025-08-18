@@ -36,8 +36,7 @@ function ThemePacksTab({ data }) {
 
         components.push(<div style={{ height: "fit-content", borderTop: "1px grey dotted", borderBottom: "1px grey dotted", boxSizing: "border-box" }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", "padding": "3px" }}>
-                <ThemePackImg themePack={themePack} scale={0.5} />
-                {themePack.name}
+                <ThemePackImg themePack={themePack} displayName={true} scale={0.5} />
             </div>
         </div>);
 
@@ -98,7 +97,7 @@ function ThemePacksTab({ data }) {
             </table>
             <button onClick={clearCategories}>Clear Categories</button>
         </div>
-        <div style={{ height: "100%", overflowY: "auto" }}>
+        <div style={{ height: "100%", overflowX: "hidden", overflowY: "auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gridAutoRows: "auto", alignItems: "start", height: "auto", maxHeight: "100%", width: "fit-content" }}>
                 {components}
             </div>
