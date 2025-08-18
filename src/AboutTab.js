@@ -1,4 +1,5 @@
-import { FaYoutube, FaGithub } from 'react-icons/fa';
+// import { FaYoutube } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
 function LinkIcons() {
     const iconStyle = {
@@ -48,7 +49,6 @@ function KoFiButton() {
 }
 
 function LinksComponent() {
-    // return <div style={{position: "absolute", top: "0%", right: "0%", display: "flex", padding: "0.5rem"}}>
     return <div style={{display: "flex", justifyContent: "center"}}>
         <LinkIcons />
         <KoFiButton />
