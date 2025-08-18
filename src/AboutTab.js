@@ -79,10 +79,9 @@ function AboutTab() {
                 {/* Disclaimer */}
                 <div className="border-t pt-3 text-sm text-gray-500 dark:text-gray-400">
                     <p>
-                        <em>Limbus Company</em> and all related assets are © Project Moon.
-                        This is an unofficial fan-made tool and is not affiliated with, endorsed,
-                        sponsored, or specifically approved by ProjectMoon. All rights reserved to
-                        their respective owners.
+                        This tool is a fan-made project and is not affiliated with or endorsed by Project Moon.
+                        Limbus Company and all related assets are © Project Moon. All rights reserved to their respective owners.
+                        The tool is free to use, and any donations go directly to supporting development of this tool and other free tools.
                     </p>
                 </div>
             </div>
