@@ -19,7 +19,7 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
                     <label class="checkbox-container">
                         <input type="checkbox" onChange={() => {
                             if (tracking[achievement.index] > i) setAchievementTracking(i);
-                            else setAchievementTracking(i+1);
+                            else setAchievementTracking(i + 1);
                         }} checked={tracking[achievement.index] > i} />
                         <span class="checkmark" />
                     </label>
@@ -40,9 +40,9 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
             <div style={{ display: "flex", gap: "0.2rem", width: "85%", alignItems: "center" }}>
                 <label class="checkbox-container">
                     <input type="checkbox" onChange={() => {
-                        if (tracking[achievement.index] > len-1) setAchievementTracking(0);
+                        if (tracking[achievement.index] > len - 1) setAchievementTracking(0);
                         else setAchievementTracking(len);
-                    }} checked={tracking[achievement.index] > len-1} />
+                    }} checked={tracking[achievement.index] > len - 1} />
                     <span class="checkmark" />
                 </label>
                 <span class="points">+{points}</span>
@@ -55,7 +55,7 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
         </summary>
         <div style={{ padding: "0.5rem 1.5rem 0.1rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
             {subAchievements ? <div>{subAchievements}</div> : null}
-            <div style={{width: "100%", textAlign: "start"}}> <AchievementTips data={data} achievement={achievement} /> </div>
+            <div style={{ width: "100%", textAlign: "start" }}> <AchievementTips data={data} achievement={achievement} /> </div>
         </div>
     </details>
 }
@@ -67,14 +67,18 @@ function AchievementTab({ data, achievements, sortClearedToBottom, category, tra
             else acc[1].push(achievement);
             return acc;
         }, [[], []])
-        
-        return <div style={{ display: "flex", flexDirection: "column", width: "100%", maxHeight: "100%", overflowY: "auto" }}>
-            {unticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
-            {ticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+
+        return <div style={{ display: "flex", justifyContent: "center", width: "100vw", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "75%", maxHeight: "100%" }}>
+                {unticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {ticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+            </div>
         </div>
     } else {
-        return <div style={{ display: "flex", flexDirection: "column", width: "100%", maxHeight: "100%", overflowY: "auto" }}>
-            {achievements.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+        return <div style={{ display: "flex", justifyContent: "center", width: "100vw", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "75%", maxHeight: "100%" }}>
+                {achievements.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+            </div>
         </div>
     }
 }
@@ -108,12 +112,12 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
         setSortClearedToBottom(!sortClearedToBottom);
     }
 
-    return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75%" }}>
-        <div style={{display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center"}}>
-            <div>Level: {Math.floor(totalPoints/100)}</div>
-            <div style={{width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative"}}>
-                <div style={{width: `${totalPoints%100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease"}} />
-                <span style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000"}}> {totalPoints%100}/100 </span>
+    return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+        <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+            <div>Level: {Math.floor(totalPoints / 100)}</div>
+            <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
+                <div style={{ width: `${totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
+                <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {totalPoints % 100}/100 </span>
             </div>
             <button class={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>
