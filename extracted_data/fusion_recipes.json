@@ -1,0 +1,71 @@
+[
+    {"name": "Soothe the Dead", "ingredients": ["Ashes to Ashes", "Dust to Dust", "Secret Cookbook"]},
+    {"name": "Soothe the Dead", "ingredients": ["Ashes to Ashes", "Dust to Dust", "Melted Paraffin", "Decamillennial Stewpot"]},
+    {"name": "Purloined Flame", "ingredients": ["Burning Intellect", "Charred Disk", "Decamillennial Hearthflame"]},
+    {"name": "Secret Cookbook", "ingredients": ["Melted Paraffin", "Decamillennial Stewpot"]},
+
+    {"name": "Bloody Mist", "ingredients": ["Smokes and Wires", "Rusted Muzzle", "Devotion"]},
+    {"name": "Bloody Mist", "ingredients": ["Smokes and Wires", "Rusted Muzzle", "Arrested Hymn", "Millarca"]},
+    {"name": "Hemorrhagic Shock", "ingredients": ["Grimy Iron Stake", "Rusted Cutting Knife", "Ruptured Blood Sac"]},
+    {"name": "Devotion", "ingredients": ["Arrested Hymn", "Millarca"]},
+    {"name": "Wholeness", "ingredients": ["Nagel und Hammer Scriptures", "Squalidity"]},
+    {"name": "Resplendence", "ingredients": ["Fractured Blade", "Worn Hilt"]},
+    
+    {"name": "Coupled Oscillation", "ingredients": ["Nixie Divergence", "Bell of Truth", "Interlocked Cogs"]},
+    {"name": "Omnivibro-octovecti-bell", "ingredients": ["Venomous Skin", "Clockwork Spring", "Epicenter"]},
+    {"name": "Omnivibro-octovecti-bell", "ingredients": ["Venomous Skin", "Clockwork Spring", "Gemstone Oscillator", "Wobbling Keg"]},
+    {"name": "Epicenter", "ingredients": ["Gemstone Oscillator", "Wobbling Keg"]},
+    {"name": "Pocket Watch : Type L", "ingredients": ["Silver Watch Case", "Etched Clock Hands"]},
+    {"name": "Pocket Watch : Type E", "ingredients": ["Silver Watch Case", "Rusted Clock Hands"]},
+    {"name": "Pocket Watch : Type Y", "ingredients": ["Faded Watch Case", "Etched Clock Hands"]},
+    {"name": "Pocket Watch : Type P", "ingredients": ["Faded Watch Case", "Rusted Clock Hands"]},
+    {"name": "Handheld Mirror", "ingredients": ["Mirror Tactile Synaesthesia", "Chief Butler's Secret Arts"]},
+    {"name": "Shadow Monster", "ingredients": ["Snuffed Lantern", "Snuffed Candlestick"]},
+
+    {"name": "Enrapturing Trance", "ingredients": ["Talisman Bundle", "Standard-duty Battery", "Thorny Rope Cuffs"]},
+    {"name": "Ruin", "ingredients": ["Thunderbranch", "Broken Revolver", "Eerie Effigy"]},
+    {"name": "Ruin", "ingredients": ["Thunderbranch", "Broken Revolver", "Bone Stake", "Shard of Apocalypse"]},
+    {"name": "Eerie Effigy", "ingredients": ["Bone Stake", "Shard of Apocalypse"]},
+    {"name": "Unmailed Letter", "ingredients": ["Ragged Umbrella", "Broken Glasses"]},
+    {"name": "Glyph of Glass Shards", "ingredients": ["Strange Glyph Talisman", "Strange Glyph Inscriptions"]},
+
+    {"name": "Black Sheet Music", "ingredients": ["Midwinter Nightmare", "Headless Portrait", "Tangled Bones"]},
+    {"name": "Impending Wave", "ingredients": ["Thorny Path", "Distant Star", "Surging Globe"]},
+    {"name": "Impending Wave", "ingredients": ["Thorny Path", "Distant Star", "Cantabile", "Faded Overcoat"]},
+    {"name": "Surging Globe", "ingredients": ["Cantabile", "Faded Overcoat"]},
+    {"name": "Hoarfrost Footprint", "ingredients": ["Haunted Shoes", "Frozen Cries"]},
+    
+    {"name": "Lucky Pouch", "ingredients": ["Four-leaf Clover", "Ornamental Horseshoe", "Reminiscence"]},
+    {"name": "Lucky Pouch", "ingredients": ["Four-leaf Clover", "Pendant of Nostalgia", "Ornamental Horseshoe", "Recollection of a Certain Day"]},
+    {"name": "Reminiscence", "ingredients": ["Pendant of Nostalgia", "Recollection of a Certain Day"]},
+    {"name": "Cask Spirits", "ingredients": ["Endorphin Kit", "Devil's Share", "Angel's Cut"]},
+    {"name": "Guiding Gas Lamp", "ingredients": ["Nebulizer", "Harpoon Prosthetic Leg"]},
+    {"name": "Jolly Plushie", "ingredients": ["Pom-pom Hat", "Huge Gift Sack", "Sad Plushie"]},
+
+    {"name": "T-1 Perpetual Motion Machine", "ingredients": ["Wrist Guards", "Material Interference Force Field", "T-1B Octagonal Bolt"]},
+    {"name": "T-5 Perpetual Motion Machine", "ingredients": ["Curriculum Vitae", "Lightning Rod", "Insulator"]},
+    {"name": "T-5 Perpetual Motion Machine", "ingredients": ["Curriculum Vitae", "Lightning Rod", "UPS System", "Miniature Telepole"]},
+    {"name": "Insulator", "ingredients": ["UPS System", "Miniature Telepole"]},
+    {"name": "Automated Joints", "ingredients": ["Biogenerative Battery", "Prosthetic Joint Servos"]},
+    {"name": "Overcharged Battery", "ingredients": ["Biogenerative Battery", "Crystallized Blood"]},
+    {"name": "Perpetual Generator Servos", "ingredients": ["Cardiovascular Reactive Module", "Prosthetic Joint Servos"]},
+    {"name": "Hearts-powered Jewel", "ingredients": ["Cardiovascular Reactive Module", "Crystallized Blood"]},
+
+    {"name": "Sublimity", "ingredients": ["Rusted Hilt", "Fractured Blade"]},
+    {"name": "Unbending", "ingredients": ["Rusted Hilt", "Broken Blade"]},
+    {"name": "Cultivation", "ingredients": ["Broken Blade", "Worn Hilt"]},
+
+    {"name": "Everlasting Chains of Bond", "ingredients": ["Enh. Tattoos - The Middle", "Chains of Loyalty"]},
+
+    {"name": "Lunar Memory", "ingredients": [{"count": 2, "options": [
+        "Fragment of Hellfire",
+        "Fragment of Allurement",
+        "Fragment of Inertia",
+        "Fragment of Desire",
+        "Fragment of Decay",
+        "Fragment of Conceit",
+        "Fragment of Friction"
+    ]}, "Sundered Memory", "Punctured Memory", "Crushed Memory"]},
+    {"name": "High-risk Operational Gear", "ingredients": ["Regular Operational Gear", "Operation Authorization Card"]},
+    {"name": "Gift", "ingredients": ["Packaging Box", "Packaging Ribbon"]}
+]

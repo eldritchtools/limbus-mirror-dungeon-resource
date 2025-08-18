@@ -1,0 +1,116 @@
+.App {
+  text-align: center;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+.App-header {
+  background-color: #1f1f1f;
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+  /* padding: 10px; */
+}
+
+button,
+select,
+input {
+  background-color: #2a2a2a;
+  color: #ddd;
+  border: 1px solid #555;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+button:hover,
+select:hover {
+  background-color: #3a3a3a;
+}
+
+input[type="checkbox"] {
+  accent-color: #0af;
+}
+
+.toggle-button {
+  background-color: #2a2a2a;
+  color: #ddd;
+  border: 1px solid #555;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.toggle-button:hover {
+  background-color: #3a3a3a;
+}
+
+.toggle-button.active {
+  background-color: #4caf50;
+  color: #fff;
+  border-color: #4caf50;
+}
+
+.toggle-button.active:hover {
+  background-color: #45a049;
+}
+
+.tabs {
+    width: 80%;
+    height: 90%;
+}
+
+.tab-list {
+    margin: 0 0 10px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.tab {
+    font-size: 1em;
+    font-weight: bold;
+    color: gray;
+    display: inline-block;
+    border: 1px solid transparent;
+    border-bottom: none;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.tab:hover {
+    color: #eee;
+}
+
+.selected-tab {
+    font-size: 1em;
+    font-weight: bold;
+    color: #eee;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.tab-panel {
+    display: none;
+    height: 90vh;
+}
+
+.selected-tab-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    /* overflow-y: auto;
+    scrollbar-color: rgba(155, 155, 155, 0.5) transparent; */
+    /* border: 2px solid gray; */
+}
