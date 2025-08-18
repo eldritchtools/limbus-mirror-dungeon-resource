@@ -41,7 +41,7 @@ function ThemePacksTab({ data }) {
             </div>
         </div>);
 
-        components.push(<div style={{ display: "grid", height: "100%", gridTemplateRows: "3fr 1fr", borderTop: "1px grey dotted", borderBottom: "1px grey dotted", boxSizing: "border-box" }}>
+        components.push(<div style={{ display: "grid", height: "100%", gridTemplateRows: "4fr 1fr", borderTop: "1px grey dotted", borderBottom: "1px grey dotted", boxSizing: "border-box" }}>
             <div style={{ flex: "3", borderBottom: "1px grey dotted", alignItems: "start", padding: "5px" }}>
                 {"unique_gifts" in themePack ? formatUniqueGifts(themePack["unique_gifts"]) : null}
             </div>
