@@ -110,7 +110,7 @@ function ShowGiftListTip({ data, tip }) {
 function ShowThemePacksTip({ data, tip }) {
     const themePacks = Object.values(data["theme_packs"]).filter((themePack) => themePack.tags.includes(tip.tag));
 
-    return <div style={{ width: "100%", display: "flex", flexDirection: "row", overflowX: "auto" }}>
+    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}><ThemePackImg themePack={pack} scale={.5} /><span>{pack.name}</span></div>)}
     </div>
 }
@@ -138,8 +138,13 @@ function ShowThemePacksByFloorTip({ data, tip }) {
         if (floor === "any") components.push(<div style={centerStyle}>Any floor</div>);
         else components.push(<div style={centerStyle}>Floor {floor}</div>);
 
-        components.push(<div style={{ ...centerStyle, display: "flex", flexDirection: "column" }}>
-            {packsByFloor[floor].map(id => <ThemePackNameWithTooltip data={data} id={id} />)}
+        components.push(<div style={{ ...centerStyle, display: "flex", flexDirection: "column", padding: "0.2rem" }}>
+            {packsByFloor[floor].map(id => {
+                if ("highlight" in tip && floor in tip.highlight && tip.highlight[floor].includes(id))
+                    return <ThemePackNameWithTooltip data={data} id={id} style={{fontWeight: "bold", color: "#4ade80"}} />
+                else
+                    return <ThemePackNameWithTooltip data={data} id={id} />
+            })}
         </div>)
     })
 

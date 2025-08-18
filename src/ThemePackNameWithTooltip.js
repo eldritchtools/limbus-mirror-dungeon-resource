@@ -1,12 +1,12 @@
 import { Tooltip } from "react-tooltip";
 import { ThemePackImg } from "./ImageHandler";
 
-function ThemePackNameWithTooltip({ data, id }) {
-    const style = { borderBottom: "1px dotted #aaa", cursor: "help" };
+function ThemePackNameWithTooltip({ data, id, style={} }) {
+    const defaultStyle = { borderBottom: "1px dotted #aaa", cursor: "help" };
     const themePack = data["theme_packs"][id];
 
     return <>
-        <span data-tooltip-id={id} style={style}>{themePack.name}</span>
+        <span data-tooltip-id={id} style={{...defaultStyle, ...style}}>{themePack.name}</span>
         <Tooltip id={id} style={{ outlineStyle: "solid", outlineColor: "#ffffff", outlineWidth: "1px", backgroundColor: "#000000" }}>
             <div>
                 <div style={{ fontSize: "1.5em", fontWeight: "bold" }}>{themePack.name}</div>
