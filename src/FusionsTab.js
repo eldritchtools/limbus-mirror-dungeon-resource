@@ -162,7 +162,7 @@ function FusionsTab({ data }) {
                 <h2>Search</h2>
                 <input value={searchString} onChange={handleSearchChange} />
             </div>
-            <div>
+            <div style={{ width: "100%" }}>
                 <h2>Keyword</h2>
                 <div style={{ display: "flex", flexDirection: "row", gap: "5px", justifyContent: "center" }}>
                     {keywords.map(keyword => {
@@ -175,7 +175,7 @@ function FusionsTab({ data }) {
                     <button onClick={clearKeywords}>Clear All</button>
                 </div>
             </div>
-            <div>
+            <div style={{ width: "100%" }}>
                 <h2>Theme Packs</h2>
                 <table style={{ borderCollapse: "collapse" }}>
                     <tbody>
@@ -183,12 +183,15 @@ function FusionsTab({ data }) {
                             Object.entries(themePackList).map(([category, themePacks]) => <tr>
                                 <td style={{ border: "1px grey dotted", padding: "2px" }}>{category}</td>
                                 <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
-                                    {themePacks.map(themePack => {
-                                        const selected = selectedThemePacks.includes(themePack);
-                                        return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                        {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
-                                        {data["theme_packs"][themePack].name}
-                                    </label>})}
+                                    <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
+                                        {themePacks.map(themePack => {
+                                            const selected = selectedThemePacks.includes(themePack);
+                                            return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
+                                                {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
+                                                {data["theme_packs"][themePack].name}
+                                            </label>
+                                        })}
+                                    </div>
                                 </td>
                             </tr>)
                         }

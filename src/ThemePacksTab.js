@@ -82,13 +82,15 @@ function ThemePacksTab({ data }) {
                                     </label>
                                 </td>
                                 <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
-                                    {innerCategories.map(innerCategory => {
-                                        const innerSelected = selectedCategories.includes(innerCategory);
-                                        return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                            {<input type="checkbox" onChange={() => handleCategoryToggle(innerCategory, innerSelected)} checked={innerSelected} />}
-                                            {innerCategory}
-                                        </label>
-                                    })}
+                                    <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
+                                        {innerCategories.map(innerCategory => {
+                                            const innerSelected = selectedCategories.includes(innerCategory);
+                                            return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
+                                                {<input type="checkbox" onChange={() => handleCategoryToggle(innerCategory, innerSelected)} checked={innerSelected} />}
+                                                {innerCategory}
+                                            </label>
+                                        })}
+                                    </div>
                                 </td>
                             </tr>
                         })

@@ -215,41 +215,44 @@ function ShowIdentitiesByRarity({ data, tip }) {
 
 function RefreshCostSummary({ data }) {
     const arr = Array.from({ length: 10 }, (_, i) => i + 1);
-    const style = { textAlign: "center", border: "1px #666 dotted" }
+    const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     let sum = 0;
-    return <table style={{ borderCollapse: "collapse" }}>
-        <thead>
-            <th style={style}>Refreshes</th>
-            {arr.map(number => <th style={style}>{number}</th>)}
-            <th style={style}>n</th>
-        </thead>
-        <tbody>
-            <tr>
-                <th style={style}>Cost per refresh</th>
-                {arr.map(number => <td style={style}>{15 * number}</td>)}
-                <td style={style}>15n</td>
-            </tr>
-            <tr>
-                <th style={style}>Total Cost</th>
-                {arr.map(number => <td style={style}>{15 * ((number * (number + 1)) / 2)}</td>)}
-                <td style={style}>15(n(n+1)/2)</td>
-            </tr>
-            <tr>
-                <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><GiftImg gift={data.gifts["9188"]} /></div></th>
-                {arr.map(number => {
-                    sum += Math.floor(10.5 * number);
-                    return <td style={style}>{Math.floor(10.5 * number)}<br /><br />{sum}</td>
-                })}
-                <td style={style}>floor(10.5n)<br /><br />sum(floor(10.5x) for x = 1, 2, ..., n)</td>
-            </tr>
-        </tbody>
-    </table>
+    return <div style={{ display: "flex", justifyContent: "center" }}>
+        <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
+            <thead>
+                <th style={style}>Refreshes</th>
+                {arr.map(number => <th style={style}>{number}</th>)}
+                <th style={style}>n</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style={style}>Cost per refresh</th>
+                    {arr.map(number => <td style={style}>{15 * number}</td>)}
+                    <td style={style}>15n</td>
+                </tr>
+                <tr>
+                    <th style={style}>Total Cost</th>
+                    {arr.map(number => <td style={style}>{15 * ((number * (number + 1)) / 2)}</td>)}
+                    <td style={style}>15(n(n+1)/2)</td>
+                </tr>
+                <tr>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><GiftImg gift={data.gifts["9188"]} /></div></th>
+                    {arr.map(number => {
+                        sum += Math.floor(10.5 * number);
+                        return <td style={style}>{Math.floor(10.5 * number)}<br /><br />{sum}</td>
+                    })}
+                    <td style={style}>floor(10.5n)<br /><br />sum(floor(10.5x) for x = 1, 2, ..., n)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 }
 
 function EnhanceCostSummary({ data }) {
     const giftTierStyle = { fontFamily: "'Archivo Narrow', sans-serif", fontWeight: "bold", fontSize: "24px", color: "#ffd84d" }
-    const style = { textAlign: "center", border: "1px #666 dotted" }
-    return <table style={{ borderCollapse: "collapse" }}>
+    const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
+    return <div style={{ display: "flex", justifyContent: "center" }}>
+        <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
         <thead>
             <th style={style}>Tier</th>
             <th style={style}><span style={giftTierStyle}>I</span></th>
@@ -288,6 +291,7 @@ function EnhanceCostSummary({ data }) {
             </tr>
         </tbody>
     </table>
+    </div>
 }
 
 function AchievementTips({ data, achievement }) {
