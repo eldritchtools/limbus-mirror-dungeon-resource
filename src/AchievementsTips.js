@@ -189,9 +189,7 @@ function ShowIdentitiesByRarity({ data, tip }) {
     const [r1, r2, r3] = identities.reduce((acc, identity) => {
         acc[identity.rarity - 1].push(identity);
         return acc;
-    }, [[], [], []])
-
-    console.log(r1, r2, r3);
+    }, [[], [], []]);
 
     const components = [];
     const insertRows = (list, rarity) => {

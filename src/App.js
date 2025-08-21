@@ -35,11 +35,28 @@ function preprocessData(data) {
     return { ...data, identities: identities, rewards: rewards };
 }
 
-function defaultTracking(achievements) {
+function defaultTracking() {
     return Object.entries(achievements).reduce((acc, [key, achievements]) => {
         acc[key] = new Array(achievements.length).fill(0);
         return acc;
     }, {});
+}
+
+function getTracking() {
+    let latestAccessedVersion = localStorage.getItem('latestVersion');
+    if (!latestAccessedVersion) latestAccessedVersion = "6.2";
+    localStorage.setItem('latestVersion', JSON.stringify("6.3"))
+
+    let storedTracking = localStorage.getItem('tracking');
+    if (storedTracking) storedTracking = JSON.parse(storedTracking);
+    else return defaultTracking(achievements);
+
+    if (latestAccessedVersion === "6.2") {
+        storedTracking["Combat"] = defaultTracking()["Combat"]
+        localStorage.setItem('tracking', JSON.stringify(storedTracking));
+    }
+    return storedTracking;
+
 }
 
 function App() {
@@ -49,10 +66,7 @@ function App() {
     });
     useEffect(() => localStorage.setItem('totalPoints', JSON.stringify(totalPoints)), [totalPoints]);
 
-    const [tracking, setTracking] = useState(() => {
-        const storedTracking = localStorage.getItem('tracking');
-        return storedTracking ? JSON.parse(storedTracking) : defaultTracking(achievements);
-    });
+    const [tracking, setTracking] = useState(getTracking);
     useEffect(() => localStorage.setItem('tracking', JSON.stringify(tracking)), [tracking]);
 
     const processedData = useMemo(() => preprocessData(data), []);
