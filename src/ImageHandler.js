@@ -91,4 +91,15 @@ function RarityImg({rarity}) {
     }
 }
 
-export {GiftImg, Icon, ThemePackImg, IdentityImg, RarityImg};
+function rescaleEGO(scale) {
+    return {width: `${256*scale}px`, height: `${256*scale}px`};
+}
+
+function EGOImg({EGOId, scale=1}) {
+    const scaledStyle = rescaleEGO(scale);
+    const img = <img src={`${ASSETS_ROOT}/egos/${EGOId}_awaken_profile.png`} alt={""} title={""} style={scaledStyle}/>
+
+    return img;
+}
+
+export {GiftImg, Icon, ThemePackImg, IdentityImg, RarityImg, EGOImg};

@@ -1,9 +1,41 @@
 // import FusionRecipe from "./FusionRecipe";
-import { GiftImg, Icon, IdentityImg, RarityImg, ThemePackImg } from "./ImageHandler";
+import { EGOImg, GiftImg, Icon, IdentityImg, RarityImg, ThemePackImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
+}
+
+function TableTip({ data, tip }) {
+    const getCellComponent = (cell) => {
+        if (typeof cell === "string") return <div style={{ whiteSpace: "pre-line", padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
+        if (typeof cell === "object" && cell !== null && !Array.isArray(cell)) {
+            if ("gifts" in cell) {
+                const gifts = Object.values(data.gifts).filter(gift => cell.gifts.includes(gift.name))
+                return <div style={{ display: "flex", flexDirection: "row", padding: "0.1rem", justifyContent: "center" }}>
+                    {gifts.map(gift => <GiftImg gift={gift} />)}
+                </div>
+            }
+        }
+        return null;
+    }
+
+    return <div style={{ display: "flex", justifyContent: "center" }}>
+        <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
+            <thead>
+                <tr>
+                    {tip.headers.map(header => <th style={{ border: "1px #666 dotted" }}>{header}</th>)}
+                </tr>
+            </thead>
+            <tbody>
+                {tip.cells.map(row => <tr>
+                    {row.map(cell => <td style={{ border: "1px #666 dotted" }}>
+                        {getCellComponent(cell)}
+                    </td>)}
+                </tr>)}
+            </tbody>
+        </table>
+    </div>;
 }
 
 function ShowGiftsTip({ data, tip }) {
@@ -108,7 +140,9 @@ function ShowGiftListTip({ data, tip }) {
 }
 
 function ShowThemePacksTip({ data, tip }) {
-    const themePacks = Object.values(data["theme_packs"]).filter((themePack) => themePack.tags.includes(tip.tag));
+    const themePacks = [];
+    if (tip.tag) themePacks.push(...Object.values(data["theme_packs"]).filter((themePack) => themePack.tags.includes(tip.tag)));
+    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => data["theme_packs"][id]));
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -169,6 +203,11 @@ function filterIdentities(data, tip) {
         if ("faction" in tip) {
             if (Array.isArray(tip.faction)) filter &= tip.faction.some(faction => identity.factions.includes(faction));
             else filter &= identity.factions.includes(tip.faction);
+        }
+        if (!filter) return false
+
+        if ("ids" in tip) {
+            filter &= tip.ids.includes(identity.id);
         }
         return filter;
     })
@@ -251,44 +290,52 @@ function EnhanceCostSummary({ data }) {
     const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     return <div style={{ display: "flex", justifyContent: "center" }}>
         <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
-        <thead>
-            <th style={style}>Tier</th>
-            <th style={style}><span style={giftTierStyle}>I</span></th>
-            <th style={style}><span style={giftTierStyle}>II</span></th>
-            <th style={style}><span style={giftTierStyle}>III</span></th>
-            <th style={style}><span style={giftTierStyle}>IV</span></th>
-        </thead>
-        <tbody>
-            <tr>
-                <th style={style}><span style={giftTierStyle}>+</span></th>
-                <td style={style}>50</td>
-                <td style={style}>60</td>
-                <td style={style}>75</td>
-                <td style={style}>100</td>
-            </tr>
-            <tr>
-                <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>+</span></div></th>
-                <td style={style}>35</td>
-                <td style={style}>42</td>
-                <td style={style}>53</td>
-                <td style={style}>70</td>
-            </tr>
-            <tr>
-                <th style={style}><span style={giftTierStyle}>++</span></th>
-                <td style={style}>100</td>
-                <td style={style}>120</td>
-                <td style={style}>150</td>
-                <td style={style}>200</td>
-            </tr>
-            <tr>
-                <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>++</span></div></th>
-                <td style={style}>70</td>
-                <td style={style}>84</td>
-                <td style={style}>105</td>
-                <td style={style}>140</td>
-            </tr>
-        </tbody>
-    </table>
+            <thead>
+                <th style={style}>Tier</th>
+                <th style={style}><span style={giftTierStyle}>I</span></th>
+                <th style={style}><span style={giftTierStyle}>II</span></th>
+                <th style={style}><span style={giftTierStyle}>III</span></th>
+                <th style={style}><span style={giftTierStyle}>IV</span></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th style={style}><span style={giftTierStyle}>+</span></th>
+                    <td style={style}>50</td>
+                    <td style={style}>60</td>
+                    <td style={style}>75</td>
+                    <td style={style}>100</td>
+                </tr>
+                <tr>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>+</span></div></th>
+                    <td style={style}>35</td>
+                    <td style={style}>42</td>
+                    <td style={style}>53</td>
+                    <td style={style}>70</td>
+                </tr>
+                <tr>
+                    <th style={style}><span style={giftTierStyle}>++</span></th>
+                    <td style={style}>100</td>
+                    <td style={style}>120</td>
+                    <td style={style}>150</td>
+                    <td style={style}>200</td>
+                </tr>
+                <tr>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>++</span></div></th>
+                    <td style={style}>70</td>
+                    <td style={style}>84</td>
+                    <td style={style}>105</td>
+                    <td style={style}>140</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+function ShowEGOsTip({tip}) {
+    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
+        {tip.EGOs.map(EGOId => <div>
+            <EGOImg EGOId={EGOId} scale={0.75} />
+        </div>)}
     </div>
 }
 
@@ -299,6 +346,7 @@ function AchievementTips({ data, achievement }) {
     achievement.tips.forEach(tip => {
         switch (tip.type) {
             case "text": components.push(<TextTip data={data} tip={tip} />); break;
+            case "table": components.push(<TableTip data={data} tip={tip} />); break;
             case "showGifts": components.push(<ShowGiftsTip data={data} tip={tip} />); break;
             case "showGiftList": components.push(<ShowGiftListTip data={data} tip={tip} />); break;
             case "showThemePacks": components.push(<ShowThemePacksTip data={data} tip={tip} />); break;
@@ -307,6 +355,7 @@ function AchievementTips({ data, achievement }) {
             case "showIdsByRarity": components.push(<ShowIdentitiesByRarity data={data} tip={tip} />); break;
             case "refreshCostSummary": components.push(<RefreshCostSummary data={data} />); break;
             case "enhanceCostSummary": components.push(<EnhanceCostSummary data={data} />); break;
+            case "showEGOs": components.push(<ShowEGOsTip data={data} tip={tip} />); break;
             default: break;
         }
     });
