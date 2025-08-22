@@ -68,15 +68,15 @@ function AchievementTab({ data, achievements, sortClearedToBottom, category, tra
             return acc;
         }, [[], []])
 
-        return <div style={{ display: "flex", justifyContent: "center", width: "100vw", overflowY: "auto" }}>
-            <div style={{ display: "flex", flexDirection: "column", width: "75%", maxHeight: "100%" }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100vw", paddingBottom: "10rem", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "75%", flexShrink: 0 }}>
                 {unticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
                 {ticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
     } else {
-        return <div style={{ display: "flex", justifyContent: "center", width: "100vw", overflowY: "auto" }}>
-            <div style={{ display: "flex", flexDirection: "column", width: "75%", maxHeight: "100%" }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100vw", paddingBottom: "10rem", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "75%", flexShrink: 0 }}>
                 {achievements.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>

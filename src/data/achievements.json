@@ -527,7 +527,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "This basically means clear to the end of MDI. There's way too many ways to clear it to actually recommend anything regarding team building. Just bring your strongest team do the best you can.\n\nIf you're struggling, there's a number of things that can help:\n- Pick theme packs that have exclusive gifts for your team's main keyword(s). The fusions are especially useful, but the rest of the gifts are also good. Remember that you can choose theme packs using starlight now, so there's no reason for you to miss them.\n- Buy more starlight buffs at the beginning of the run. They can make a massive difference.\n- Avoid Refraction Railway theme packs. They add +3 levels to all enemies instead of the usual +1.\n- Avoid difficult theme packs (e.g. The Dream Ending and The Surrendered Witnessing are particularly hard because you have to fight Sancho and possibly Jia Qiu) or theme packs that counter your keyword (e.g. Murder on the WARP Express for Bleed or Yield My Flesh to Claim Their Bones for Sinking).\n- Try picking the least painful Mounting Trials at the end of every floor. Remember that 3 offense levels = 1 clash power. Picking +3 offense levels is better than picking +2 clash power. Also, unless you're using Sinking or have some other ways of reducing enemy SP, always avoid coin power.\n- Aim to fuse Lunar Memory after you've gotten all the important gifts for your keyword. Potentially dealing up to 4x damage speeds up fights a lot and reduces chances for enemies to damage you. You also stagger them much faster, which makes high atk weight E.G.Os incredibly useful to stagger entire waves at higher floors."
+                    "text": "This basically means clear to the end of MDI. There's way too many ways to clear it to actually recommend anything regarding team building. Just bring your strongest team do the best you can.\n\nIf you're struggling, there's a number of things that can help:\n- Pick theme packs that have exclusive gifts for your team's main keyword(s). The fusions are especially useful, but the rest of the gifts are also good. Remember that you can choose theme packs using starlight now, so there's no reason for you to miss them.\n- Buy more starlight buffs at the beginning of the run. They can make a massive difference.\n- Avoid Refraction Railway theme packs. They add an additional +3 levels to all enemies on clear.\n- Avoid difficult theme packs (e.g. The Dream Ending and The Surrendered Witnessing are particularly hard because you have to fight Sancho and possibly Jia Qiu) or theme packs that counter your keyword (e.g. Murder on the WARP Express for Bleed or Yield My Flesh to Claim Their Bones for Sinking).\n- Try picking the least painful Mounting Trials at the end of every floor. Remember that 3 offense levels = 1 clash power. Picking +3 offense levels is better than picking +2 clash power. Also, unless you're using Sinking or have some other ways of reducing enemy SP, always avoid coin power.\n- Aim to fuse Lunar Memory after you've gotten all the important gifts for your keyword. Potentially dealing up to 4x damage speeds up fights a lot and reduces chances for enemies to damage you. You also stagger them much faster, which makes high atk weight E.G.Os incredibly useful to stagger entire waves at higher floors."
                 }
             ]
         },
@@ -553,7 +553,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "You're required to take Line #2 on Floor 4, but you're free to choose the rest in any order on the floors after that. You have a 1 floor leeway to choose whatever you want between F5-10, so you can choose a theme pack that will give you good gifts to help. Just remember that pushing the remaining RR packs back will also make them stronger.\n\nBring a team that can clash really well. RR theme packs give enemies +3 levels instead of the usual +1, so enemies will clash higher than usual especially on higher floors.\n\nIf you have weak AOE options, you might want to take Lines 4 and 5 earlier to deal with the envy peccatula while they're still weaker."
+                    "text": "You're required to take Line #2 on Floor 4, but you're free to choose the rest in any order on the floors after that. You have a 1 floor leeway to choose whatever you want between F5-10, so you can choose a theme pack that will give you good gifts to help. Just remember that pushing the remaining RR packs back will also make them stronger.\n\nBring a team that can clash really well. RR theme packs give enemies an additional +3 levels on clear. This adds up quickly making enemies clash higher than usual especially on higher floors.\n\nIf you have weak AOE options, you might want to take Lines 4 and 5 earlier to deal with the envy peccatula while they're still weaker."
                 },
                 {
                     "type": "showThemePacksByFloor",
@@ -1197,7 +1197,31 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "This should naturally happen in a Poise team as long as all 7 of the ids you bring are Poise ids."
+                    "text": "(Credit to u/ey_lamo on Reddit for their post on this) Apparently there's a mistranslation issue with this achievement. The actual achievement is to critically hit with all coins on the first turn while having 7 sinners. The easiest way to do this is to get the Ragged Bamboo Hat gift from the To Claim Their Bones theme pack and using Blade Lineage ids."
+                },
+                {
+                    "type": "showIds",
+                    "faction": ["Blade Lineage"]
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["Ragged Bamboo Hat"]
+                },
+                {
+                    "type": "text",
+                    "text": "This guarantees that all Blade Lineage ids will crit as long as they have Poise. Since there are 6 Blade Lineage ids in the game, you only need to get one more Poise id, and having them crit on turn 1 shouldn't be too difficult. If you don't want to use all 6 Blade Lineage ids, there's a few other self-sufficient Poise ids that should be able to replace them without adding too much difficulty. Ideally bring ids with low coin skills that give a lot of Poise Potency. The following are a few example of ids that have skills like that:"
+                },
+                {
+                    "type": "showIds",
+                    "ids": ["10107", "10613", "10611", "10711", "11207"]
+                },
+                {
+                    "type": "text",
+                    "text": "Using E.G.O that give poise before attacking is also a viable option.\n\nYou'll also need some Poise granting gifts that can give Poise on turn 1 to make this more consistent."
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["Pendant of Nostalgia", "Ornamental Horseshoe", "Emerald Elytra", "Stone Tomb", "Nebulizer", "Endorphin Kit", "CQC Manual", "Lucky Pouch", "Guiding Gas Lamp", "Cask Spirits"]
                 }
             ]
         },
@@ -1499,13 +1523,17 @@
             ]
         },
         {
-            "text": "In a Mirror Dungeon boss fight at Floor 5 or higher, activate the effect of Impose Weight E.G.O Gift after 2 turns, then clear the Encounter",
+            "text": "In a Mirror Dungeon boss fight at Floor 5 or higher, activate the effect of Imposed Weight E.G.O Gift after 2 turns, then clear the Encounter",
             "points": 100,
             "hardonly": false,
             "tips": [
                 {
                     "type": "text",
-                    "text": "(Untested) You might be able to do this with a solo? If not, you can bring either bring Fell Bullet Yi Sang with anyone else and kill them or bring a strong id with ids that can retreat (Family Heirarch Candidate Ishmael, Devyat Rodion, or Devyat Sinclair) and have them retreat on turn 3."
+                    "text": "You can achieve this by only bringing one sinner for that boss. (Thanks to u/TheParentheticals on Reddit for confirming)"
+                },
+                {
+                    "type": "text",
+                    "text": "If you're struggling with the solo you can bring either bring Fell Bullet Yi Sang with anyone else and kill them or bring a strong id with ids that can retreat (Family Heirarch Candidate Ishmael, Devyat Rodion, or Devyat Sinclair) and have them retreat."
                 }
             ]
         },
