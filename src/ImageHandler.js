@@ -102,4 +102,11 @@ function EGOImg({EGOId, scale=1}) {
     return img;
 }
 
-export {GiftImg, Icon, ThemePackImg, IdentityImg, RarityImg, EGOImg};
+function SampleImg({img, width=null, height=null}) {
+    const style = {};
+    if (width) style.width = width; else style.width = "auto";
+    if (height) style.height = height; else style.height = "auto";
+    return <img src={`${ASSETS_ROOT}/samples/${img}.png`} alt={""} title={""} style={style}/>
+}
+
+export {GiftImg, Icon, ThemePackImg, IdentityImg, RarityImg, EGOImg, SampleImg};

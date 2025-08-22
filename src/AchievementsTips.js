@@ -1,5 +1,5 @@
 // import FusionRecipe from "./FusionRecipe";
-import { EGOImg, GiftImg, Icon, IdentityImg, RarityImg, ThemePackImg } from "./ImageHandler";
+import { EGOImg, GiftImg, Icon, IdentityImg, RarityImg, SampleImg, ThemePackImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 
 function TextTip({ tip }) {
@@ -331,12 +331,18 @@ function EnhanceCostSummary({ data }) {
     </div>
 }
 
-function ShowEGOsTip({tip}) {
+function ShowEGOsTip({ tip }) {
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {tip.EGOs.map(EGOId => <div>
             <EGOImg EGOId={EGOId} scale={0.75} />
         </div>)}
     </div>
+}
+
+function ShowSampleTip({ tip }) {
+    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
+        <SampleImg img={tip.img} width={tip.width} height={tip.height}/>
+    </div >
 }
 
 function AchievementTips({ data, achievement }) {
@@ -356,6 +362,7 @@ function AchievementTips({ data, achievement }) {
             case "refreshCostSummary": components.push(<RefreshCostSummary data={data} />); break;
             case "enhanceCostSummary": components.push(<EnhanceCostSummary data={data} />); break;
             case "showEGOs": components.push(<ShowEGOsTip data={data} tip={tip} />); break;
+            case "showSample": components.push(<ShowSampleTip tip={tip} />); break;
             default: break;
         }
     });
