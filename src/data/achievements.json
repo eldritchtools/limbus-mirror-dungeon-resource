@@ -1245,9 +1245,9 @@
                     "cells": [
                         [
                             "S3 with Savage Tigermark Rounds (5 coins)",
-                            "3, +2 from passive",
+                            "3",
                             "",
-                            "+3, +2 from conditional"
+                            "+3\n+2 from conditional\n+2 from passive"
                         ],
                         [
                             "Starlight Guidance++ (Starlight Buff)",
@@ -1276,16 +1276,6 @@
                             },
                             "",
                             "+1",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Chalice of Trickle-down"
-                                ]
-                            },
-                            "",
-                            "+2",
                             ""
                         ],
                         [
@@ -1322,39 +1312,29 @@
                             "+2 each (up to +4)"
                         ],
                         [
-                            {
-                                "gifts": [
-                                    "Enh. Tattoos - The Middle",
-                                    "Dimensional Recycle Bin"
-                                ]
-                            },
-                            "",
-                            "+1 each",
-                            ""
-                        ],
-                        [
-                            "Total without Accumulated Past: 76\nTotal with Accumulated Past: 81",
-                            "6",
-                            "+10 (without Accumulated Past)\n+15 (with Accumulated Past)",
-                            "+12"
+                            "Total without Accumulated Past: 80\nTotal with Accumulated Past: 85",
+                            "4",
+                            "+6 (without Accumulated Past)\n+11 (with Accumulated Past)",
+                            "+14"
                         ]
                     ]
                 },
                 {
                     "type": "text",
-                    "text": "If you're lacking a few Clash Power, they can be gotten from more general gift sources. The following gifts can also give a total of +7 Attack/Clash Power combined:"
+                    "text": "There's quite a bit of leeway. If you're lacking a few Clash Power, they can be gotten from more general gift sources."
                 },
                 {
                     "type": "showGiftList",
                     "gifts": [
                         "Tango Marinade",
                         "Darkflame Smoking Pipe",
-                        "Sunshower"
+                        "Sunshower",
+                        "Enh. Tattoos - The Middle",
+                        "Dimensional Recycle Bin",
+                        "Temporal Bridle",
+                        "Keenbranch",
+                        "Chalice of Trickle-down"
                     ]
-                },
-                {
-                    "type": "text",
-                    "text": "If you're aiming for these gifts, Tango Marinade can only be gotten from Hell's Kitchen at F2 and Darkflame Smoking Pipe from Full-Stopped by a Bullet from F3."
                 },
                 {
                     "type": "text",
