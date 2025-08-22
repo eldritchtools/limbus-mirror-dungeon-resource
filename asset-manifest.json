@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/limbus-mirror-dungeon-resource/static/css/main.e3811082.css",
-    "main.js": "/limbus-mirror-dungeon-resource/static/js/main.20c2f885.js",
+    "main.js": "/limbus-mirror-dungeon-resource/static/js/main.b4d6c567.js",
     "static/js/453.f0560536.chunk.js": "/limbus-mirror-dungeon-resource/static/js/453.f0560536.chunk.js",
     "index.html": "/limbus-mirror-dungeon-resource/index.html",
     "main.e3811082.css.map": "/limbus-mirror-dungeon-resource/static/css/main.e3811082.css.map",
-    "main.20c2f885.js.map": "/limbus-mirror-dungeon-resource/static/js/main.20c2f885.js.map",
+    "main.b4d6c567.js.map": "/limbus-mirror-dungeon-resource/static/js/main.b4d6c567.js.map",
     "453.f0560536.chunk.js.map": "/limbus-mirror-dungeon-resource/static/js/453.f0560536.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e3811082.css",
-    "static/js/main.20c2f885.js"
+    "static/js/main.b4d6c567.js"
   ]
 }
