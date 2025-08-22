@@ -1247,7 +1247,7 @@
                             "S3 with Savage Tigermark Rounds (5 coins)",
                             "3",
                             "",
-                            "+3\n+2 from conditional\n+2 from passive"
+                            "+3\n+2 from conditional\n+2 for 3rd-5th coins from passive"
                         ],
                         [
                             "Starlight Guidance++ (Starlight Buff)",
@@ -1312,16 +1312,16 @@
                             "+2 each (up to +4)"
                         ],
                         [
-                            "Total without Accumulated Past: 80\nTotal with Accumulated Past: 85",
+                            "Total without Accumulated Past: 76\nTotal with Accumulated Past: 81",
                             "4",
                             "+6 (without Accumulated Past)\n+11 (with Accumulated Past)",
-                            "+14"
+                            "+12 for 1st and 2nd coins\n+14 for 3rd-5th coins"
                         ]
                     ]
                 },
                 {
                     "type": "text",
-                    "text": "There's quite a bit of leeway. If you're lacking a few Clash Power, they can be gotten from more general gift sources."
+                    "text": "The remaining Clash Power can be gotten from more general gift sources."
                 },
                 {
                     "type": "showGiftList",
