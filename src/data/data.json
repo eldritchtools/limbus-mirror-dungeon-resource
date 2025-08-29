@@ -2569,6 +2569,80 @@
                 "I7-1"
             ]
         },
+        "9819": {
+            "tier": "2",
+            "keyword": "Burn",
+            "name": "Bloodflame Sword",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9820": {
+            "tier": "2",
+            "keyword": "Tremor",
+            "name": "Blackiron Barding",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9821": {
+            "tier": "3",
+            "keyword": "Slash",
+            "name": "Red Cloth that Closes the Heart",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9822": {
+            "tier": "2",
+            "keyword": "Rupture",
+            "name": "Virtue - Zhi (\u667a)",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9823": {
+            "tier": "2",
+            "keyword": "Rupture",
+            "name": "Virtue - Yong (\u52c7)",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9824": {
+            "tier": "2",
+            "keyword": "Rupture",
+            "name": "Virtue - Ren (\u4ec1)",
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9825": {
+            "tier": "4",
+            "keyword": "Rupture",
+            "name": "Cultivation: Cut, File, Carve, Polish",
+            "image_override": "Cultivation  Cut, File, Carve, Polish",
+            "fusion": true,
+            "recipes": [
+                [
+                    9822,
+                    9823,
+                    9824
+                ]
+            ],
+            "sources": [
+                "I8-1"
+            ]
+        },
+        "9826": {
+            "tier": "2",
+            "keyword": "Keywordless",
+            "enhanceable": true,
+            "name": "Shaoxing Wine",
+            "sources": [
+                "I8-1"
+            ]
+        },
         "9781": {
             "tier": "3",
             "keyword": "Keywordless",
@@ -3357,6 +3431,28 @@
                 9794
             ]
         },
+        "I8-1": {
+            "name": "Spring Cultivation",
+            "image": "Canto_XiChunMaker",
+            "category": [
+                "Intervallo",
+                "Spring Cultivation"
+            ],
+            "tags": [
+                "Intervallo",
+                "Spring Cultivation"
+            ],
+            "unique_gifts": [
+                9819,
+                9820,
+                9821,
+                9822,
+                9823,
+                9824,
+                9825,
+                9826
+            ]
+        },
         "W4": {
             "name": "The Noon of Violet",
             "image": "Walpu4_NoonOfViolet",
@@ -3546,7 +3642,8 @@
                 "I6-1",
                 "I6-2",
                 "I7-1",
-                "I7-2"
+                "I7-2",
+                "I8-1"
             ]
         },
         "hard": {
@@ -3615,7 +3712,8 @@
                 "I5-2B",
                 "I7-2",
                 "R5",
-                "I6-1B"
+                "I6-1B",
+                "I8-1"
             ]
         }
     }

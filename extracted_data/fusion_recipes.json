@@ -28,6 +28,7 @@
     {"name": "Eerie Effigy", "ingredients": ["Bone Stake", "Shard of Apocalypse"]},
     {"name": "Unmailed Letter", "ingredients": ["Ragged Umbrella", "Broken Glasses"]},
     {"name": "Glyph of Glass Shards", "ingredients": ["Strange Glyph Talisman", "Strange Glyph Inscriptions"]},
+    {"name": "Cultivation: Cut, File, Carve, Polish", "ingredients": ["Virtue - Zhi (智)", "Virtue - Yong (勇)", "Virtue - Ren (仁)"]},
 
     {"name": "Black Sheet Music", "ingredients": ["Midwinter Nightmare", "Headless Portrait", "Tangled Bones"]},
     {"name": "Impending Wave", "ingredients": ["Thorny Path", "Distant Star", "Surging Globe"]},

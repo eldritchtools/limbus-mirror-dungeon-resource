@@ -233,6 +233,13 @@
         "category": ["Intervallo", "Nocturnal Sweeping"],
         "tags": ["Intervallo", "Nocturnal Sweeping"]
     },
+    "I8-1": {
+        "name": "Spring Cultivation",
+        "image": "Canto_XiChunMaker",
+        "unique_gifts": ["Bloodflame Sword", "Blackiron Barding", "Red Cloth that Closes the Heart", "Virtue - Zhi (智)", "Virtue - Yong (勇)", "Virtue - Ren (仁)", "Cultivation: Cut, File, Carve, Polish", "Shaoxing Wine"],
+        "category": ["Intervallo", "Spring Cultivation"],
+        "tags": ["Intervallo", "Spring Cultivation"]
+    },
     "W4": {
         "name": "The Noon of Violet",
         "image": "Walpu4_NoonOfViolet",

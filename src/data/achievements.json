@@ -794,7 +794,9 @@
                     "type": "showIds",
                     "faction": [
                         "Heishou Pack - Mao Branch",
-                        "Heishou Pack - Si Branch"
+                        "Heishou Pack - Si Branch",
+                        "Heishou Pack - You Branch",
+                        "Heishou Pack - Wu Branch"
                     ]
                 }
             ]
@@ -870,7 +872,9 @@
                     "faction": [
                         "Jia Family",
                         "Heishou Pack - Mao Branch",
-                        "Heishou Pack - Si Branch"
+                        "Heishou Pack - Si Branch",
+                        "Heishou Pack - You Branch",
+                        "Heishou Pack - Wu Branch"
                     ]
                 },
                 {

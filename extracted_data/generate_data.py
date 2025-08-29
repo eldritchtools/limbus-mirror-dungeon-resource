@@ -85,7 +85,7 @@ def add_ingredient(ingredient, result):
         for item in ingredient["options"]:
             add_ingredient(item, result)
 
-with open("fusion_recipes.json", 'r') as file:
+with open("fusion_recipes.json", 'r', encoding="utf8") as file:
     data = json.load(file)
     for fusion in data:
         id = gifts_name_mapping[fusion["name"]]
@@ -118,7 +118,7 @@ with open("hard_only_gifts.json", 'r') as file:
 
 theme_packs = {}
 
-with open("theme_packs.json", 'r') as file:
+with open("theme_packs.json", 'r', encoding="utf8") as file:
     data = json.load(file)
     for (id, info) in data.items():
         theme_packs[id] = {
