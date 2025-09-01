@@ -109,9 +109,9 @@ function FusionsDisplay({ data, searchString, selectedKeywords, selectedThemePac
         keywords.forEach(keyword => {
             if (fusionsByKeyword[keyword].length === 0) return;
             if (keyword === "Keywordless")
-                components.push(<td style={tdstyle} colspan={3}><div style={style}>Keywordless</div></td>);
+                components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}>Keywordless</div></td></tr>);
             else
-                components.push(<td style={tdstyle} colspan={3}><div style={style}><Icon id={keyword} scale={1.5} />{keyword}</div></td>);
+                components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}><Icon id={keyword} scale={1.5} />{keyword}</div></td></tr>);
             fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow data={data} recipe={recipe} />));
         });
 

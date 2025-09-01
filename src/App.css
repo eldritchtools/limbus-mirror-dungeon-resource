@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-header {

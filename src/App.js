@@ -3,12 +3,12 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import AchievementsTab from './AchievementsTab';
 import FusionsTab from './FusionsTab';
 import ThemePacksTab from './ThemePacksTab';
-import AboutTab from './AboutTab';
 
 import data from './data/data.json';
 import achievements from './data/achievements.json';
 import identities from './data/identities.json';
 import rewards from './data/rewards.json';
+import { Footer } from '@eldritchtools/shared-components';
 
 import { useEffect, useMemo, useState } from 'react';
 
@@ -80,7 +80,6 @@ function App() {
                         <Tab className="tab">Achievements</Tab>
                         <Tab className="tab">Fusions</Tab>
                         <Tab className="tab">Notable Theme Packs</Tab>
-                        <Tab className="tab">About this Tool</Tab>
                     </TabList>
 
                     <TabPanel className="tab-panel">
@@ -92,11 +91,14 @@ function App() {
                     <TabPanel className="tab-panel">
                         <ThemePacksTab data={processedData} />
                     </TabPanel>
-                    <TabPanel className="tab-panel">
-                        <AboutTab />
-                    </TabPanel>
                 </Tabs>
             </header>
+            <Footer
+                description={"This site was created as a reference for Limbus Company Mirror Dungeon Achievements."}
+                gameName={"Limbus Company"}
+                developerName={"Project Moon"}
+                githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
+            />
         </div>
     );
 }

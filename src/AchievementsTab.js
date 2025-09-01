@@ -68,15 +68,15 @@ function AchievementTab({ data, achievements, sortClearedToBottom, category, tra
             return acc;
         }, [[], []])
 
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100vw", paddingBottom: "10rem", overflowY: "auto" }}>
-            <div style={{ display: "flex", flexDirection: "column", width: "75%", flexShrink: 0 }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
                 {unticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
                 {ticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
     } else {
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100vw", paddingBottom: "10rem", overflowY: "auto" }}>
-            <div style={{ display: "flex", flexDirection: "column", width: "75%", flexShrink: 0 }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
                 {achievements.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
@@ -187,7 +187,7 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
                 <div style={{ width: `${totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
                 <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {totalPoints % 100}/100 </span>
             </div>
-            <button class={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
+            <button className={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
             <TabList className="tab-list">
