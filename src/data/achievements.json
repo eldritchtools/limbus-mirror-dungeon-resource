@@ -496,7 +496,12 @@
                 30,
                 40,
                 40,
-                50
+                50,
+                60,
+                70,
+                80,
+                90,
+                100
             ],
             "replace": {
                 "floor": [
@@ -509,7 +514,12 @@
                     7,
                     8,
                     9,
-                    10
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
                 ]
             },
             "hardonly": [
@@ -522,9 +532,22 @@
                 true,
                 true,
                 true,
+                true,
+                true,
+                true,
+                true,
+                true,
                 true
             ],
             "tips": [
+                {
+                    "type": "text",
+                    "text": "Clearing up to Floor 10 means completing MD Infinity, while clearing up to Floor 15 means completing MD Extreme. For F15, if you only want this achievement and not the 50 Adversity points one, then it's pretty much the same as finishing Infinity if you don't take any Adversities, just a little harder since you have to go further and pick more Mounting Trials. Otherwise, see the 50 Adversity points achievement in the 'Adversity - EXTREME' category."
+                },
+                {
+                    "type": "text",
+                    "text": "Everything below was written prior to the release of Extreme which extended this achievement from F10 to F15."
+                },
                 {
                     "type": "text",
                     "text": "This basically means clear to the end of MDI. There's way too many ways to clear it to actually recommend anything regarding team building. Just bring your strongest team do the best you can.\n\nIf you're struggling, there's a number of things that can help:\n- Pick theme packs that have exclusive gifts for your team's main keyword(s). The fusions are especially useful, but the rest of the gifts are also good. Remember that you can choose theme packs using starlight now, so there's no reason for you to miss them.\n- Buy more starlight buffs at the beginning of the run. They can make a massive difference.\n- Avoid Refraction Railway theme packs. They add an additional +3 levels to all enemies on clear.\n- Avoid difficult theme packs (e.g. The Dream Ending and The Surrendered Witnessing are particularly hard because you have to fight Sancho and possibly Jia Qiu) or theme packs that counter your keyword (e.g. Murder on the WARP Express for Bleed or Yield My Flesh to Claim Their Bones for Sinking).\n- Try picking the least painful Mounting Trials at the end of every floor. Remember that 3 offense levels = 1 clash power. Picking +3 offense levels is better than picking +2 clash power. Also, unless you're using Sinking or have some other ways of reducing enemy SP, always avoid coin power.\n- Aim to fuse Lunar Memory after you've gotten all the important gifts for your keyword. Potentially dealing up to 4x damage speeds up fights a lot and reduces chances for enemies to damage you. You also stagger them much faster, which makes high atk weight E.G.Os incredibly useful to stagger entire waves at higher floors."
@@ -1163,7 +1186,9 @@
                 },
                 {
                     "type": "showIds",
-                    "ids": ["10104"]
+                    "ids": [
+                        "10104"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1171,11 +1196,20 @@
                 },
                 {
                     "type": "showIds",
-                    "ids": ["10309", "11113", "10609", "10512", "11013"]
+                    "ids": [
+                        "10309",
+                        "11113",
+                        "10609",
+                        "10512",
+                        "11013"
+                    ]
                 },
                 {
                     "type": "showEGOs",
-                    "EGOs": ["20206", "20606"]
+                    "EGOs": [
+                        "20206",
+                        "20606"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1205,11 +1239,15 @@
                 },
                 {
                     "type": "showIds",
-                    "faction": ["Blade Lineage"]
+                    "faction": [
+                        "Blade Lineage"
+                    ]
                 },
                 {
                     "type": "showGiftList",
-                    "gifts": ["Ragged Bamboo Hat"]
+                    "gifts": [
+                        "Ragged Bamboo Hat"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1217,7 +1255,13 @@
                 },
                 {
                     "type": "showIds",
-                    "ids": ["10107", "10613", "10611", "10711", "11207"]
+                    "ids": [
+                        "10107",
+                        "10613",
+                        "10611",
+                        "10711",
+                        "11207"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1225,7 +1269,18 @@
                 },
                 {
                     "type": "showGiftList",
-                    "gifts": ["Pendant of Nostalgia", "Ornamental Horseshoe", "Emerald Elytra", "Stone Tomb", "Nebulizer", "Endorphin Kit", "CQC Manual", "Lucky Pouch", "Guiding Gas Lamp", "Cask Spirits"]
+                    "gifts": [
+                        "Pendant of Nostalgia",
+                        "Ornamental Horseshoe",
+                        "Emerald Elytra",
+                        "Stone Tomb",
+                        "Nebulizer",
+                        "Endorphin Kit",
+                        "CQC Manual",
+                        "Lucky Pouch",
+                        "Guiding Gas Lamp",
+                        "Cask Spirits"
+                    ]
                 }
             ]
         },
@@ -1346,7 +1401,17 @@
                 },
                 {
                     "type": "showGiftList",
-                    "gifts": ["Temporal Bridle", "Crushed Memory", "Omnivibro-octovecti-bell", "The Book of Vengeance", "Chalice of Trickle-down", "Pocket Watch : Type L", "Pocket Watch : Type P", "Darkflame Smoking Pipe", "Enh. Tattoos - The Middle"]
+                    "gifts": [
+                        "Temporal Bridle",
+                        "Crushed Memory",
+                        "Omnivibro-octovecti-bell",
+                        "The Book of Vengeance",
+                        "Chalice of Trickle-down",
+                        "Pocket Watch : Type L",
+                        "Pocket Watch : Type P",
+                        "Darkflame Smoking Pipe",
+                        "Enh. Tattoos - The Middle"
+                    ]
                 },
                 {
                     "type": "showSample",
@@ -1556,7 +1621,11 @@
                 },
                 {
                     "type": "showGiftList",
-                    "gifts": ["Smoking Gunpowder", "Fluorescent Lamp", "Shadow Bamboo Hat"]
+                    "gifts": [
+                        "Smoking Gunpowder",
+                        "Fluorescent Lamp",
+                        "Shadow Bamboo Hat"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1564,7 +1633,12 @@
                 },
                 {
                     "type": "showGiftList",
-                    "gifts": ["Resolution", "Scalpel", "Ancient Effigy", "Harpoon Prosthetic Leg"]
+                    "gifts": [
+                        "Resolution",
+                        "Scalpel",
+                        "Ancient Effigy",
+                        "Harpoon Prosthetic Leg"
+                    ]
                 }
             ]
         },
@@ -1652,7 +1726,9 @@
             "tips": [
                 {
                     "type": "showThemePacks",
-                    "themePacks": ["W5"]
+                    "themePacks": [
+                        "W5"
+                    ]
                 },
                 {
                     "type": "text",
@@ -1660,7 +1736,247 @@
                 },
                 {
                     "type": "showEGOs",
-                    "EGOs": ["20307", "20608", "20508"]
+                    "EGOs": [
+                        "20307",
+                        "20608",
+                        "20508"
+                    ]
+                }
+            ]
+        }
+    ],
+    "Adversity - EXTREME": [
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Level Boost' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nLevel Boost appears on every floor from 11-15 and gives all enemies +3 levels each time if taken."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Frailness' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nFrailness appears on every floor from 11-15 and reduces the max hp of all sinners by -10% each time if taken."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Mark of Fire' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nMark of Fire appears on floors 11 and 14 and deals fixed hp damage to all sinners at every turn end if taken. Mark of Fire on F11 I deals 5 damage on turn 1, increasing by 3 every turn up to a max of 20. Mark of Fire II on F14 deals 10 damage on turn 1, increasing by 5 every turn up to a max of 30."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Inflation' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nInflation appears on floors 11 and 13 and increases the costs of all Shop functions (Skill Replace, Buy Gift, Heal Sinners, Enhance Gifts, and Replace Sinners). Inflation I at F11 doubles all costs. Inflation II at F13 triples all costs."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Ego Interference' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEgo Interference is currently unavailable as PM is adjusting its effects, but it's likely to appear on floors 11 and 13 as these are the floors currently with only 4 adversities."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Mental Psychosis' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nMental Psychosis appears on floors 12 and 15 and reduces the SP of all sinners at the end of every turn. Mental Psychosis I on F12 is -3SP every turn. Mental Psychosis II on F15 is -5SP every turn."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Nerve Acceleration' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nNerve Acceleration appears on floors 12 and 15 and raises the min and max speed of all enemies. Nerve Acceleration I on F12 raises speeds by 1. Nerve Acceleration II on F15 raises speeds by 2."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'SP Fatigue' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nSP Fatigue appears on floors 12 and 15 and stops SP healing from going above a cap in battles (healing in the Shop can still reach 45SP). SP Fatigue I on F12 caps SP healing to 35. SP Fatigue II on F15 caps SP healing to 30."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Tremor Barrier' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nTremor Barrier appears on floor 13 and removes the first Stagger Threshold on all enemies."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Vitality Boost' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nVitality Boost appears on floor 14 and increases the max HP of all enemies by 30%."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with 1 or more 'Brutality' Adversities",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nBrutality appears floor 14 and gives all enemies +2 Plus Coin Power and -2 Minus Coin Power."
+                }
+            ]
+        },
+        {
+            "text": "Clear Mirror Dungeon with [count] or higher Adversity Score",
+            "replace": {
+                "count": [
+                    5,
+                    15,
+                    25,
+                    35,
+                    50
+                ]
+            },
+            "points": [
+                100,
+                100,
+                150,
+                150,
+                200
+            ],
+            "hardonly": [
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEach adversity has a corresponding score attached to it. Your final adversity score is the sum of all the Adversities you took throughout your run. Hitting 50 requires you to take every Adversity on every floor, but is currently impossible to finish due to Ego Interference being disabled.\n\nIf Ego Interference follows the same pattern as the other adversities then it should give 2 and 3 points for ranks I and II. This means the maximum Adversity Scores you can reach on each floor are as follows:"
+                },
+                {
+                    "type": "table",
+                    "headers": ["Floor", "Max Adversity Score", "Cumulative Max Adversity Score"],
+                    "cells": [
+                        ["F11", "8 (6 without Ego Interference", "8 (6 without Ego Interference)"],
+                        ["F12", "9", "17 (15 without Ego Interference)"],
+                        ["F13", "10 (7 without Ego Interference)", "27 (22 without Ego Interference)"],
+                        ["F14", "10", "37 (32 without Ego Interference)"],
+                        ["F15", "13", "50 (45 without Ego Interference)"]
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "This means if you only want to partially clear this achievement, you only need to complete the corresponding floor if you pick enough Adversities (F11 for 5, F12 for 15, and so on)."
+                },
+                {
+                    "type": "text",
+                    "text": "If you want to complete all the way until 50, then get ready for highly difficult encounters where enemies can easily one shot you and your highest rolling EGOs are hopeless. A few things to remember:"
+                },
+                {
+                    "type": "text",
+                    "text": "- Take all the Starlight buffs at ++ if you can afford it. You'll need all the help you can get."
+                },
+                {
+                    "type": "text",
+                    "text": "- Bring easily accessible HP and SP healing. You will not survive the longer fights without it."
+                },
+                {
+                    "type": "text",
+                    "text": "- If you're taking Extreme only theme packs, be careful of the order in which you pick them and also which ones you decide to skip. Some have harder fights that are better done early compared to others. The Clear All Cathy pack (Impenetrable Path) is particularly nasty because the Peccatulum Iraes have unavoidable counters that will stagger or outright kill your sinners if you're not resistant to them."
+                },
+                {
+                    "type": "table",
+                    "headers": ["Theme Pack", "Theme Pack Name", "Enemies"],
+                    "cells": [
+                        ["N Corp.", "N Corp. New League of Nine Litterateurs", "Ahab Trio, Nelly, Jia Huan + Gubo"],
+                        ["Plants", "Efflorescing Greenery", "Drenched Gossypium, Rose Hunter, DongBaek"],
+                        ["Railway 3", "Line 3 - Terminus", "Ambling Pearl, Ardor Blossom Moth, Spiral of Contempt"],
+                        ["Infinity", "Bridle of Infinity", "You Want To Get Beat? Hurtily?, Shock Centipede, My Form Empties"],
+                        ["The Magic Hellbus", "S.E.A. C.R", "Trash Crabs + King Trash Crab"],
+                        ["Clear All Cathy", "Impenetrable Path", "Wild Hunt enemies + Peccatulum Irae??"],
+                        ["Bloodfiends", "Who Couldn't be Bloodfiends", "WARP train and La Manchaland Bloodbags"]
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "- If you're taking regular theme packs, be careful of non-focused encounters (regular and risky). Not being able to choose clashes and sometimes having less moves than the enemy can end your run if you get unlucky."
+                },
+                {
+                    "type": "text",
+                    "text": "- Try to have your entire build established by F10. You won't be able to buy a lot of things on F11-15 because of Inflation, and if you have sinners dying regularly or using a lot of EGOs, you'll end up spending most of your Cost on heals (unless you managed to pick up Faith)."
+                },
+                {
+                    "type": "text",
+                    "text": "- Take the level up option on events that can level you up. Pick up Piece of Relationship as well if possible. You will need all the help you can get when you're clashing on the higher floors."
+                },
+                {
+                    "type": "text",
+                    "text": "- Do NOT limit yourself to gifts of one keyword. Bring hybrid keyword identities that can make use of gifts for other keywords. All the better if you can trigger fusions for multiple keywords. Just don't overdo it to the point where the team itself is negatively affected because you're trying to force in an extra keyword. Get all your main keyword/s' gifts early and make sure you don't miss theme pack specific gifts and fusions. After that, get all the gifts you can for your damage types and secondary keywords (and Lunar Memory). They will make a big difference in how powerful your team is. Make sure not to fuse gifts of your secondary keyword if you don't have 5+ sinners to activate them."
+                },
+                {
+                    "type": "text",
+                    "text": "- Having 30 max SP means rng can hurt you badly. Don't forget you can reset a stage when things don't go your way as long as you still have living sinners."
+                },
+                {
+                    "type": "text",
+                    "text": "- Don't forget you have Durante abilities. Superbia isn't very useful later on since you should have more than enough EGO resources, but Pigritia and Morositasis especially could help in certain circumstances."
+                }
+            ]
+        }
+    ],
+    "Completionist": [
+        {
+            "text": "Complete all Achievements",
+            "points": 0,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Not much to say here other than good luck!"
                 }
             ]
         }

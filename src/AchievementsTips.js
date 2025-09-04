@@ -121,9 +121,9 @@ function ShowGiftsTip({ data, tip }) {
         insertFloorRow(floor, floor in normal.exclusive ? normal.exclusive[floor] : null, floor in hard.exclusive ? hard.exclusive[floor] : null);
     })
 
-    // Floor 5 or 5+
-    if ("5" in normal.exclusive || "5+" in hard.exclusive) {
-        insertFloorRow("5+", "5" in normal.exclusive ? normal.exclusive["5"] : null, "5+" in hard.exclusive ? hard.exclusive["5+"] : null);
+    // Floor 5 or 5-10
+    if ("5" in normal.exclusive || "5-10" in hard.exclusive) {
+        insertFloorRow("5-10", "5" in normal.exclusive ? normal.exclusive["5"] : null, "5-10" in hard.exclusive ? hard.exclusive["5-10"] : null);
     }
 
     return <div style={{ display: "grid", width: "100%", gridTemplateColumns: "1fr 5fr 5fr", border: "1px #666 dotted" }}>
@@ -169,7 +169,7 @@ function ShowThemePacksByFloorTip({ data, tip }) {
     const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" };
 
     const components = [];
-    ["any", "1", "2", "3", "4", "5+"].forEach(floor => {
+    ["any", "1", "2", "3", "4", "5-10"].forEach(floor => {
         if (!(floor in packsByFloor)) return;
         if (floor === "any") components.push(<div style={centerStyle}>Any floor</div>);
         else components.push(<div style={centerStyle}>Floor {floor}</div>);

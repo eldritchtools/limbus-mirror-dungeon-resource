@@ -302,5 +302,54 @@
         "unique_gifts": ["Sorrowful Exhale", "Shatterbound Cannon", "Coveting Thorn"],
         "category": ["Refraction Railway"],
         "tags": ["Refraction Railway"]
+    },
+    "E1": {
+        "name": "N Corp. New League of Nine Litterateurs",
+        "image": "CorpN_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E2": {
+        "name": "Efflorescing Greenery",
+        "image": "Plant_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E3": {
+        "name": "Line 3 - Terminus",
+        "image": "RailwayDungeon3_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E4": {
+        "name": "Bridle of Infinity",
+        "image": "DealCut_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E5": {
+        "name": "S.E.A. C.R",
+        "image": "Canto_SEA_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E6": {
+        "name": "Impenetrable Path",
+        "image": "Canto_VI_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
+    },
+    "E7": {
+        "name": "Who Couldn't be Bloodfiends",
+        "image": "BloodFiend_Extreme",
+        "unique_gifts": [],
+        "category": ["Extreme"],
+        "tags": ["Extreme"]
     }
 }

@@ -3593,6 +3593,83 @@
                 9797,
                 9798
             ]
+        },
+        "E1": {
+            "name": "N Corp. New League of Nine Litterateurs",
+            "image": "CorpN_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E2": {
+            "name": "Efflorescing Greenery",
+            "image": "Plant_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E3": {
+            "name": "Line 3 - Terminus",
+            "image": "RailwayDungeon3_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E4": {
+            "name": "Bridle of Infinity",
+            "image": "DealCut_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E5": {
+            "name": "S.E.A. C.R",
+            "image": "Canto_SEA_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E6": {
+            "name": "Impenetrable Path",
+            "image": "Canto_VI_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
+        },
+        "E7": {
+            "name": "Who Couldn't be Bloodfiends",
+            "image": "BloodFiend_Extreme",
+            "category": [
+                "Extreme"
+            ],
+            "tags": [
+                "Extreme"
+            ],
+            "unique_gifts": []
         }
     },
     "floors": {
@@ -3692,7 +3769,7 @@
                 "I5-2B",
                 "I6-1B"
             ],
-            "5+": [
+            "5-10": [
                 "C4-4",
                 "C5-3",
                 "C6-3",
@@ -3714,6 +3791,23 @@
                 "R5",
                 "I6-1B",
                 "I8-1"
+            ],
+            "11-15": [
+                "C6-3",
+                "C8-1",
+                "C8-2",
+                "R3",
+                "R4-1",
+                "R4-2",
+                "R5",
+                "I7-2",
+                "E1",
+                "E2",
+                "E3",
+                "E4",
+                "E5",
+                "E6",
+                "E7"
             ]
         }
     }

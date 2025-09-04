@@ -2,6 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./AchievementsTab.css"
 import { useState } from 'react';
 import AchievementTips from './AchievementsTips';
+import { Tooltip } from 'react-tooltip';
 
 function Achievement({ data, achievement, tracking, setAchievementTracking }) {
     let subAchievements = null;
@@ -89,7 +90,7 @@ function RewardsTab({ data, totalPoints, columns = 2 }) {
         if (parseInt(level) <= currentLevel) {
             if (reward.item in acc[0]) acc[0][reward.item] += reward.count;
             else acc[0][reward.item] = reward.count;
-            
+
             acc[2].push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
                 <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{level}</span>
                 <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{reward.count}x {reward.item}</span>
@@ -144,7 +145,7 @@ function RewardsTab({ data, totalPoints, columns = 2 }) {
                 </div>
             </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${columns}, 1fr)`}}>
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
             {headers}
             {reorderedComponents}
         </div>
@@ -182,10 +183,15 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
-            <div>Level: {Math.floor(totalPoints / 100)}</div>
-            <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
-                <div style={{ width: `${totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
-                <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {totalPoints % 100}/100 </span>
+            <div data-tooltip-id={"level"} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+                <div>Level: {Math.floor(totalPoints / 100)}</div>
+                <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
+                    <div style={{ width: `${totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
+                    <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {totalPoints % 100}/100 </span>
+                </div>
+                <Tooltip id={"level"} style={{ outlineStyle: "solid", outlineColor: "#ffffff", outlineWidth: "1px", backgroundColor: "#000000" }}>
+                    You can get additional projection/achievement points from completing MD runs so this may not reflect your actual achievement level.
+                </Tooltip>
             </div>
             <button className={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>

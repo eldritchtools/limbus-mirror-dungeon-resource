@@ -45,18 +45,28 @@ function defaultTracking() {
 function getTracking() {
     let latestAccessedVersion = localStorage.getItem('latestVersion');
     if (!latestAccessedVersion) latestAccessedVersion = "6.2";
-    localStorage.setItem('latestVersion', JSON.stringify("6.3"))
+    else latestAccessedVersion = JSON.parse(latestAccessedVersion);
+    localStorage.setItem('latestVersion', JSON.stringify("6.4"))
 
     let storedTracking = localStorage.getItem('tracking');
     if (storedTracking) storedTracking = JSON.parse(storedTracking);
-    else return defaultTracking(achievements);
+    else return defaultTracking();
 
     if (latestAccessedVersion === "6.2") {
         storedTracking["Combat"] = defaultTracking()["Combat"]
         localStorage.setItem('tracking', JSON.stringify(storedTracking));
+        latestAccessedVersion = "6.3";
     }
-    return storedTracking;
 
+    if (latestAccessedVersion === "6.3") {
+        let def = defaultTracking();
+        storedTracking["Adversity - EXTREME"] = def["Adversity - EXTREME"]
+        storedTracking["Completionist"] = def["Completionist"]
+        localStorage.setItem('tracking', JSON.stringify(storedTracking));
+        latestAccessedVersion = "6.4";
+    }
+
+    return storedTracking;
 }
 
 function App() {
