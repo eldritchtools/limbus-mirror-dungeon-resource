@@ -22,7 +22,7 @@ Object.entries(data.floors.hard).forEach(([floor, packs]) => packs.forEach(pack 
 Object.entries(floorsPerPack.normal).forEach(([pack, floors]) => data["theme_packs"][pack]["normalFloors"] = floors);
 Object.entries(floorsPerPack.hard).forEach(([pack, floors]) => data["theme_packs"][pack]["hardFloors"] = floors);
 
-data = {
+const updatedData = {
     gifts: data.gifts,
     themePacks: data["theme_packs"],
     floors: data.floors,
@@ -31,4 +31,4 @@ data = {
     rewards
 }
 
-export default data;
+export default updatedData;
