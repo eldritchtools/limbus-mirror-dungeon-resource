@@ -1,12 +1,13 @@
 // import FusionRecipe from "./FusionRecipe";
 import { EGOImg, GiftImg, Icon, IdentityImg, RarityImg, SampleImg, ThemePackImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
+import data from './data';
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
 }
 
-function TableTip({ data, tip }) {
+function TableTip({ tip }) {
     const getCellComponent = (cell) => {
         if (typeof cell === "string") return <div style={{ whiteSpace: "pre-line", padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
         if (typeof cell === "object" && cell !== null && !Array.isArray(cell)) {
@@ -38,7 +39,7 @@ function TableTip({ data, tip }) {
     </div>;
 }
 
-function ShowGiftsTip({ data, tip }) {
+function ShowGiftsTip({ tip }) {
     const [normal, hard] = Object.entries(data.gifts).reduce((acc, [_id, gift]) => {
         if (gift.vestige) return acc;
         if ("keyword" in tip && gift.keyword !== tip.keyword) return acc;
@@ -59,7 +60,7 @@ function ShowGiftsTip({ data, tip }) {
 
         if ("sources" in gift) {
             gift.sources.forEach(source => {
-                const themePack = data["theme_packs"][source];
+                const themePack = data.themePacks[source];
                 if ("normalFloors" in themePack) themePack.normalFloors.forEach(floor => {
                     if (!(floor in acc[0].exclusive)) acc[0].exclusive[floor] = {};
                     if (!(source in acc[0].exclusive[floor])) acc[0].exclusive[floor][source] = [];
@@ -100,7 +101,7 @@ function ShowGiftsTip({ data, tip }) {
     function constructPackGiftsComponent(packGiftMapping) {
         return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0.1rem", border: "1px #666 dotted" }}>
             {Object.entries(packGiftMapping).map(([pack, gifts]) => <div style={{ width: "100%", textAlign: "center" }}>
-                <ThemePackNameWithTooltip data={data} id={pack} />
+                <ThemePackNameWithTooltip id={pack} />
                 <div style={giftsStyle}>{gifts.map(gift => <GiftImg gift={gift} />)}</div>
             </div>)
             }
@@ -131,7 +132,7 @@ function ShowGiftsTip({ data, tip }) {
     </div>
 }
 
-function ShowGiftListTip({ data, tip }) {
+function ShowGiftListTip({ tip }) {
     const gifts = Object.values(data.gifts).filter(gift => tip.gifts.includes(gift.name))
 
     return <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "fit-content", justifyContent: "center", flexWrap: "wrap" }}>
@@ -139,10 +140,10 @@ function ShowGiftListTip({ data, tip }) {
     </div>
 }
 
-function ShowThemePacksTip({ data, tip }) {
+function ShowThemePacksTip({ tip }) {
     const themePacks = [];
-    if (tip.tag) themePacks.push(...Object.values(data["theme_packs"]).filter((themePack) => themePack.tags.includes(tip.tag)));
-    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => data["theme_packs"][id]));
+    if (tip.tag) themePacks.push(...Object.values(data.themePacks).filter((themePack) => themePack.tags.includes(tip.tag)));
+    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => data.themePacks[id]));
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -151,8 +152,8 @@ function ShowThemePacksTip({ data, tip }) {
     </div>
 }
 
-function ShowThemePacksByFloorTip({ data, tip }) {
-    const themePacks = Object.entries(data["theme_packs"]).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
+function ShowThemePacksByFloorTip({ tip }) {
+    const themePacks = Object.entries(data.themePacks).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
     const packsByFloor = themePacks.reduce((acc, [id, pack]) => {
         if ("hardFloors" in pack) {
             pack.hardFloors.forEach(floor => {
@@ -177,9 +178,9 @@ function ShowThemePacksByFloorTip({ data, tip }) {
         components.push(<div style={{ ...centerStyle, display: "flex", flexDirection: "column", padding: "0.2rem" }}>
             {packsByFloor[floor].map(id => {
                 if ("highlight" in tip && floor in tip.highlight && tip.highlight[floor].includes(id))
-                    return <ThemePackNameWithTooltip data={data} id={id} style={{ fontWeight: "bold", color: "#4ade80" }} />
+                    return <ThemePackNameWithTooltip id={id} style={{ fontWeight: "bold", color: "#4ade80" }} />
                 else
-                    return <ThemePackNameWithTooltip data={data} id={id} />
+                    return <ThemePackNameWithTooltip id={id} />
             })}
         </div>)
     })
@@ -191,7 +192,7 @@ function ShowThemePacksByFloorTip({ data, tip }) {
     </div>
 }
 
-function filterIdentities(data, tip) {
+function filterIdentities(tip) {
     return data.identities.filter(identity => {
         let filter = true;
         if ("keyword" in tip) {
@@ -213,8 +214,8 @@ function filterIdentities(data, tip) {
     })
 }
 
-function ShowIdentities({ data, tip }) {
-    const identities = filterIdentities(data, tip);
+function ShowIdentities({ tip }) {
+    const identities = filterIdentities(tip);
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
@@ -223,8 +224,8 @@ function ShowIdentities({ data, tip }) {
     </div>
 }
 
-function ShowIdentitiesByRarity({ data, tip }) {
-    const identities = filterIdentities(data, tip);
+function ShowIdentitiesByRarity({ tip }) {
+    const identities = filterIdentities(tip);
     const [r1, r2, r3] = identities.reduce((acc, identity) => {
         acc[identity.rarity - 1].push(identity);
         return acc;
@@ -250,16 +251,18 @@ function ShowIdentitiesByRarity({ data, tip }) {
     </div>
 }
 
-function RefreshCostSummary({ data }) {
+function RefreshCostSummary() {
     const arr = Array.from({ length: 10 }, (_, i) => i + 1);
     const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     let sum = 0;
     return <div style={{ display: "flex", justifyContent: "center" }}>
         <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
             <thead>
-                <th style={style}>Refreshes</th>
-                {arr.map(number => <th style={style}>{number}</th>)}
-                <th style={style}>n</th>
+                <tr>
+                    <th style={style}>Refreshes</th>
+                    {arr.map(number => <th style={style}>{number}</th>)}
+                    <th style={style}>n</th>
+                </tr>
             </thead>
             <tbody>
                 <tr>
@@ -285,17 +288,19 @@ function RefreshCostSummary({ data }) {
     </div>
 }
 
-function EnhanceCostSummary({ data }) {
+function EnhanceCostSummary() {
     const giftTierStyle = { fontFamily: "'Archivo Narrow', sans-serif", fontWeight: "bold", fontSize: "24px", color: "#ffd84d" }
     const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     return <div style={{ display: "flex", justifyContent: "center" }}>
         <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
             <thead>
-                <th style={style}>Tier</th>
-                <th style={style}><span style={giftTierStyle}>I</span></th>
-                <th style={style}><span style={giftTierStyle}>II</span></th>
-                <th style={style}><span style={giftTierStyle}>III</span></th>
-                <th style={style}><span style={giftTierStyle}>IV</span></th>
+                <tr>
+                    <th style={style}>Tier</th>
+                    <th style={style}><span style={giftTierStyle}>I</span></th>
+                    <th style={style}><span style={giftTierStyle}>II</span></th>
+                    <th style={style}><span style={giftTierStyle}>III</span></th>
+                    <th style={style}><span style={giftTierStyle}>IV</span></th>
+                </tr>
             </thead>
             <tbody>
                 <tr>
@@ -341,27 +346,27 @@ function ShowEGOsTip({ tip }) {
 
 function ShowSampleTip({ tip }) {
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
-        <SampleImg img={tip.img} width={tip.width} height={tip.height}/>
+        <SampleImg img={tip.img} width={tip.width} height={tip.height} />
     </div >
 }
 
-function AchievementTips({ data, achievement }) {
+function AchievementTips({ achievement }) {
     if (!("tips" in achievement)) return <div>Coming soon...</div>;
 
     const components = [];
     achievement.tips.forEach(tip => {
         switch (tip.type) {
-            case "text": components.push(<TextTip data={data} tip={tip} />); break;
-            case "table": components.push(<TableTip data={data} tip={tip} />); break;
-            case "showGifts": components.push(<ShowGiftsTip data={data} tip={tip} />); break;
-            case "showGiftList": components.push(<ShowGiftListTip data={data} tip={tip} />); break;
-            case "showThemePacks": components.push(<ShowThemePacksTip data={data} tip={tip} />); break;
-            case "showThemePacksByFloor": components.push(<ShowThemePacksByFloorTip data={data} tip={tip} />); break;
-            case "showIds": components.push(<ShowIdentities data={data} tip={tip} />); break;
-            case "showIdsByRarity": components.push(<ShowIdentitiesByRarity data={data} tip={tip} />); break;
-            case "refreshCostSummary": components.push(<RefreshCostSummary data={data} />); break;
-            case "enhanceCostSummary": components.push(<EnhanceCostSummary data={data} />); break;
-            case "showEGOs": components.push(<ShowEGOsTip data={data} tip={tip} />); break;
+            case "text": components.push(<TextTip tip={tip} />); break;
+            case "table": components.push(<TableTip tip={tip} />); break;
+            case "showGifts": components.push(<ShowGiftsTip tip={tip} />); break;
+            case "showGiftList": components.push(<ShowGiftListTip tip={tip} />); break;
+            case "showThemePacks": components.push(<ShowThemePacksTip tip={tip} />); break;
+            case "showThemePacksByFloor": components.push(<ShowThemePacksByFloorTip tip={tip} />); break;
+            case "showIds": components.push(<ShowIdentities tip={tip} />); break;
+            case "showIdsByRarity": components.push(<ShowIdentitiesByRarity tip={tip} />); break;
+            case "refreshCostSummary": components.push(<RefreshCostSummary />); break;
+            case "enhanceCostSummary": components.push(<EnhanceCostSummary />); break;
+            case "showEGOs": components.push(<ShowEGOsTip tip={tip} />); break;
             case "showSample": components.push(<ShowSampleTip tip={tip} />); break;
             default: break;
         }

@@ -1,6 +1,7 @@
 import { GiftImg } from "./ImageHandler";
+import data from './data';
 
-function FusionRecipe({ data, recipe, includeProduct=true }) {
+function FusionRecipe({ recipe, includeProduct=true }) {
     const fontStyle = { color: "#ECCDA3", fontSize: "2.5em" }
     const components = [];
     if (includeProduct) {

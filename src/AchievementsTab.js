@@ -3,8 +3,10 @@ import "./AchievementsTab.css"
 import { useState } from 'react';
 import AchievementTips from './AchievementsTips';
 import { Tooltip } from 'react-tooltip';
+import { useProfiles } from '@eldritchtools/shared-components';
+import data from './data';
 
-function Achievement({ data, achievement, tracking, setAchievementTracking }) {
+function Achievement({ achievement, tracking, setAchievementTracking }) {
     let subAchievements = null;
     let achievementText = achievement.text;
 
@@ -15,17 +17,17 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
         for (let i = 0; i < achievement.points.length; i++) {
             let text = achievement.text;
             Object.entries(achievement.replace).forEach(([key, values]) => text = text.replace(`[${key}]`, values[i]));
-            subAchievements.push(<div class="subitem">
+            subAchievements.push(<div className="subitem">
                 <div style={{ display: "flex", gap: "0.2rem", width: "85%", alignItems: "center" }}>
-                    <label class="checkbox-container">
+                    <label className="checkbox-container">
                         <input type="checkbox" onChange={() => {
                             if (tracking[achievement.index] > i) setAchievementTracking(i);
                             else setAchievementTracking(i + 1);
                         }} checked={tracking[achievement.index] > i} />
-                        <span class="checkmark" />
+                        <span className="checkmark" />
                     </label>
-                    <span class="points">+{achievement.points[i]}</span>
-                    <span class="item-label">{text}</span>
+                    <span className="points">+{achievement.points[i]}</span>
+                    <span className="item-label">{text}</span>
                 </div>
                 {achievement.hardonly[i] ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
             </div>);
@@ -36,18 +38,18 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
     const points = Array.isArray(achievement.points) ? achievement.points.reduce((acc, x) => acc + x, 0) : achievement.points;
     const len = Array.isArray(achievement.points) ? achievement.points.length : 1;
 
-    return <details>
-        <summary>
+    return <details className="details">
+        <summary className="summary">
             <div style={{ display: "flex", gap: "0.2rem", width: "85%", alignItems: "center" }}>
-                <label class="checkbox-container">
+                <label className="checkbox-container">
                     <input type="checkbox" onChange={() => {
                         if (tracking[achievement.index] > len - 1) setAchievementTracking(0);
                         else setAchievementTracking(len);
                     }} checked={tracking[achievement.index] > len - 1} />
-                    <span class="checkmark" />
+                    <span className="checkmark" />
                 </label>
-                <span class="points">+{points}</span>
-                <span class="item-label">{achievementText}</span>
+                <span className="points">+{points}</span>
+                <span className="item-label">{achievementText}</span>
             </div>
             <div style={{ display: "flex", gap: "0.5rem", width: "15%", justifyContent: "end", alignItems: "center" }}>
                 {hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
@@ -56,12 +58,12 @@ function Achievement({ data, achievement, tracking, setAchievementTracking }) {
         </summary>
         <div style={{ padding: "0.5rem 1.5rem 0.1rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
             {subAchievements ? <div>{subAchievements}</div> : null}
-            <div style={{ width: "100%", textAlign: "start" }}> <AchievementTips data={data} achievement={achievement} /> </div>
+            <div style={{ width: "100%", textAlign: "start" }}> <AchievementTips achievement={achievement} /> </div>
         </div>
     </details>
 }
 
-function AchievementTab({ data, achievements, sortClearedToBottom, category, tracking, setAchievementTracking }) {
+function AchievementTab({ achievements, sortClearedToBottom, category, tracking, setAchievementTracking }) {
     if (sortClearedToBottom) {
         const [ticked, unticked] = achievements.reduce((acc, achievement) => {
             if (tracking[achievement.index] === (Array.isArray(achievement.points) ? achievement.points.length : 1)) acc[0].push(achievement);
@@ -71,20 +73,20 @@ function AchievementTab({ data, achievements, sortClearedToBottom, category, tra
 
         return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
-                {unticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
-                {ticked.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {unticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {ticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
     } else {
         return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
-                {achievements.map(achievement => <Achievement key={achievement.index} data={data} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {achievements.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
     }
 }
 
-function RewardsTab({ data, totalPoints, columns = 2 }) {
+function RewardsTab({ totalPoints, columns = 2 }) {
     const currentLevel = Math.floor(totalPoints / 100);
     const [rewardsDone, rewardsTodo, levelComponents] = Object.entries(data.rewards).reduce((acc, [level, reward]) => {
         if (parseInt(level) <= currentLevel) {
@@ -152,29 +154,35 @@ function RewardsTab({ data, totalPoints, columns = 2 }) {
     </div>;
 }
 
-function AchievementsTab({ data, achievements, tracking, setTracking, totalPoints, setTotalPoints }) {
+function AchievementsTab() {
     const [sortClearedToBottom, setSortClearedToBottom] = useState(false);
+    const { profileData, setProfileData } = useProfiles();
 
     const setAchievementTracking = (category, achievement, value) => {
+        let tracking = profileData.tracking;
+        let totalPoints = profileData.totalPoints;
+
         if (Array.isArray(achievement.points)) {
             let v = tracking[category][achievement.index];
             let diff = 0;
             while (v < value) diff += achievement.points[v++];
             while (v > value) diff -= achievement.points[--v];
 
-            setTotalPoints(totalPoints + diff);
+            totalPoints += diff;
         } else {
-            if (value === 1) setTotalPoints(totalPoints + achievement.points);
-            else setTotalPoints(totalPoints - achievement.points);
+            if (value === 1) totalPoints += achievement.points;
+            else totalPoints -= achievement.points;
         }
 
-        setTracking({
+        tracking = {
             ...tracking,
             [category]: tracking[category].map((x, i) => {
                 if (achievement.index === i) return value;
                 else return x;
             })
-        })
+        }
+        
+        setProfileData({...profileData, tracking: tracking, totalPoints: totalPoints});
     }
 
     const toggleSortClearedToBottom = () => {
@@ -184,10 +192,10 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
             <div data-tooltip-id={"level"} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
-                <div>Level: {Math.floor(totalPoints / 100)}</div>
+                <div>Level: {Math.floor(profileData.totalPoints / 100)}</div>
                 <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
-                    <div style={{ width: `${totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
-                    <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {totalPoints % 100}/100 </span>
+                    <div style={{ width: `${profileData.totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
+                    <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {profileData.totalPoints % 100}/100 </span>
                 </div>
                 <Tooltip id={"level"} style={{ outlineStyle: "solid", outlineColor: "#ffffff", outlineWidth: "1px", backgroundColor: "#000000" }}>
                     You can get additional projection/achievement points from completing MD runs so this may not reflect your actual achievement level.
@@ -197,16 +205,16 @@ function AchievementsTab({ data, achievements, tracking, setTracking, totalPoint
         </div>
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
             <TabList className="tab-list">
-                {Object.entries(achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
+                {Object.entries(data.achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
                 <Tab className="tab">Rewards</Tab>
             </TabList>
 
-            {Object.entries(achievements).map(([category, list]) =>
+            {Object.entries(data.achievements).map(([category, list]) =>
                 <TabPanel className="tab-panel" style={{ height: "85vh" }}>
-                    <AchievementTab data={data} achievements={list} sortClearedToBottom={sortClearedToBottom} category={category} tracking={tracking[category]} setAchievementTracking={setAchievementTracking} />
+                    <AchievementTab achievements={list} sortClearedToBottom={sortClearedToBottom} category={category} tracking={profileData.tracking[category]} setAchievementTracking={setAchievementTracking} />
                 </TabPanel>)}
             <TabPanel className="tab-panel" style={{ height: "85vh" }}>
-                <RewardsTab data={data} totalPoints={totalPoints} />
+                <RewardsTab totalPoints={profileData.totalPoints} />
             </TabPanel>
         </Tabs>
     </div>

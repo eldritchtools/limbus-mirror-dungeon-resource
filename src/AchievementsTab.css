@@ -1,4 +1,4 @@
-details {
+.details {
     background-color: #1e1e1e;
     border: 1px solid #333;
     border-radius: 6px;
@@ -7,7 +7,7 @@ details {
     margin-bottom: 0.5rem;
 }
 
-summary {
+.summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,16 +28,16 @@ summary {
   transition: transform 0.2s ease;
 }
 
-details[open] .arrow {
+.details[open] .arrow {
   transform: rotate(180deg);
 }
 
-summary:hover {
+.summary:hover {
   background-color: #333;
 }
 
 /* Remove default disclosure triangle in Safari */
-summary::-webkit-details-marker {
+.summary::-webkit-details-marker {
     display: none;
 }
 

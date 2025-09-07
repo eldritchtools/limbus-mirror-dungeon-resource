@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Icon } from "./ImageHandler";
 import FusionRecipe from "./FusionRecipe";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
+import data from './data';
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -16,14 +17,14 @@ function getFusionRecipes(gifts) {
     return list;
 }
 
-function organizeThemePacks(data, themePacks) {
+function organizeThemePacks() {
     const fusionThemePacks = new Set();
     Object.entries(data.gifts).forEach(([id, gift]) => {
         if (!gift.fusion || !("sources" in gift)) return;
         gift.sources.forEach(source => fusionThemePacks.add(source));
     })
 
-    const typeMap = Object.entries(themePacks).reduce((acc, [id, themePack]) => {
+    const typeMap = Object.entries(data.themePacks).reduce((acc, [id, themePack]) => {
         if (!("unique_gifts" in themePack) || !fusionThemePacks.has(id))
             return acc;
 
@@ -76,10 +77,10 @@ function filterFusionRecipes(gifts, fusionsList, searchString, selectedKeywords,
     return list;
 }
 
-function FusionRow({ data, recipe }) {
+function FusionRow({ recipe }) {
     const tdStyle = { borderTop: "1px grey dotted", borderBottom: "1px grey dotted", padding: "5px" };
     return <tr>
-        <td style={tdStyle}><FusionRecipe data={data} recipe={recipe} /></td>
+        <td style={tdStyle}><FusionRecipe recipe={recipe} /></td>
         <td style={tdStyle}>
             {data.gifts[recipe.id].hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
         </td>
@@ -87,15 +88,15 @@ function FusionRow({ data, recipe }) {
             {data.gifts[recipe.id].sources ?
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <span>Requires:</span>
-                    {data.gifts[recipe.id].sources.map(source => <ThemePackNameWithTooltip data={data} id={source} />)}
+                    {data.gifts[recipe.id].sources.map(source => <ThemePackNameWithTooltip id={source} />)}
                 </div> :
                 <span>Always obtainable</span>}
         </td>
     </tr>
 }
 
-function FusionsDisplay({ data, searchString, selectedKeywords, selectedThemePacks }) {
-    const fusionRecipesList = useMemo(() => getFusionRecipes(data.gifts), [data]);
+function FusionsDisplay({ searchString, selectedKeywords, selectedThemePacks }) {
+    const fusionRecipesList = useMemo(() => getFusionRecipes(data.gifts), []);
 
     if (searchString === "" && selectedKeywords.length === 0 && selectedThemePacks.length === 0) {
         const fusionsByKeyword = fusionRecipesList.reduce((acc, fusion) => {
@@ -112,20 +113,20 @@ function FusionsDisplay({ data, searchString, selectedKeywords, selectedThemePac
                 components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}>Keywordless</div></td></tr>);
             else
                 components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}><Icon id={keyword} scale={1.5} />{keyword}</div></td></tr>);
-            fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow data={data} recipe={recipe} />));
+            fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow recipe={recipe} />));
         });
 
         return <table style={{ borderCollapse: "collapse" }}><tbody>{components}</tbody></table>
     } else {
         const filteredRecipesList = filterFusionRecipes(data.gifts, fusionRecipesList, searchString, selectedKeywords, selectedThemePacks);
-        return <table style={{ borderCollapse: "collapse" }}><tbody>{filteredRecipesList.map(recipe => <FusionRow data={data} recipe={recipe} />)}</tbody></table>
+        return <table style={{ borderCollapse: "collapse" }}><tbody>{filteredRecipesList.map(recipe => <FusionRow recipe={recipe} />)}</tbody></table>
     }
 }
 
-function FusionsTab({ data }) {
+function FusionsTab() {
     const [searchString, setSearchString] = useState("");
     const [selectedKeywords, setSelectedKeywords] = useState([]);
-    const themePackList = useMemo(() => organizeThemePacks(data, data["theme_packs"]), [data]);
+    const themePackList = useMemo(() => organizeThemePacks(), []);
     const [selectedThemePacks, setSelectedThemePacks] = useState([]);
 
     const handleSearchChange = (e) => {
@@ -154,7 +155,7 @@ function FusionsTab({ data }) {
         setSelectedThemePacks([]);
     }
 
-    const fusionsComponent = useMemo(() => <FusionsDisplay data={data} searchString={searchString} selectedKeywords={selectedKeywords} selectedThemePacks={selectedThemePacks} />, [data, searchString, selectedKeywords, selectedThemePacks]);
+    const fusionsComponent = useMemo(() => <FusionsDisplay searchString={searchString} selectedKeywords={selectedKeywords} selectedThemePacks={selectedThemePacks} />, [searchString, selectedKeywords, selectedThemePacks]);
 
     return <div style={{ display: "flex", flexDirection: "row", maxHeight: "100%", gap: "5px", alignItems: "center" }}>
         <div style={{ width: "40%", display: "flex", flexDirection: "column", minHeight: "100%", justifyContent: "start" }}>
@@ -188,7 +189,7 @@ function FusionsTab({ data }) {
                                             const selected = selectedThemePacks.includes(themePack);
                                             return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
                                                 {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
-                                                {data["theme_packs"][themePack].name}
+                                                {data.themePacks[themePack].name}
                                             </label>
                                         })}
                                     </div>
