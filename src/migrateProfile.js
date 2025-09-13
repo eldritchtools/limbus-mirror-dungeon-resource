@@ -2,7 +2,7 @@ import { db } from "@eldritchtools/shared-components";
 import achievements from './data/achievements.json';
 
 const DB_NAME = "limbus-mirror-dungeon-resource"
-const LATEST_VERSION = "6.4";
+const LATEST_VERSION = "6.5";
 
 function defaultTracking() {
     return Object.entries(achievements).reduce((acc, [key, achievements]) => {
@@ -31,8 +31,7 @@ async function firstMigrate() {
 }
 
 function migrateProfile(profile = {}) {
-    let latestVersion = "latestVersion" in profile ? profile.latestVersion : 0;
-    if (latestVersion === 0) {
+    if (!("latestVersion" in profile)) {
         return {
             latestVersion: LATEST_VERSION,
             totalPoints: 0,
@@ -42,15 +41,20 @@ function migrateProfile(profile = {}) {
 
     let migratedProfile = { ...profile };
     let def = defaultTracking();
-    if (latestVersion === "6.2") {
-        migratedProfile.tracking["Combat"] = def["Combat"]
-        latestVersion = "6.3";
+    if (migratedProfile.latestVersion === "6.2") {
+        migratedProfile.tracking["Combat"] = def["Combat"];
+        migratedProfile.latestVersion = "6.3";
     }
 
-    if (latestVersion === "6.3") {
+    if (migratedProfile.latestVersion === "6.3") {
         migratedProfile.tracking["Adversity - EXTREME"] = def["Adversity - EXTREME"]
         migratedProfile.tracking["Completionist"] = def["Completionist"]
-        latestVersion = "6.4";
+        migratedProfile.latestVersion = "6.4";
+    }
+
+    if (migratedProfile.latestVersion === "6.4") {
+        migratedProfile.tracking["Hidden"] = def["Hidden"]
+        migratedProfile.latestVersion = "6.5";
     }
 
     return migratedProfile;

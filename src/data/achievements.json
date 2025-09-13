@@ -1797,7 +1797,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEgo Interference is currently unavailable as PM is adjusting its effects, but it's likely to appear on floors 11 and 13 as these are the floors currently with only 4 adversities."
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEgo Interference appears on floors 11 and 13 and increases the costs of using E.G.Os. Ego Interference I doubles all costs and Ego Interference II triples them."
                 }
             ]
         },
@@ -1895,17 +1895,17 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEach adversity has a corresponding score attached to it. Your final adversity score is the sum of all the Adversities you took throughout your run. Hitting 50 requires you to take every Adversity on every floor, but is currently impossible to finish due to Ego Interference being disabled.\n\nIf Ego Interference follows the same pattern as the other adversities then it should give 2 and 3 points for ranks I and II. This means the maximum Adversity Scores you can reach on each floor are as follows:"
+                    "text": "Adversities only exist on Extreme difficulty at F11-15.\n\nEach adversity has a corresponding score attached to it. Your final adversity score is the sum of all the Adversities you took throughout your run. Hitting 50 requires you to take every Adversity on every floor.\n\nThe maximum Adversity Scores you can reach on each floor are as follows:"
                 },
                 {
                     "type": "table",
                     "headers": ["Floor", "Max Adversity Score", "Cumulative Max Adversity Score"],
                     "cells": [
-                        ["F11", "8 (6 without Ego Interference", "8 (6 without Ego Interference)"],
-                        ["F12", "9", "17 (15 without Ego Interference)"],
-                        ["F13", "10 (7 without Ego Interference)", "27 (22 without Ego Interference)"],
-                        ["F14", "10", "37 (32 without Ego Interference)"],
-                        ["F15", "13", "50 (45 without Ego Interference)"]
+                        ["F11", "8", "8"],
+                        ["F12", "9", "17"],
+                        ["F13", "10", "27"],
+                        ["F14", "10", "37"],
+                        ["F15", "13", "50"]
                     ]
                 },
                 {
@@ -1922,11 +1922,11 @@
                 },
                 {
                     "type": "text",
-                    "text": "- Bring easily accessible HP and SP healing. You will not survive the longer fights without it."
+                    "text": "- Bring easily accessible HP and SP healing. You might struggle to survive the longer fights without it."
                 },
                 {
                     "type": "text",
-                    "text": "- If you're taking Extreme only theme packs, be careful of the order in which you pick them and also which ones you decide to skip. Some have harder fights that are better done early compared to others. The Clear All Cathy pack (Impenetrable Path) is particularly nasty because the Peccatulum Iraes have unavoidable counters that will stagger or outright kill your sinners if you're not resistant to them."
+                    "text": "- Be careful of the order in which you pick the theme packs and also which ones you decide to skip. Some have harder fights that are better done early compared to others. The Clear All Cathy pack (Impenetrable Path) is particularly nasty because the Peccatulum Iraes have unavoidable counters that will stagger or outright kill your sinners if you're not resistant to them."
                 },
                 {
                     "type": "table",
@@ -1940,10 +1940,6 @@
                         ["Clear All Cathy", "Impenetrable Path", "Wild Hunt enemies + Peccatulum Irae??"],
                         ["Bloodfiends", "Who Couldn't be Bloodfiends", "WARP train and La Manchaland Bloodbags"]
                     ]
-                },
-                {
-                    "type": "text",
-                    "text": "- If you're taking regular theme packs, be careful of non-focused encounters (regular and risky). Not being able to choose clashes and sometimes having less moves than the enemy can end your run if you get unlucky."
                 },
                 {
                     "type": "text",
@@ -1974,13 +1970,129 @@
     ],
     "Completionist": [
         {
-            "text": "Complete all Achievements",
+            "text": "Complete all Achievements (Not counting Achievements in the \"Hidden\" category)",
             "points": 0,
             "hardonly": true,
             "tips": [
                 {
                     "type": "text",
                     "text": "Not much to say here other than good luck!"
+                }
+            ]
+        }
+    ],
+    "Hidden": [
+        {
+            "text": "Clear Hidden Node - Don Quixote",
+            "points": 0,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
+                },
+                {
+                    "type": "text",
+                    "text": "For Don Quixote, just defend with everyone when he throws the gondolas at you. Heal often if you get hit with a lot of bleed. He has a lot of hp \"checkpoints\" so you'll end up skipping a lot of his mechanics if you deal enough damage."
+                },
+                {
+                    "type": "text",
+                    "text": "If you beat him, you'll get \"The Family's Resentment\"."
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["The Family's Resentment"]
+                }
+            ]
+        },
+        {
+            "text": "Clear Hidden Node - Lei Heng",
+            "points": 0,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
+                },
+                {
+                    "type": "text",
+                    "text": "For Lei Heng, the biggest problem most players had in story mode was the amount of damage he dealt from his red coins due to his ammo and speed passives. Most builds that will survive extreme will probably naturally have sources of haste/bind in their gifts, which already eliminates his speed issue. Try clashing his weaker skills with your faster sinners to make him use up his ammo so he runs out before his stronger skills."
+                },
+                {
+                    "type": "text",
+                    "text": "If you beat him, you'll get \"For the Capo\"."
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["For the Capo"]
+                }
+            ]
+        },
+        {
+            "text": "Clear Hidden Node - Ricardo",
+            "points": 0,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
+                },
+                {
+                    "type": "text",
+                    "text": "There's not really much to say about Ricardo. You just have to outclash him. He gets offense level buffs when you hit him or his minions, but at that point in extreme that doesn't really make that big of a difference and it's not really something you can control very well. You can use egos to make yourself resistant to his counter if you want to minimize damage."
+                },
+                {
+                    "type": "text",
+                    "text": "If you beat him, you'll get \"Rules of the Middle\"."
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["Rules of the Middle"]
+                }
+            ]
+        },
+        {
+            "text": "Clear Hidden Node - Vergilius",
+            "points": 0,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
+                },
+                {
+                    "type": "text",
+                    "text": "Sorry, I haven't fought him since the April Fool's event, and I haven't encountered him in MDE yet, so I don't know what he does."
+                },
+                {
+                    "type": "text",
+                    "text": "If you beat him, you'll get \"Kkomi's Mini-Gift\"."
+                },
+                {
+                    "type": "showGiftList",
+                    "gifts": ["Kkomi's Mini-Gift"]
+                }
+            ]
+        },
+        {
+            "text": "Obtain EX-Tier E.G.O Gift \"A Certain Philosophy\"",
+            "points": 0,
+            "hardonly": false,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You need to fuse with a 99% chance to get the keyword you want and fail it to get this gift. Just keep fusing either 3 gifts with the starlight buff to increase the fuse chance or with 4 gifts in a super shop."
+                }
+            ]
+        },
+        {
+            "text": "Obtain EX-Tier E.G.O Gift \"Wealth\"",
+            "points": 0,
+            "hardonly": false,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "You need to encounter the slot machine event and succeed in the 1% chance to get this gift."
                 }
             ]
         }

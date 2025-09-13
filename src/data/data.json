@@ -2281,6 +2281,28 @@
                 "I7-2"
             ]
         },
+        "9827": {
+            "tier": "4",
+            "keyword": "Bleed",
+            "name": "The Family's Resentment",
+            "image_override": "The Family_s Resentment"
+        },
+        "9828": {
+            "tier": "4",
+            "keyword": "Tremor",
+            "name": "For the Capo"
+        },
+        "9829": {
+            "tier": "4",
+            "keyword": "Blunt",
+            "name": "Rules of the Middle"
+        },
+        "9830": {
+            "tier": "4",
+            "keyword": "Keywordless",
+            "name": "Kkomi's Mini-Gift",
+            "image_override": "Kkomi_s Mini-Gift"
+        },
         "9799": {
             "tier": "EX",
             "keyword": "Keywordless",
@@ -3793,14 +3815,10 @@
                 "I8-1"
             ],
             "11-15": [
-                "C6-3",
-                "C8-1",
-                "C8-2",
                 "R3",
                 "R4-1",
                 "R4-2",
                 "R5",
-                "I7-2",
                 "E1",
                 "E2",
                 "E3",
