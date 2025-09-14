@@ -48,6 +48,7 @@
     {"id": "10409", "name": "District 20 Yurodivy", "sinner": "Ryōshū", "rarity": 2, "factions": ["Yurodiviye"], "keywords": ["Tremor"]},
     {"id": "10410", "name": "Lobotomy E.G.O::Red Eyes & Penitence", "sinner": "Ryōshū", "rarity": 3, "factions": [], "keywords": ["Bleed", "Charge"]},
     {"id": "10411", "name": "Heishou Pack - Mao Branch", "sinner": "Ryōshū", "rarity": 3, "factions": ["Heishou Pack - Mao Branch"], "keywords": ["Rupture"]},
+    {"id": "10412", "name": "N Corp. E.G.O::Contempt, Awe", "sinner": "Ryōshū", "rarity": 3, "factions": ["N Corp."], "keywords": ["Bleed", "Tremor"]},
     {"id": "10501", "name": "LCB Sinner", "sinner": "Meursault", "rarity": 1, "factions": ["Limbus Company", "LCB"], "keywords": ["Tremor"]},
     {"id": "10502", "name": "Liu Assoc. South Section 6", "sinner": "Meursault", "rarity": 2, "factions": ["Liu Association"], "keywords": ["Burn"]},
     {"id": "10503", "name": "W Corp. L2 Cleanup Agent", "sinner": "Meursault", "rarity": 3, "factions": ["W Corp."], "keywords": ["Rupture", "Charge"]},
