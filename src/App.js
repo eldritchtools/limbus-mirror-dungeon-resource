@@ -8,6 +8,12 @@ import ThemePacksTab from './ThemePacksTab';
 import { Header, Footer, ProfileProvider } from '@eldritchtools/shared-components';
 import migrateProfile, { firstMigrate } from './migrateProfile';
 
+const description = <span>
+    Limbus Company Mirror Dungeon Resource and Achievements Tracker is a free fan-made tool to help players plan dungeon runs and track achievement progress.
+    <br /><br />
+    Get tips and details for each achievement, plus references for fusion recipes, theme packs, and other info related to Mirror Dungeons.
+</span>;
+
 function App() {
     const [migrated, setMigrated] = useState(false);
 
@@ -47,7 +53,7 @@ function App() {
                     </div>
                 </div>
                 <Footer
-                    description={"This site was created as a reference for Limbus Company Mirror Dungeon Achievements."}
+                    description={description}
                     gameName={"Limbus Company"}
                     developerName={"Project Moon"}
                     githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
