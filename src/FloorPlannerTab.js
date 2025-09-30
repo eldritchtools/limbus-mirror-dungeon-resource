@@ -66,7 +66,7 @@ function FloorSelection({ difficulty, selectedFloors, setSelectedFloors }) {
     if (difficulty === "E")
         for (let i = 10; i < 15; i++) selectors.push(<FloorSelector value={selectedFloors[i]} setValue={v => setSelectedFloor(v, i)} options={getOptions(i + 1)} />);
 
-    return <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 400px)", width: "100%", justifyContent: "center", overflowY: "auto" }}>
         {selectors.map((selector, index) => <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", width: "400px" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <span>Floor {index+1}</span>
@@ -92,7 +92,7 @@ function FloorPlannerTab() {
         setDifficulty(v);
     }
 
-    return <div style={{ display: "flex", flexDirection: "column", maxHeight: "100%", gap: "5px", alignItems: "center" }}>
+    return <div style={{ display: "flex", flexDirection: "column", maxHeight: "100%", gap: "5px", alignItems: "center", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
             <div data-tooltip-id="genericTooltip" data-tooltip-content="Changing to or from Normal will reset all selected theme packs." style={{borderBottom: "1px #aaa dotted"}}>Select Difficulty:</div>
             <select name="difficulty" id="difficulty" value={difficulty} onChange={e => handleSetDifficulty(e.target.value)}>

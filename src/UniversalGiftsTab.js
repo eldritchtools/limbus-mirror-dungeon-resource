@@ -5,7 +5,7 @@ function GiftRow({ list=null, dict=null }) {
     return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))", width: "100%", justifyContent: "center" }}>
         {list ? 
             list.map(giftId => <Gift id={giftId} includeTooltip={true} />) : 
-            dict.map(([giftId, notes]) => <div style={{display: "flex", flexDirection: "column"}}>
+            dict.map(([giftId, notes]) => <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <Gift id={giftId} includeTooltip={true} />
                 <span style={{whiteSpace: "pre-wrap"}}>{notes}</span>
                 </div>)}
