@@ -1,0 +1,49 @@
+{
+    "individual": [
+        {"title": "Power", "sections": [
+            {"title": "General", "gifts": [9703, 9011, 9420, 9146, 9767]},
+            {"title": "Slash", "gifts": [9142, 9196, 9195, 9140, 9193]},
+            {"title": "Pierce", "gifts": [9147, 9200, 9145, 9197, 9199]},
+            {"title": "Blunt", "gifts": [9152, 9204, 9150, 9201, 9786]}
+        ]},
+        {"title": "Damage", "sections": [
+            {"title": "General", "gifts": [9083, 9705, 9065, 9067, 9022, 9015, 9007, 9085, 9025, 9036]},
+            {"title": "Type Specific", "gifts": [9141, 9768, 9151, 9138, 9143]}
+        ]},
+        {"title": "E.G.O Resources", "gifts": [9068, 9021, 9006, 9002, 9037, 9153, 9058, 9712, 9439]},
+        {"title": "HP", "gifts": [9754, 9756, 9813, 9004, 9076, 9028, 9039, 9733, 9794, 9077]},
+        {"title": "SP", "gifts": [9081, 9748, 9749, 9810]},
+        {"title": "Cost", "gifts": [9079, 9080, 9078, 9191, 9189, 9190, 9188, 9185, 9186]},
+        {"title": "Others", "gifts": [9082, 9014, 9084, 9433, 9040, 9764, 9762, 9763]}
+    ],
+    "combo": [
+        {"title": "Burn", "sections": [
+            {"title": "Enablers", "gifts": [[9053, "Wave Start\nSloth Res"], [9776, "Turn Start"], [9001, "Apply Burn\nWrath Res"], [9003, "Combat Start"], [9009, "Lust Hit"], [9034, "Envy Hit"]]},
+            {"title": "Exploiters", "gifts": [[9071, "Offense Level Down"], [9104, "+Damage"], [9045, "Defense Level Down"]]}
+        ]},
+        {"title": "Bleed", "sections": [
+            {"title": "Enablers", "gifts": [[9050, "Wave Start"], [9089, "Deal Dmg"], [9704, "First Skill"], [9008, "Single-coin Skill"], [9440, "Backup Enemies"], [9020, "Stagger"]]},
+            {"title": "Exploiters", "gifts": [[9050, "Lose Offense and Defense Level"], [9106, "Haste\nDamage\nOffense Level"], [9029, "+Dmg Dealt\n-Dmg Taken"], [9042, "-Speed"]]}
+        ]},
+        {"title": "Tremor", "sections": [
+            {"title": "Enablers", "gifts": [[9055, "Turn Start"], [9031, "Wave Start\nEnvy Hit"], [9044, "On Hit"], [9724, "Wave Start"], [9725, "Wave Start"], [9706, "Blunt Skill"], [9016, "Gluttony Hit"]]},
+            {"title": "Exploiters", "gifts": [[9055, "Tremor Burst"], [9024, "Burst: Offense and Defense Level Down"], [9091, "Burst: Fragile"], [9086, "Bind\nDefense Level Down\nParalyze"], [9724, "+Dmg Dealt"], [9725, "-Dmg Taken"], [9111, "Dmg on Kill"]]}
+        ]},
+        {"title": "Rupture", "sections": [
+            {"title": "Enablers", "gifts": [[9060, "Turn Start"], [9018, "Turn Start"], [9047, "Turn End"], [9033, "On Hit"], [9013, "Deal Dmg"], [9803, "Turn Start"], [9403, "Encounter Start"]]},
+            {"title": "Exploiters", "gifts": [[9790, "Clash Power"], [9093, "Damage Up\nHaste"], [9064, "Offense and Defense Level Down"], [9060, "Gluttony Damage"]]}
+        ]},
+        {"title": "Sinking", "sections": [
+            {"title": "Enablers", "gifts": [[9095, "Wave Start"], [9059, "On Hit"], [9074, "-SP Enemies\nEnvy Skills"], [9409, "Clash Win\nWhen Hit"], [9049, "Gloom or Lust Res"], [9806, "When Hit"]]},
+            {"title": "Exploiters", "gifts": [[9054, "Offense and Defense Level Down"], [9061, "+Dmg Dealt\n-Dmg Taken"], [9436, "Gloom Damage"], [9807, "Gloom Damage"], [9172, "SP Heal"], [9750, "+Dmg on Heads"]]}
+        ]},
+        {"title": "Poise", "sections": [
+            {"title": "Enablers", "gifts": [[9066, "Wave Start\nPride Res"], [9063, "Combat Start"], [9097, "Turn Start"], [9056, "On Crit"], [9128, "Wave Start"], [9765, "Damage Dealt\nTurn Start"], [9709, "Damage Dealt"], [9710, "Turn Start"]]},
+            {"title": "Exploiters", "gifts": [[9070, "+Damage\nOffense Level Up"], [9046, "Power Up"], [9130, "Clash Power\nDamage Up"], [9429, "Haste\nOffense Level Up\nDamage Up"], [9127, "Haste"], [9129, "Defense Level Down"], [9770, "+Damage\nDefense Level and Power Up"], [9715, "Pride Damage"]]}
+        ]},
+        {"title": "Charge", "sections": [
+            {"title": "Enablers", "gifts": [[9075, "Encounter Start\nTurn Start"], [9099, "Wave Start as Charge Barrier"], [9072, "Encounter Start"], [9134, "Turn End as Charge Barrier"], [9132, "Turn End"], [9052, "Turn Start\nSloth Res"], [9043, "Wrath Res"]]},
+            {"title": "Exploiters", "gifts": [[9057, "Offense Level Up"], [9736, "Offense Level Up\nHaste"], [9069, "Damage Up"], [9132, "Damage Up"], [9062, "Haste\nPower Up"], [9737, "Shield on Clash Lose"]]}
+        ]}
+    ]
+}

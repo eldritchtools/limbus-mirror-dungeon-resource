@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Icon } from "./ImageHandler";
 import FusionRecipe from "./FusionRecipe";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
-import data from './data';
+import { gifts as giftsData, KeywordSelector, themePacks as themePacksData } from "@eldritchtools/limbus-shared-library";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -19,13 +19,13 @@ function getFusionRecipes(gifts) {
 
 function organizeThemePacks() {
     const fusionThemePacks = new Set();
-    Object.entries(data.gifts).forEach(([id, gift]) => {
-        if (!gift.fusion || !("sources" in gift)) return;
-        gift.sources.forEach(source => fusionThemePacks.add(source));
+    Object.entries(giftsData).forEach(([id, gift]) => {
+        if (!gift.fusion || !("exclusiveTo" in gift)) return;
+        gift.exclusiveTo.forEach(source => fusionThemePacks.add(source));
     })
 
-    const typeMap = Object.entries(data.themePacks).reduce((acc, [id, themePack]) => {
-        if (!("unique_gifts" in themePack) || !fusionThemePacks.has(id))
+    const typeMap = Object.entries(themePacksData).reduce((acc, [id, themePack]) => {
+        if (!("exclusive_gifts" in themePack) || !fusionThemePacks.has(id))
             return acc;
 
         switch (id[0]) {
@@ -63,17 +63,17 @@ function includesIgnoreCase(s1, s2) {
 function filterFusionRecipes(gifts, fusionsList, searchString, selectedKeywords, selectedThemePacks) {
     let list = fusionsList;
     if (searchString !== "")
-        list = list.filter(recipe => includesIgnoreCase(gifts[recipe.id].name, searchString) || recipe.ingredients.some(ingredient => {
+        list = list.filter(recipe => includesIgnoreCase(gifts[recipe.id].names[0], searchString) || recipe.ingredients.some(ingredient => {
             if (ingredient instanceof Object)
-                return ingredient.options.some(option => includesIgnoreCase(gifts[option].name, searchString))
+                return ingredient.options.some(option => includesIgnoreCase(gifts[option].names[0], searchString))
             else
-                return includesIgnoreCase(gifts[ingredient].name, searchString)
+                return includesIgnoreCase(gifts[ingredient].names[0], searchString)
         }));
     if (selectedKeywords.length !== 0) {
         list = list.filter(recipe => selectedKeywords.includes(gifts[recipe.id].keyword));
     }
     if (selectedThemePacks.length !== 0)
-        list = list.filter(recipe => gifts[recipe.id].sources ? gifts[recipe.id].sources.some(source => selectedThemePacks.includes(source)) : false);
+        list = list.filter(recipe => gifts[recipe.id].exclusiveTo ? gifts[recipe.id].exclusiveTo.some(source => selectedThemePacks.includes(source)) : false);
     return list;
 }
 
@@ -82,13 +82,13 @@ function FusionRow({ recipe }) {
     return <tr>
         <td style={tdStyle}><FusionRecipe recipe={recipe} /></td>
         <td style={tdStyle}>
-            {data.gifts[recipe.id].hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
+            {giftsData[recipe.id].hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
         </td>
         <td style={tdStyle}>
-            {data.gifts[recipe.id].sources ?
+            {giftsData[recipe.id].exclusiveTo ?
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <span>Requires:</span>
-                    {data.gifts[recipe.id].sources.map(source => <ThemePackNameWithTooltip id={source} />)}
+                    {giftsData[recipe.id].exclusiveTo.map(source => <ThemePackNameWithTooltip id={source} />)}
                 </div> :
                 <span>Always obtainable</span>}
         </td>
@@ -96,11 +96,11 @@ function FusionRow({ recipe }) {
 }
 
 function FusionsDisplay({ searchString, selectedKeywords, selectedThemePacks }) {
-    const fusionRecipesList = useMemo(() => getFusionRecipes(data.gifts), []);
+    const fusionRecipesList = useMemo(() => getFusionRecipes(giftsData), []);
 
     if (searchString === "" && selectedKeywords.length === 0 && selectedThemePacks.length === 0) {
         const fusionsByKeyword = fusionRecipesList.reduce((acc, fusion) => {
-            acc[data.gifts[fusion.id].keyword].push(fusion);
+            acc[giftsData[fusion.id].keyword].push(fusion);
             return acc;
         }, keywords.reduce((acc, keyword) => { acc[keyword] = []; return acc }, {}))
 
@@ -116,10 +116,10 @@ function FusionsDisplay({ searchString, selectedKeywords, selectedThemePacks }) 
             fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow recipe={recipe} />));
         });
 
-        return <table style={{ borderCollapse: "collapse" }}><tbody>{components}</tbody></table>
+        return <table style={{ borderCollapse: "collapse", width: "100%" }}><tbody>{components}</tbody></table>
     } else {
-        const filteredRecipesList = filterFusionRecipes(data.gifts, fusionRecipesList, searchString, selectedKeywords, selectedThemePacks);
-        return <table style={{ borderCollapse: "collapse" }}><tbody>{filteredRecipesList.map(recipe => <FusionRow recipe={recipe} />)}</tbody></table>
+        const filteredRecipesList = filterFusionRecipes(giftsData, fusionRecipesList, searchString, selectedKeywords, selectedThemePacks);
+        return <table style={{ borderCollapse: "collapse", width: "100%" }}><tbody>{filteredRecipesList.map(recipe => <FusionRow recipe={recipe} />)}</tbody></table>
     }
 }
 
@@ -131,17 +131,6 @@ function FusionsTab() {
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value);
-    }
-
-    const handleKeywordToggle = (keyword, selected) => {
-        if (selected)
-            setSelectedKeywords(selectedKeywords.filter(x => x !== keyword));
-        else
-            setSelectedKeywords([...selectedKeywords, keyword]);
-    }
-
-    const clearKeywords = () => {
-        setSelectedKeywords([]);
     }
 
     const handleSourceToggle = (themePack, selected) => {
@@ -157,52 +146,46 @@ function FusionsTab() {
 
     const fusionsComponent = useMemo(() => <FusionsDisplay searchString={searchString} selectedKeywords={selectedKeywords} selectedThemePacks={selectedThemePacks} />, [searchString, selectedKeywords, selectedThemePacks]);
 
-    return <div style={{ display: "flex", flexDirection: "row", maxHeight: "100%", gap: "5px", alignItems: "center" }}>
-        <div style={{ width: "40%", display: "flex", flexDirection: "column", minHeight: "100%", justifyContent: "start" }}>
-            <div>
-                <h2>Search</h2>
-                <input value={searchString} onChange={handleSearchChange} />
-            </div>
-            <div style={{ width: "100%" }}>
-                <h2>Keyword</h2>
-                <div style={{ display: "flex", flexDirection: "row", gap: "5px", justifyContent: "center" }}>
-                    {keywords.map(keyword => {
-                        const selected = selectedKeywords.includes(keyword);
-                        return <label style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                            {<input type="checkbox" onChange={() => handleKeywordToggle(keyword, selected)} checked={selected} />}
-                            {keyword === "Keywordless" ? "Keywordless" : <Icon id={keyword} />}
-                        </label>
-                    })}
-                    <button onClick={clearKeywords}>Clear All</button>
+    return <div style={{ display: "flex", flexDirection: "column", maxHeight: "100%", width: "80%", gap: "1rem", justifyContent: "center" }}>
+        <details open>
+            <summary><span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Filters</span></summary>
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "0.5rem", alignItems: "center" }}>
+                    <span style={{ fontWeight: "bold", textAlign: "end" }}>Search</span>
+                    <div style={{ display: "flex", alignItems: "start" }}><input value={searchString} onChange={handleSearchChange} /></div>
+                    <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Keywords</span>
+                    <KeywordSelector value={selectedKeywords} onChange={v => setSelectedKeywords(v)} />
+                </div>
+                <div style={{ width: "80%" }}>
+                    <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Theme Packs <button onClick={clearSources}>Clear All</button></div>
+                    <table style={{ borderCollapse: "collapse" }}>
+                        <tbody>
+                            {
+                                Object.entries(themePackList).map(([category, themePacks]) => <tr>
+                                    <td style={{ border: "1px grey dotted", padding: "2px" }}>{category}</td>
+                                    <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
+                                        <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
+                                            {themePacks.map(themePack => {
+                                                const selected = selectedThemePacks.includes(themePack);
+                                                return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
+                                                    {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
+                                                    {themePacksData[themePack].name}
+                                                </label>
+                                            })}
+                                        </div>
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            <div style={{ width: "100%" }}>
-                <h2>Theme Packs</h2>
-                <table style={{ borderCollapse: "collapse" }}>
-                    <tbody>
-                        {
-                            Object.entries(themePackList).map(([category, themePacks]) => <tr>
-                                <td style={{ border: "1px grey dotted", padding: "2px" }}>{category}</td>
-                                <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
-                                    <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
-                                        {themePacks.map(themePack => {
-                                            const selected = selectedThemePacks.includes(themePack);
-                                            return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                                {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
-                                                {data.themePacks[themePack].name}
-                                            </label>
-                                        })}
-                                    </div>
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-                <button onClick={clearSources}>Clear All</button>
+        </details>
+        <div style={{ flex: 1, height: "50%", display: "flex", justifyContent: "center", width: "100%" }}>
+            <div style={{ height: "100%", width: "80%", overflowY: "auto" }}>
+                {fusionsComponent}
             </div>
-        </div>
-        <div style={{ flex: "1", minHeight: "50%", maxHeight: "100%", overflowY: "auto", display: "flex", justifyContent: "end" }}>
-            {fusionsComponent}
         </div>
     </div>;
 }

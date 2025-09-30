@@ -1291,6 +1291,10 @@
             "tips": [
                 {
                     "type": "text",
+                    "text": "Note that the methods below focus on getting this achievement with lower time, cost, and starlight investment. They rely solely on gifts for the relevant keyword and general damage type gifts. 80 clash power is much easier to reach if you get the starlight buffs that make getting gifts easier and get the various gift combos using other keywords. There are also methods using other IDs and E.G.Os that give Coin Power, but those won't be covered here."
+                },
+                {
+                    "type": "text",
                     "text": "The main option for this achievement is to use The Thumb East Capo IIII Meursault and put together the following:"
                 },
                 {
@@ -1420,7 +1424,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "WARNING: THIS OTHER METHOD IS UNTESTED\nA possible alternative is using Charge. The problem is that most of Charge's Clash Power comes from Offense Levels instead of raw Base/Coin/Clash Power, so if enemies have too high Offense Level (from mounting trials or just from higher floors) they might end up cancelling out the Clash Power bonuses that Charge can get. The following is a list of most of the Charge skills with 4-5 coins (W Meursault's S3 and R Hong Lu's s2 have even lower numbers). Apologies if I have missed or added some numbers wrong (Clash Power won't be exact because of the differing Offense Levels, but the numbers I put should roughly be in that ballpark):"
+                    "text": "A possible alternative is using Charge. The problem is that most of Charge's Clash Power comes from Offense Levels instead of raw Base/Coin/Clash Power, so if enemies have too high Offense Level (from mounting trials or just from higher floors) they might end up cancelling out the Clash Power bonuses that Charge can get. The following is a list of most of the Charge skills with 4-5 coins (W Meursault's S3 and R Hong Lu's s2 have even lower numbers). Apologies if I have missed or added some numbers wrong (Clash Power won't be exact because of the differing Offense Levels, but the numbers I put should roughly be in that ballpark):"
                 },
                 {
                     "type": "table",

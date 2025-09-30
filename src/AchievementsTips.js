@@ -1,7 +1,9 @@
 // import FusionRecipe from "./FusionRecipe";
-import { EGOImg, GiftImg, Icon, IdentityImg, RarityImg, SampleImg, ThemePackImg } from "./ImageHandler";
+import { Gift } from "@eldritchtools/limbus-shared-library";
+import { EGOImg, Icon, IdentityImg, RarityImg, SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 import data from './data';
+import { gifts as giftsData, themePacks as themePacksData, ThemePackImg } from "@eldritchtools/limbus-shared-library";
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
@@ -12,9 +14,9 @@ function TableTip({ tip }) {
         if (typeof cell === "string") return <div style={{ whiteSpace: "pre-line", padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
         if (typeof cell === "object" && cell !== null && !Array.isArray(cell)) {
             if ("gifts" in cell) {
-                const gifts = Object.values(data.gifts).filter(gift => cell.gifts.includes(gift.name))
+                const gifts = Object.values(giftsData).filter(gift => cell.gifts.includes(gift.names[0]))
                 return <div style={{ display: "flex", flexDirection: "row", padding: "0.1rem", justifyContent: "center" }}>
-                    {gifts.map(gift => <GiftImg gift={gift} />)}
+                    {gifts.map(gift => <Gift gift={gift} />)}
                 </div>
             }
         }
@@ -40,7 +42,7 @@ function TableTip({ tip }) {
 }
 
 function ShowGiftsTip({ tip }) {
-    const [normal, hard] = Object.entries(data.gifts).reduce((acc, [_id, gift]) => {
+    const [normal, hard] = Object.entries(giftsData).reduce((acc, [_id, gift]) => {
         if (gift.vestige) return acc;
         if ("keyword" in tip && gift.keyword !== tip.keyword) return acc;
         if ("tier" in tip) {
@@ -60,7 +62,7 @@ function ShowGiftsTip({ tip }) {
 
         if ("sources" in gift) {
             gift.sources.forEach(source => {
-                const themePack = data.themePacks[source];
+                const themePack = themePacksData[source];
                 if ("normalFloors" in themePack) themePack.normalFloors.forEach(floor => {
                     if (!(floor in acc[0].exclusive)) acc[0].exclusive[floor] = {};
                     if (!(source in acc[0].exclusive[floor])) acc[0].exclusive[floor][source] = [];
@@ -94,15 +96,15 @@ function ShowGiftsTip({ tip }) {
     // General
     if (normal.general.length + hard.general.length > 0) {
         gridComponents.push(<div style={centerStyle}>General</div>);
-        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{normal.general.map(gift => <GiftImg gift={gift} />)}</div></div>);
-        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{hard.general.map(gift => <GiftImg gift={gift} />)}</div></div>);
+        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{normal.general.map(gift => <Gift gift={gift} />)}</div></div>);
+        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{hard.general.map(gift => <Gift gift={gift} />)}</div></div>);
     }
 
     function constructPackGiftsComponent(packGiftMapping) {
         return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0.1rem", border: "1px #666 dotted" }}>
             {Object.entries(packGiftMapping).map(([pack, gifts]) => <div style={{ width: "100%", textAlign: "center" }}>
                 <ThemePackNameWithTooltip id={pack} />
-                <div style={giftsStyle}>{gifts.map(gift => <GiftImg gift={gift} />)}</div>
+                <div style={giftsStyle}>{gifts.map(gift => <Gift gift={gift} />)}</div>
             </div>)
             }
         </div>
@@ -133,17 +135,17 @@ function ShowGiftsTip({ tip }) {
 }
 
 function ShowGiftListTip({ tip }) {
-    const gifts = Object.values(data.gifts).filter(gift => tip.gifts.includes(gift.name))
+    const gifts = Object.values(giftsData).filter(gift => tip.gifts.includes(gift.name))
 
     return <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "fit-content", justifyContent: "center", flexWrap: "wrap" }}>
-        {gifts.map(gift => <GiftImg gift={gift} />)}
+        {gifts.map(gift => <Gift gift={gift} />)}
     </div>
 }
 
 function ShowThemePacksTip({ tip }) {
     const themePacks = [];
-    if (tip.tag) themePacks.push(...Object.values(data.themePacks).filter((themePack) => themePack.tags.includes(tip.tag)));
-    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => data.themePacks[id]));
+    if (tip.tag) themePacks.push(...Object.values(themePacksData).filter((themePack) => themePack.tags.includes(tip.tag)));
+    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => themePacksData[id]));
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -153,7 +155,7 @@ function ShowThemePacksTip({ tip }) {
 }
 
 function ShowThemePacksByFloorTip({ tip }) {
-    const themePacks = Object.entries(data.themePacks).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
+    const themePacks = Object.entries(themePacksData).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
     const packsByFloor = themePacks.reduce((acc, [id, pack]) => {
         if ("hardFloors" in pack) {
             pack.hardFloors.forEach(floor => {
@@ -170,7 +172,7 @@ function ShowThemePacksByFloorTip({ tip }) {
     const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" };
 
     const components = [];
-    ["any", "1", "2", "3", "4", "5-10"].forEach(floor => {
+    ["any", "1", "2", "3", "4", "5", "6-10"].forEach(floor => {
         if (!(floor in packsByFloor)) return;
         if (floor === "any") components.push(<div style={centerStyle}>Any floor</div>);
         else components.push(<div style={centerStyle}>Floor {floor}</div>);
@@ -238,7 +240,7 @@ function ShowIdentitiesByRarity({ tip }) {
         components.push(<div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" }}><RarityImg rarity={rarity} /></div>);
         components.push(<div style={{ width: "100%", display: "flex", flexDirection: "row", overflowX: "auto" }}>
             {list.map(identity => <div style={{ border: "1px #666 dotted" }}>
-                <IdentityImg identity={identity} displayName={true} scale={.3} />
+                <IdentityImg identity={identity} displayName={true} scale={.25} />
             </div>)}
         </div>)
     }
@@ -276,7 +278,7 @@ function RefreshCostSummary() {
                     <td style={style}>15(n(n+1)/2)</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><GiftImg gift={data.gifts["9188"]} /></div></th>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><Gift id={9188} /></div></th>
                     {arr.map(number => {
                         sum += Math.floor(10.5 * number);
                         return <td style={style}>{Math.floor(10.5 * number)}<br /><br />{sum}</td>
@@ -311,7 +313,7 @@ function EnhanceCostSummary() {
                     <td style={style}>100</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>+</span></div></th>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Gift id={9189} /><span style={giftTierStyle}>+</span></div></th>
                     <td style={style}>35</td>
                     <td style={style}>42</td>
                     <td style={style}>53</td>
@@ -325,7 +327,7 @@ function EnhanceCostSummary() {
                     <td style={style}>200</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><GiftImg gift={data.gifts["9189"]} /><span style={giftTierStyle}>++</span></div></th>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Gift id={9189} /><span style={giftTierStyle}>++</span></div></th>
                     <td style={style}>70</td>
                     <td style={style}>84</td>
                     <td style={style}>105</td>

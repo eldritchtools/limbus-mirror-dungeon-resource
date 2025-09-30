@@ -1,1 +1,0 @@
-Files to generate the data json used by the site. Game data from the game's files are not included in the repo but should be put in a `game_data` folder in this directory.

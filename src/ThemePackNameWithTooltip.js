@@ -1,26 +1,43 @@
 import { Tooltip } from "react-tooltip";
-import { ThemePackImg } from "./ImageHandler";
-import data from './data';
+import { themePacks, ThemePackImg } from "@eldritchtools/limbus-shared-library";
+import { tooltipStyle } from "./constants";
 
-function ThemePackNameWithTooltip({ id, style={} }) {
+function ThemePackNameWithTooltip({ id, style = {} }) {
     const defaultStyle = { borderBottom: "1px dotted #aaa", cursor: "help" };
-    const themePack = data.themePacks[id];
+    const themePack = themePacks[id];
 
-    return <>
-        <span data-tooltip-id={id} style={{...defaultStyle, ...style}}>{themePack.name}</span>
-        <Tooltip id={id} style={{ outlineStyle: "solid", outlineColor: "#ffffff", outlineWidth: "1px", backgroundColor: "#000000" }}>
-            <div>
-                <div style={{ fontSize: "1.5em", fontWeight: "bold" }}>{themePack.name}</div>
-                <ThemePackImg themePack={themePack} scale={0.5} />
-                <div style={{ display: "grid", width: "100%", gridTemplateColumns: "1fr 1fr" }} >
-                    <div style={{ color: "#4ade80" }}>Normal</div>
-                    <div style={{ color: "#f87171" }}>Hard</div>
-                    <div>{themePack.normalFloors ? themePack.normalFloors.map(f => `F${f}`).join(", ") : "None"}</div>
-                    <div>{themePack.hardFloors ? themePack.hardFloors.map(f => `F${f}`).join(", ") : "None"}</div>
-                </div>
+    return <span
+        data-tooltip-id={"theme-pack-name-tooltip"}
+        data-tooltip-content={id}
+        style={{ ...defaultStyle, ...style }}
+    >
+        {themePack.name}
+    </span>;
+}
+
+function TooltipContent({ themePack }) {
+    return <div style={tooltipStyle}>
+        <div style={{ padding: "0.75rem" }}>
+            <div style={{ fontSize: "1.5em", fontWeight: "bold" }}>{themePack.name}</div>
+            <ThemePackImg themePack={themePack} scale={0.5} />
+            <div style={{ display: "grid", width: "100%", gridTemplateColumns: "1fr 1fr" }} >
+                <div style={{ color: "#4ade80" }}>Normal</div>
+                <div style={{ color: "#f87171" }}>Hard</div>
+                <div>{themePack.normalFloors ? themePack.normalFloors.map(f => `F${f}`).join(", ") : "None"}</div>
+                <div>{themePack.hardFloors ? themePack.hardFloors.map(f => `F${f}`).join(", ") : "None"}</div>
             </div>
-        </Tooltip>
-    </>;
+        </div>
+    </div>
+}
+
+function ThemePackNameTooltip() {
+    return <Tooltip
+        id={"theme-pack-name-tooltip"}
+        render={({ content }) => <TooltipContent themePack={themePacks[content]} />}
+        getTooltipContainer={() => document.body}
+        style={{ backgroundColor: "transparent", zIndex: "9999" }}
+    />
 }
 
 export default ThemePackNameWithTooltip;
+export { ThemePackNameTooltip };

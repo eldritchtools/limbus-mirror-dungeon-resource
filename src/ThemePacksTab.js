@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { GiftImg, ThemePackImg } from "./ImageHandler";
-import data from "./data";
+import { Gift, themePacks, ThemePackImg } from "@eldritchtools/limbus-shared-library";
 
-const formatUniqueGifts = (uniqueGifts) => {
+const formatExclusiveGifts = (exclusiveGifts) => {
     return <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
-        {uniqueGifts.map(gift => <GiftImg gift={data.gifts[gift]} />)}
+        {exclusiveGifts.map(gift => <Gift id={gift} />)}
     </div>
 }
 
@@ -18,7 +17,7 @@ function ThemePack({ themePack }) {
 
         <div style={{ display: "grid", height: "100%", gridTemplateRows: "4fr 1fr", boxSizing: "border-box" }}>
             <div style={{ flex: "3", borderBottom: "1px grey dotted", alignItems: "start", padding: "5px" }}>
-                {"unique_gifts" in themePack ? formatUniqueGifts(themePack["unique_gifts"]) : null}
+                {"exclusive_gifts" in themePack ? formatExclusiveGifts(themePack["exclusive_gifts"]) : null}
             </div>
             <div style={{ flex: "1", display: "flex", flexDirection: "column", alignItems: "start", padding: "5px" }}>
                 <div>Floors</div>
@@ -50,14 +49,14 @@ function ThemePacksTab() {
 
     const components = [];
 
-    Object.entries(data.themePacks).forEach(([id, themePack]) => {
+    Object.entries(themePacks).forEach(([id, themePack]) => {
         if (selectedCategories.length !== 0 && !selectedCategories.some(selectedCategory => themePack.category.includes(selectedCategory))) return;
 
         components.push(<ThemePack themePack={themePack} />);
     })
 
     const categories = {};
-    Object.values(data.themePacks).forEach(themePack => {
+    Object.values(themePacks).forEach(themePack => {
         if (!(themePack.category[0] in categories))
             categories[themePack.category[0]] = []
         if (themePack.category.length === 2 && !categories[themePack.category[0]].includes(themePack.category[1]))
