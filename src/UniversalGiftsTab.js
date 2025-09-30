@@ -51,7 +51,7 @@ function UniversalGiftsTab() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 520px)", width: "100%", justifyContent: "center" }}>
             {universalGifts.individual.map((category) => <Container category={category} />)}
         </div>
-        All statuses have combinations of gifts that can provide benefits for all team compositions. Gifts will generally be Enablers (gifts that apply the status) or Exploiters (gifts that provide benefits against enemies with the status), with some being both.
+        All 7 archetypes have combinations of gifts that can provide benefits for all team compositions. Gifts will generally be Enablers (gifts that apply the status) or Exploiters (gifts that provide benefits against enemies with the status), with some being both.
         <div style={{ display: "grid", gridTemplateColumns: "1fr", width: "100%" }}>
             {universalGifts.combo.map((status) => <ComboContainer data={status} />)}
         </div>
