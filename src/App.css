@@ -7,8 +7,8 @@
 
 .App-content {
   background-color: #1f1f1f;
-  min-height: 90vh;
-  max-height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,14 +104,15 @@ input[type="checkbox"] {
 
 .tab-panel {
     display: none;
-    height: 90vh;
+    min-height: 90vh;
 }
 
 .selected-tab-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90vh;
+    min-height: 90vh;
+    height: fit-content;
     /* overflow-y: auto;
     scrollbar-color: rgba(155, 155, 155, 0.5) transparent; */
     /* border: 2px solid gray; */

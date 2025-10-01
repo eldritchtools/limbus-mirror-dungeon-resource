@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
-import { Icon } from "./ImageHandler";
 import FusionRecipe from "./FusionRecipe";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
-import { gifts as giftsData, KeywordSelector, themePacks as themePacksData } from "@eldritchtools/limbus-shared-library";
+import { gifts as giftsData, KeywordIcon, KeywordSelector, themePacks as themePacksData } from "@eldritchtools/limbus-shared-library";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -112,7 +111,7 @@ function FusionsDisplay({ searchString, selectedKeywords, selectedThemePacks }) 
             if (keyword === "Keywordless")
                 components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}>Keywordless</div></td></tr>);
             else
-                components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}><Icon id={keyword} scale={1.5} />{keyword}</div></td></tr>);
+                components.push(<tr><td style={tdstyle} colSpan={3}><div style={style}><KeywordIcon id={keyword} scale={1.5} />{keyword}</div></td></tr>);
             fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow recipe={recipe} />));
         });
 

@@ -71,14 +71,14 @@ function AchievementTab({ achievements, sortClearedToBottom, category, tracking,
             return acc;
         }, [[], []])
 
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem" }}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
                 {unticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
                 {ticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
         </div>
     } else {
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem", overflowY: "auto" }}>
+        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem" }}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
                 {achievements.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
             </div>
@@ -132,7 +132,7 @@ function RewardsTab({ totalPoints, columns = 2 }) {
         </div>);
     }
 
-    return <div style={{ display: "flex", flexDirection: "column", gap: "0.5em", overflowY: "auto" }}>
+    return <div style={{ display: "flex", flexDirection: "column", gap: "0.5em" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             <div>
                 <div style={{ fontWeight: "bold" }}>Rewards Obtained:</div>
@@ -210,10 +210,10 @@ function AchievementsTab() {
             </TabList>
 
             {Object.entries(data.achievements).map(([category, list]) =>
-                <TabPanel className="tab-panel" style={{ height: "85vh" }}>
+                <TabPanel className="tab-panel">
                     <AchievementTab achievements={list} sortClearedToBottom={sortClearedToBottom} category={category} tracking={profileData.tracking[category]} setAchievementTracking={setAchievementTracking} />
                 </TabPanel>)}
-            <TabPanel className="tab-panel" style={{ height: "85vh" }}>
+            <TabPanel className="tab-panel">
                 <RewardsTab totalPoints={profileData.totalPoints} />
             </TabPanel>
         </Tabs>

@@ -1,9 +1,7 @@
-// import FusionRecipe from "./FusionRecipe";
-import { Gift } from "@eldritchtools/limbus-shared-library";
-import { EGOImg, Icon, IdentityImg, RarityImg, SampleImg } from "./ImageHandler";
+import { Gift, KeywordIcon } from "@eldritchtools/limbus-shared-library";
+import { EGOImg, RarityImg, SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
-import data from './data';
-import { gifts as giftsData, themePacks as themePacksData, ThemePackImg } from "@eldritchtools/limbus-shared-library";
+import { gifts as giftsData, themePacks as themePacksData, identities as identitiesData, ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
@@ -88,7 +86,7 @@ function ShowGiftsTip({ tip }) {
 
     const gridComponents = [];
     // Headers
-    if (tip.keyword) gridComponents.push(<div style={{ ...centerStyle, gap: "0.5rem" }}><Icon id={tip.keyword} /> {tip.keyword} Gifts</div>);
+    if (tip.keyword) gridComponents.push(<div style={{ ...centerStyle, gap: "0.5rem" }}><KeywordIcon id={tip.keyword} /> {tip.keyword} Gifts</div>);
     else gridComponents.push(<div style={centerStyle}>Gifts</div>);
     gridComponents.push(<div style={{ ...centerStyle, color: "#4ade80" }}>Normal</div>);
     gridComponents.push(<div style={{ ...centerStyle, color: "#f87171" }}>Hard</div>);
@@ -195,17 +193,17 @@ function ShowThemePacksByFloorTip({ tip }) {
 }
 
 function filterIdentities(tip) {
-    return data.identities.filter(identity => {
+    return Object.values(identitiesData).filter(identity => {
         let filter = true;
         if ("keyword" in tip) {
-            if (Array.isArray(tip.keyword)) filter &= tip.keyword.some(keyword => identity.keywords.includes(keyword));
-            else filter &= identity.keywords.includes(tip.keyword);
+            if (Array.isArray(tip.keyword)) filter &= tip.keyword.some(keyword => identity.skillKeywordList.includes(keyword));
+            else filter &= identity.skillKeywordList.includes(tip.keyword);
         }
         if (!filter) return false;
 
         if ("faction" in tip) {
-            if (Array.isArray(tip.faction)) filter &= tip.faction.some(faction => identity.factions.includes(faction));
-            else filter &= identity.factions.includes(tip.faction);
+            if (Array.isArray(tip.faction)) filter &= tip.faction.some(faction => identity.tags.includes(faction));
+            else filter &= identity.tags.includes(tip.faction);
         }
         if (!filter) return false
 
@@ -221,7 +219,7 @@ function ShowIdentities({ tip }) {
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
-            <IdentityImg identity={identity} displayName={true} scale={.3} />
+            <IdentityImg identity={identity} uptie={4} displayName={true} scale={.3} />
         </div>)}
     </div>
 }
@@ -229,7 +227,7 @@ function ShowIdentities({ tip }) {
 function ShowIdentitiesByRarity({ tip }) {
     const identities = filterIdentities(tip);
     const [r1, r2, r3] = identities.reduce((acc, identity) => {
-        acc[identity.rarity - 1].push(identity);
+        acc[identity.rank - 1].push(identity);
         return acc;
     }, [[], [], []]);
 
@@ -240,7 +238,7 @@ function ShowIdentitiesByRarity({ tip }) {
         components.push(<div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" }}><RarityImg rarity={rarity} /></div>);
         components.push(<div style={{ width: "100%", display: "flex", flexDirection: "row", overflowX: "auto" }}>
             {list.map(identity => <div style={{ border: "1px #666 dotted" }}>
-                <IdentityImg identity={identity} displayName={true} scale={.25} />
+                <IdentityImg identity={identity} uptie={4} displayName={true} scale={.25} />
             </div>)}
         </div>)
     }

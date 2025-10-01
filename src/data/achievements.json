@@ -733,7 +733,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Bring the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
+                    "text": "Bring at least 3 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
                     "type": "showIds",
@@ -811,15 +811,12 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Bring the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
+                    "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
                     "type": "showIds",
                     "faction": [
-                        "Heishou Pack - Mao Branch",
-                        "Heishou Pack - Si Branch",
-                        "Heishou Pack - You Branch",
-                        "Heishou Pack - Wu Branch"
+                        "Heishou Pack"
                     ]
                 }
             ]

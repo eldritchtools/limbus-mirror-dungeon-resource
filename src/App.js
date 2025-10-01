@@ -37,8 +37,8 @@ function App() {
     return (migrated ?
         <ProfileProvider dbName={"limbus-mirror-dungeon-resource"} migrateProfile={migrateProfile}>
             <div className="App">
-                <div style={{ height: "100vh" }} >
-                    <Header title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"} lastUpdated={process.env.REACT_APP_LAST_UPDATED} />
+                <Header title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"} lastUpdated={process.env.REACT_APP_LAST_UPDATED} />
+                <div style={{ minHeight: "90vh", height: "auto", paddingBottom: "1rem" }} >
                     <div className="App-content">
                         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
                             <TabList className="tab-list">
