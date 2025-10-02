@@ -14,6 +14,7 @@ import { GiftTooltip, StatusTooltip } from '@eldritchtools/limbus-shared-library
 import { ThemePackNameTooltip } from './ThemePackNameWithTooltip';
 import { Tooltip } from 'react-tooltip';
 import { tooltipStyle } from './constants';
+import MigrationTab from './MigrationTab';
 
 const description = <span>
     Limbus Company Mirror Dungeon Resource and Achievements Tracker is a free fan-made tool to help players plan dungeon runs and track achievement progress.
@@ -48,6 +49,7 @@ function App() {
                                 <Tab className="tab">Universal Gifts/Gift Combos</Tab>
                                 <Tab className="tab">Notable Theme Packs</Tab>
                                 <Tab className="tab">Floor Planner</Tab>
+                                <Tab className="tab">Click here if your data is missing</Tab>
                             </TabList>
 
                             <TabPanel className="tab-panel">
@@ -67,6 +69,9 @@ function App() {
                             </TabPanel>
                             <TabPanel className="tab-panel">
                                 <FloorPlannerTab />
+                            </TabPanel>
+                            <TabPanel className="tab-panel">
+                                <MigrationTab />
                             </TabPanel>
                         </Tabs>
                     </div>

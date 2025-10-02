@@ -1,11 +1,11 @@
 {
   "name": "limbus-mirror-dungeon-resource",
   "version": "0.1.0",
-  "homepage": "https://eldritchtools.github.io/limbus-mirror-dungeon-resource",
+  "homepage": "https://limbus-md.eldritchtools.com",
   "private": true,
   "dependencies": {
     "@eldritchtools/limbus-shared-library": "github:eldritchtools/limbus-shared-library#v0.2.0",
-    "@eldritchtools/shared-components": "github:eldritchtools/shared-components#v1.2.4",
+    "@eldritchtools/shared-components": "github:eldritchtools/shared-components#v1.2.7",
     "@radix-ui/react-select": "^2.2.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
