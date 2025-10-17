@@ -1,5 +1,5 @@
-import { Gift, KeywordIcon } from "@eldritchtools/limbus-shared-library";
-import { EGOImg, RarityImg, SampleImg } from "./ImageHandler";
+import { EgoImg, Gift, KeywordIcon } from "@eldritchtools/limbus-shared-library";
+import { RarityImg, SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 import { gifts as giftsData, themePacks as themePacksData, identities as identitiesData, ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
 
@@ -219,7 +219,7 @@ function ShowIdentities({ tip }) {
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
-            <IdentityImg identity={identity} uptie={4} displayName={true} scale={.3} />
+            <IdentityImg identity={identity} uptie={4} displayName={true} scale={.5} />
         </div>)}
     </div>
 }
@@ -238,7 +238,7 @@ function ShowIdentitiesByRarity({ tip }) {
         components.push(<div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" }}><RarityImg rarity={rarity} /></div>);
         components.push(<div style={{ width: "100%", display: "flex", flexDirection: "row", overflowX: "auto" }}>
             {list.map(identity => <div style={{ border: "1px #666 dotted" }}>
-                <IdentityImg identity={identity} uptie={4} displayName={true} scale={.25} />
+                <IdentityImg identity={identity} uptie={4} displayName={true} scale={.5} />
             </div>)}
         </div>)
     }
@@ -338,8 +338,8 @@ function EnhanceCostSummary() {
 
 function ShowEGOsTip({ tip }) {
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
-        {tip.EGOs.map(EGOId => <div>
-            <EGOImg EGOId={EGOId} scale={0.75} />
+        {tip.EGOs.map(EGOId => <div style={{ border: "1px #666 dotted" }}>
+            <EgoImg id={EGOId} scale={0.5} displayName={true} type={"awaken"} />
         </div>)}
     </div>
 }

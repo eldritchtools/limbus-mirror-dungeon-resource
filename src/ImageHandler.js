@@ -9,17 +9,6 @@ function RarityImg({rarity}) {
     }
 }
 
-function rescaleEGO(scale) {
-    return {width: `${256*scale}px`, height: `${256*scale}px`};
-}
-
-function EGOImg({EGOId, scale=1}) {
-    const scaledStyle = rescaleEGO(scale);
-    const img = <img src={`${ASSETS_ROOT}/egos/${EGOId}_awaken_profile.png`} alt={""} title={""} style={scaledStyle}/>
-
-    return img;
-}
-
 function SampleImg({img, width=null, height=null}) {
     const style = {};
     if (width) style.width = width; else style.width = "auto";
@@ -27,4 +16,4 @@ function SampleImg({img, width=null, height=null}) {
     return <img src={`${ASSETS_ROOT}/samples/${img}.png`} alt={""} title={""} style={style}/>
 }
 
-export {RarityImg, EGOImg, SampleImg};
+export {RarityImg, SampleImg};
