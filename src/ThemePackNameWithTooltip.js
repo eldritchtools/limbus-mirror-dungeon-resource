@@ -1,5 +1,5 @@
 import { Tooltip } from "react-tooltip";
-import { themePacks, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
+import { ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { tooltipStyle } from "./constants";
 import { getFloorsForPack } from "./themePackUtil";
 
