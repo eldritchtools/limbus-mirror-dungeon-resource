@@ -62,7 +62,7 @@ function ShowGiftsTip({ tip }) {
         } else {
             if (gift.fusion) return acc;
         }
-        if ("themePack" in tip && tip.themePack && !("sources" in gift)) return acc;
+        if ("themePack" in tip && tip.themePack && !("exclusiveTo" in gift)) return acc;
         if ("enhanceable" in tip && tip.enhanceable !== gift.enhanceable) return acc;
 
         if ("exclusiveTo" in gift) {
@@ -245,7 +245,7 @@ function ShowIdentities({ tip }) {
 function ShowIdentitiesByRarity({ tip }) {
     const [identitiesData, identitiesLoading] = useData("identities");
     const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
-    
+
     const [r1, r2, r3] = identities.reduce((acc, identity) => {
         acc[identity.rank - 1].push(identity);
         return acc;
