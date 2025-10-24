@@ -1,7 +1,7 @@
 {
     "individual": [
         {"title": "Power", "sections": [
-            {"title": "General", "gifts": [9703, 9011, 9420, 9146, 9767]},
+            {"title": "General", "gifts": [9703, 9011, 9420, 9146, 9035]},
             {"title": "Slash", "gifts": [9142, 9196, 9195, 9140, 9193]},
             {"title": "Pierce", "gifts": [9147, 9200, 9145, 9197, 9199]},
             {"title": "Blunt", "gifts": [9152, 9204, 9150, 9201, 9786]}
@@ -35,7 +35,7 @@
         ]},
         {"title": "Sinking", "sections": [
             {"title": "Enablers", "gifts": [[9095, "Wave Start"], [9059, "On Hit"], [9074, "-SP Enemies\nEnvy Skills"], [9409, "Clash Win\nWhen Hit"], [9049, "Gloom or Lust Res"], [9806, "When Hit"]]},
-            {"title": "Exploiters", "gifts": [[9054, "Offense and Defense Level Down"], [9061, "+Dmg Dealt\n-Dmg Taken"], [9436, "Gloom Damage"], [9807, "Gloom Damage"], [9172, "SP Heal"], [9750, "+Dmg on Heads"]]}
+            {"title": "Exploiters", "gifts": [[9817, "Final Power Down"], [9054, "Offense and Defense Level Down"], [9061, "+Dmg Dealt\n-Dmg Taken"], [9436, "Gloom Damage"], [9807, "Gloom Damage"], [9172, "SP Heal"], [9750, "+Dmg on Heads"]]}
         ]},
         {"title": "Poise", "sections": [
             {"title": "Enablers", "gifts": [[9066, "Wave Start\nPride Res"], [9063, "Combat Start"], [9097, "Turn Start"], [9056, "On Crit"], [9128, "Wave Start"], [9765, "Damage Dealt\nTurn Start"], [9709, "Damage Dealt"], [9710, "Turn Start"]]},

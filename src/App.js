@@ -10,7 +10,7 @@ import FloorPlannerTab from './FloorPlannerTab';
 
 import { Header, Footer, ProfileProvider } from '@eldritchtools/shared-components';
 import migrateProfile, { firstMigrate } from './migrateProfile';
-import { GiftTooltip, StatusTooltip } from '@eldritchtools/limbus-shared-library';
+import { DataProvider, getMeta, GiftTooltip, StatusTooltip } from '@eldritchtools/limbus-shared-library';
 import { ThemePackNameTooltip } from './ThemePackNameWithTooltip';
 import { Tooltip } from 'react-tooltip';
 import { tooltipStyle } from './constants';
@@ -24,6 +24,7 @@ const description = <span>
 
 function App() {
     const [migrated, setMigrated] = useState(false);
+    const [lastUpdated, setLastUpdated] = useState(process.env.REACT_APP_LAST_UPDATED);
 
     useEffect(() => {
         if (!migrated) {
@@ -35,58 +36,64 @@ function App() {
         }
     }, [migrated]);
 
+    useEffect(() => {
+        getMeta().then(meta => setLastUpdated(p => p > meta.datetime ? p : meta.datetime));
+    }, [])
+
     return (migrated ?
         <ProfileProvider dbName={"limbus-mirror-dungeon-resource"} migrateProfile={migrateProfile}>
-            <div className="App">
-                <Header title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"} lastUpdated={process.env.REACT_APP_LAST_UPDATED} />
-                <div style={{ minHeight: "90vh", height: "auto", paddingBottom: "1rem" }} >
-                    <div className="App-content">
-                        <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
-                            <TabList className="tab-list">
-                                <Tab className="tab">Achievements</Tab>
-                                <Tab className="tab">Gifts</Tab>
-                                <Tab className="tab">Fusion Recipes</Tab>
-                                <Tab className="tab">Universal Gifts/Gift Combos</Tab>
-                                <Tab className="tab">Notable Theme Packs</Tab>
-                                <Tab className="tab">Floor Planner</Tab>
-                                <Tab className="tab">Click here if your data is missing</Tab>
-                            </TabList>
+            <DataProvider>
+                <div className="App">
+                    <Header title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"} lastUpdated={lastUpdated} />
+                    <div style={{ minHeight: "90vh", height: "auto", paddingBottom: "1rem" }} >
+                        <div className="App-content">
+                            <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
+                                <TabList className="tab-list">
+                                    <Tab className="tab">Achievements</Tab>
+                                    <Tab className="tab">Gifts</Tab>
+                                    <Tab className="tab">Fusion Recipes</Tab>
+                                    <Tab className="tab">Universal Gifts/Gift Combos</Tab>
+                                    <Tab className="tab">Notable Theme Packs</Tab>
+                                    <Tab className="tab">Floor Planner</Tab>
+                                    <Tab className="tab">Click here if your data is missing</Tab>
+                                </TabList>
 
-                            <TabPanel className="tab-panel">
-                                <AchievementsTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <GiftsTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <FusionsTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <UniversalGiftsTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <ThemePacksTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <FloorPlannerTab />
-                            </TabPanel>
-                            <TabPanel className="tab-panel">
-                                <MigrationTab />
-                            </TabPanel>
-                        </Tabs>
+                                <TabPanel className="tab-panel">
+                                    <AchievementsTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <GiftsTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <FusionsTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <UniversalGiftsTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <ThemePacksTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <FloorPlannerTab />
+                                </TabPanel>
+                                <TabPanel className="tab-panel">
+                                    <MigrationTab />
+                                </TabPanel>
+                            </Tabs>
+                        </div>
                     </div>
+                    <GiftTooltip />
+                    <StatusTooltip />
+                    <ThemePackNameTooltip />
+                    <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
+                    <Footer
+                        description={description}
+                        gameName={"Limbus Company"}
+                        developerName={"Project Moon"}
+                        githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
+                    />
                 </div>
-                <GiftTooltip />
-                <StatusTooltip />
-                <ThemePackNameTooltip />
-                <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
-                <Footer
-                    description={description}
-                    gameName={"Limbus Company"}
-                    developerName={"Project Moon"}
-                    githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
-                />
-            </div>
+            </DataProvider>
         </ProfileProvider> :
         null
     );

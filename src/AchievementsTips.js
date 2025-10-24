@@ -1,17 +1,20 @@
-import { EgoImg, Gift, KeywordIcon } from "@eldritchtools/limbus-shared-library";
+import { EgoImg, Gift, KeywordIcon, useData } from "@eldritchtools/limbus-shared-library";
 import { RarityImg, SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
-import { gifts as giftsData, themePacks as themePacksData, identities as identitiesData, ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
+import { ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
+import { getFloorsPerPack } from "./themePackUtil";
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
 }
 
 function TableTip({ tip }) {
+    const [giftsData, giftsLoading] = useData("gifts");
+
     const getCellComponent = (cell) => {
         if (typeof cell === "string") return <div style={{ whiteSpace: "pre-line", padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
         if (typeof cell === "object" && cell !== null && !Array.isArray(cell)) {
-            if ("gifts" in cell) {
+            if ("gifts" in cell && !giftsLoading) {
                 const gifts = Object.values(giftsData).filter(gift => cell.gifts.includes(gift.names[0]))
                 return <div style={{ display: "flex", flexDirection: "row", padding: "0.1rem", justifyContent: "center" }}>
                     {gifts.map(gift => <Gift gift={gift} />)}
@@ -40,7 +43,11 @@ function TableTip({ tip }) {
 }
 
 function ShowGiftsTip({ tip }) {
-    const [normal, hard] = Object.entries(giftsData).reduce((acc, [_id, gift]) => {
+    const [giftsData, giftsLoading] = useData("gifts");
+    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
+    const floorsPerPack = floorPacksLoading ? { normal: {}, hard: {} } : getFloorsPerPack(floorPacksData)
+
+    const [normal, hard] = Object.entries(giftsLoading ? {} : giftsData).reduce((acc, [_id, gift]) => {
         if (gift.vestige) return acc;
         if ("keyword" in tip && gift.keyword !== tip.keyword) return acc;
         if ("tier" in tip) {
@@ -58,16 +65,15 @@ function ShowGiftsTip({ tip }) {
         if ("themePack" in tip && tip.themePack && !("sources" in gift)) return acc;
         if ("enhanceable" in tip && tip.enhanceable !== gift.enhanceable) return acc;
 
-        if ("sources" in gift) {
-            gift.sources.forEach(source => {
-                const themePack = themePacksData[source];
-                if ("normalFloors" in themePack) themePack.normalFloors.forEach(floor => {
+        if ("exclusiveTo" in gift) {
+            gift.exclusiveTo.forEach(source => {
+                if (source in floorsPerPack.normal) floorsPerPack.normal[source].forEach(floor => {
                     if (!(floor in acc[0].exclusive)) acc[0].exclusive[floor] = {};
                     if (!(source in acc[0].exclusive[floor])) acc[0].exclusive[floor][source] = [];
                     acc[0].exclusive[floor][source].push(gift);
                 })
 
-                if ("hardFloors" in themePack) themePack.hardFloors.forEach(floor => {
+                if (source in floorsPerPack.hard) floorsPerPack.hard[source].forEach(floor => {
                     if (!(floor in acc[1].exclusive)) acc[1].exclusive[floor] = {};
                     if (!(source in acc[1].exclusive[floor])) acc[1].exclusive[floor][source] = [];
                     acc[1].exclusive[floor][source].push(gift);
@@ -116,15 +122,15 @@ function ShowGiftsTip({ tip }) {
         else gridComponents.push(<div />);
     }
 
-    // Floors 1-4
-    ["1", "2", "3", "4"].forEach(floor => {
+    // Floors 1-5
+    ["1", "2", "3", "4", "5"].forEach(floor => {
         if (!(floor in normal.exclusive) && !(floor in hard.exclusive)) return;
         insertFloorRow(floor, floor in normal.exclusive ? normal.exclusive[floor] : null, floor in hard.exclusive ? hard.exclusive[floor] : null);
     })
 
-    // Floor 5 or 5-10
-    if ("5" in normal.exclusive || "5-10" in hard.exclusive) {
-        insertFloorRow("5-10", "5" in normal.exclusive ? normal.exclusive["5"] : null, "5-10" in hard.exclusive ? hard.exclusive["5-10"] : null);
+    // Floor 6-10
+    if ("6-10" in hard.exclusive) {
+        insertFloorRow("6-10", null, "6-10" in hard.exclusive ? hard.exclusive["6-10"] : null);
     }
 
     return <div style={{ display: "grid", width: "100%", gridTemplateColumns: "1fr 5fr 5fr", border: "1px #666 dotted" }}>
@@ -133,7 +139,9 @@ function ShowGiftsTip({ tip }) {
 }
 
 function ShowGiftListTip({ tip }) {
-    const gifts = Object.values(giftsData).filter(gift => tip.gifts.includes(gift.name))
+    const [giftsData, giftsLoading] = useData("gifts");
+
+    const gifts = Object.values(giftsLoading ? {} : giftsData).filter(gift => tip.gifts.includes(gift.name))
 
     return <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "fit-content", justifyContent: "center", flexWrap: "wrap" }}>
         {gifts.map(gift => <Gift gift={gift} />)}
@@ -141,9 +149,13 @@ function ShowGiftListTip({ tip }) {
 }
 
 function ShowThemePacksTip({ tip }) {
+    const [themePacksData, themePacksLoading] = useData("md_theme_packs");
+
     const themePacks = [];
-    if (tip.tag) themePacks.push(...Object.values(themePacksData).filter((themePack) => themePack.tags.includes(tip.tag)));
-    if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => themePacksData[id]));
+    if (!themePacksLoading) {
+        if (tip.tag) themePacks.push(...Object.values(themePacksData).filter((themePack) => themePack.tags.includes(tip.tag)));
+        if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => themePacksData[id]));
+    }
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -153,10 +165,15 @@ function ShowThemePacksTip({ tip }) {
 }
 
 function ShowThemePacksByFloorTip({ tip }) {
-    const themePacks = Object.entries(themePacksData).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
+    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
+    const [themePacksData, themePacksLoading] = useData("md_theme_packs");
+
+    const { hard } = floorPacksLoading ? { normal: {}, hard: {} } : getFloorsPerPack(floorPacksData)
+
+    const themePacks = Object.entries(themePacksLoading ? {} : themePacksData).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
     const packsByFloor = themePacks.reduce((acc, [id, pack]) => {
-        if ("hardFloors" in pack) {
-            pack.hardFloors.forEach(floor => {
+        if (id in hard) {
+            hard[id].forEach(floor => {
                 if (floor in acc) acc[floor].push(id);
                 else acc[floor] = [id];
             })
@@ -192,7 +209,7 @@ function ShowThemePacksByFloorTip({ tip }) {
     </div>
 }
 
-function filterIdentities(tip) {
+function filterIdentities(tip, identitiesData) {
     return Object.values(identitiesData).filter(identity => {
         let filter = true;
         if ("keyword" in tip) {
@@ -215,7 +232,8 @@ function filterIdentities(tip) {
 }
 
 function ShowIdentities({ tip }) {
-    const identities = filterIdentities(tip);
+    const [identitiesData, identitiesLoading] = useData("identities");
+    const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
         {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
@@ -225,7 +243,9 @@ function ShowIdentities({ tip }) {
 }
 
 function ShowIdentitiesByRarity({ tip }) {
-    const identities = filterIdentities(tip);
+    const [identitiesData, identitiesLoading] = useData("identities");
+    const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
+    
     const [r1, r2, r3] = identities.reduce((acc, identity) => {
         acc[identity.rank - 1].push(identity);
         return acc;

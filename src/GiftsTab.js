@@ -1,68 +1,18 @@
 import { useMemo, useState } from "react";
-import { Gift, gifts as giftsData, KeywordSelector, replaceStatusVariables, ThemePackImg } from "@eldritchtools/limbus-shared-library";
-import FusionRecipe from "./FusionRecipe";
+import { Gift, KeywordSelector, replaceStatusVariables, useData } from "@eldritchtools/limbus-shared-library";
 
 const searchTerms = ["power", "coin power", "offense level", "damage", "HP", "SP", "heal", "speed"];
 const buttonStyle = { border: "1px #aaa solid", padding: "4px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transiton: "background-color 0.2s, border-color 0.2s" };
 const iconTextStyle = { fontFamily: "'Archivo Narrow', sans-serif", fontWeight: "bold", fontSize: "20px", color: "#ffd84d" };
 
-function GiftDisplay({ id }) {
-    const [enhanceLevel, setEnhanceLevel] = useState(0);
-
-    if (!id) {
-        return <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-            Select a gift to view all details
-        </div>
-    }
-
-    const gift = giftsData[id];
-    let level = Math.min(enhanceLevel, gift.descs.length - 1);
-
-    return <div style={{ display: "flex", flexDirection: "column", width: "80%", gap: "0.5rem" }}>
-        <div style={{ fontSize: "1.25rem", fontWeight: "bold", textAlign: "start" }}>{gift.names[level]}</div>
-        <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-                <Gift gift={gift} includeTooltip={false} />
-                {gift.enhanceable ? <div style={{ display: "grid", gridTemplateColumns: `repeat(${gift.names.length}, 1fr)` }}>
-                    {Array.from({ length: gift.names.length }, (_, index) => <div style={{ ...buttonStyle, backgroundColor: enhanceLevel === index ? "#3f3f3f" : "#1f1f1f" }} onClick={() => setEnhanceLevel(index)}>
-                        {index === 0 ? "-" : <span style={iconTextStyle}>{"+".repeat(index)}</span>}
-                    </div>)}
-                </div> : null
-                }
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "inline-block", fontSize: "1rem", lineHeight: "1.5", textWrap: "wrap", whiteSpace: "pre-wrap", textAlign: "start" }}>
-                    <span>{replaceStatusVariables(gift.descs[level], true)}</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
-                    {
-                        gift.exclusiveTo ?
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                                <span style={{ fontSize: "1.25rem", fontWeight: "bold", textAlign: "start" }}>Exclusive Theme Packs</span>
-                                <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem" }}>
-                                    {gift.exclusiveTo.map(packId => <ThemePackImg id={packId} displayName={true} scale={0.5} />)}
-                                </div>
-                            </div> : null
-                    }
-                    {
-                        gift.recipes ?
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                                <span style={{ fontSize: "1.25rem", fontWeight: "bold", textAlign: "start" }}>Fusion Recipes</span>
-                                {gift.recipes.map(recipe => <FusionRecipe recipe={{ ingredients: recipe }} includeProduct={false} />)}
-                            </div> : null
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
 function GiftDesc({ gift }) {
-    return <div style={{ display: "flex", flexDirection: "column", padding: "0.5rem", width: "100%", height: "fit-content", border: "1px #aaa solid", borderRadius: "1rem", boxSizing: "border-box" }}>
+    const [expand, setExpand] = useState(false);
+
+    return <div style={{ display: "flex", flexDirection: "column", padding: "0.5rem", width: "100%", height: "fit-content", border: "1px #aaa solid", borderRadius: "1rem", boxSizing: "border-box", cursor: "pointer" }} onClick={() => setExpand(!expand)}>
         <div style={{ marginBottom: "0.5rem", fontSize: "1.25rem", fontWeight: "bold", textAlign: "start" }}>{gift.names[0]}</div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <Gift gift={gift} includeTooltip={false} />
+                <Gift gift={gift} includeTooltip={false} expandOverride={expand} setExpandOverride={() => setExpand(false)} />
             </div>
             <div style={{ display: "inline-block", fontSize: "1rem", lineHeight: "1.5", textWrap: "wrap", whiteSpace: "pre-wrap", textAlign: "start" }}>
                 <span>{replaceStatusVariables(gift.descs[0], true)}</span>
@@ -72,11 +22,13 @@ function GiftDesc({ gift }) {
 }
 
 function GiftCard({ gift }) {
-    return <div style={{ display: "flex", flexDirection: "column", padding: "0.5rem", width: "400px", height: "250px", border: "1px #aaa solid", borderRadius: "1rem" }}>
+    const [expand, setExpand] = useState(false);
+
+    return <div style={{ display: "flex", flexDirection: "column", padding: "0.5rem", width: "400px", height: "250px", border: "1px #aaa solid", borderRadius: "1rem", cursor: "pointer" }} onClick={() => setExpand(!expand)}>
         <div style={{ marginBottom: "0.5rem", fontSize: "1.25rem", fontWeight: "bold", textAlign: "center" }}>{gift.names[0]}</div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <Gift gift={gift} includeTooltip={false} />
+                <Gift gift={gift} includeTooltip={false} expandOverride={expand} setExpandOverride={() => setExpand(false)} />
             </div>
             <div style={{ display: "inline-block", fontSize: "1rem", lineHeight: "1.5", inlineSize: "50ch", textWrap: "wrap", whiteSpace: "pre-wrap", textAlign: "start", height: "200px", overflowY: "auto" }}>
                 <span>{replaceStatusVariables(gift.descs[0], true)}</span>
@@ -95,22 +47,22 @@ function checkSearchMatch(searchString, searchType, gift) {
     return false;
 }
 
-function GiftList({ searchString, selectedKeywords, selectedTiers, searchType, displayType, setSelectedGiftId }) {
+function GiftList({ searchString, selectedKeywords, selectedTiers, searchType, displayType, giftsData }) {
     const list = useMemo(() => Object.entries(giftsData).filter(([_id, gift]) => {
         if (searchString !== "" && !checkSearchMatch(searchString, searchType, gift)) return false;
         if (selectedKeywords.length !== 0 && !selectedKeywords.includes(gift.keyword)) return false;
         if (selectedTiers.length !== 0 && !selectedTiers.includes(gift.tier)) return false;
         return true;
-    }), [searchString, selectedKeywords, selectedTiers, searchType]);
+    }), [searchString, selectedKeywords, selectedTiers, searchType, giftsData]);
 
-    const listComponents = list.map(([id, gift]) => {
+    const listComponents = list.map(([_, gift]) => {
         switch (displayType) {
-            case "icon": return [id, <Gift gift={gift} includeTooltip={true} />];
-            case "card": return [id, <GiftCard gift={gift} />];
-            case "desc": return [id, <GiftDesc gift={gift} />];
-            default: return [id, null];
+            case "icon": return <Gift gift={gift} includeTooltip={true} />;
+            case "card": return <GiftCard gift={gift} />;
+            case "desc": return <GiftDesc gift={gift} />;
+            default: return null;
         }
-    }).map(([id, component]) => <div onClick={() => setSelectedGiftId(id)} style={{ cursor: "pointer" }}>{component}</div>);
+    });
 
     const columns = displayType === "icon" ? "repeat(auto-fill, minmax(100px, 1fr))" : displayType === "card" ? "repeat(auto-fill, minmax(400px, 1fr))" : "1fr"
 
@@ -160,8 +112,9 @@ function GiftsTab() {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedTiers, setSelectedTiers] = useState([]);
     const [searchType, setSearchType] = useState("0");
-    const [selectedGiftId, setSelectedGiftId] = useState(null);
     const [displayType, setDisplayType] = useState("icon");
+
+    const [giftsData, giftsLoading] = useData("gifts");
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value);
@@ -214,8 +167,10 @@ function GiftsTab() {
                 </div>
             </div>
         </details>
-        <GiftDisplay id={selectedGiftId} />
-        <GiftList searchString={searchString} selectedKeywords={selectedKeywords} selectedTiers={selectedTiers} searchType={searchType} displayType={displayType} setSelectedGiftId={setSelectedGiftId} />
+        {giftsLoading ? 
+            <div style={{textAlign: "center", fontSize: "1.5rem"}}>Loading Gifts...</div> : 
+            <GiftList searchString={searchString} selectedKeywords={selectedKeywords} selectedTiers={selectedTiers} searchType={searchType} displayType={displayType} giftsData={giftsData} />
+        }
     </div>;
 }
 

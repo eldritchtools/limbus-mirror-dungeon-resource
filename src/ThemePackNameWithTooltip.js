@@ -1,10 +1,14 @@
 import { Tooltip } from "react-tooltip";
-import { themePacks, ThemePackImg } from "@eldritchtools/limbus-shared-library";
+import { themePacks, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { tooltipStyle } from "./constants";
+import { getFloorsForPack } from "./themePackUtil";
 
 function ThemePackNameWithTooltip({ id, style = {} }) {
+    const [themePacksData, themePacksLoading] = useData("md_theme_packs");
+    if(themePacksLoading) return null;
+
     const defaultStyle = { borderBottom: "1px dotted #aaa", cursor: "help" };
-    const themePack = themePacks[id];
+    const themePack = themePacksData[id];
 
     return <span
         data-tooltip-id={"theme-pack-name-tooltip"}
@@ -15,7 +19,14 @@ function ThemePackNameWithTooltip({ id, style = {} }) {
     </span>;
 }
 
-function TooltipContent({ themePack }) {
+function TooltipContent({ themePackId }) {
+    const [themePacksData, themePacksLoading] = useData("md_theme_packs");
+    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
+
+    if (!themePackId || themePacksLoading || floorPacksLoading) return null;
+    const themePack = themePacksData[themePackId];
+    const {normal, hard} = getFloorsForPack(themePackId, floorPacksData);
+
     return <div style={tooltipStyle}>
         <div style={{ padding: "0.75rem" }}>
             <div style={{ fontSize: "1.5em", fontWeight: "bold" }}>{themePack.name}</div>
@@ -23,8 +34,8 @@ function TooltipContent({ themePack }) {
             <div style={{ display: "grid", width: "100%", gridTemplateColumns: "1fr 1fr" }} >
                 <div style={{ color: "#4ade80" }}>Normal</div>
                 <div style={{ color: "#f87171" }}>Hard</div>
-                <div>{themePack.normalFloors ? themePack.normalFloors.map(f => `F${f}`).join(", ") : "None"}</div>
-                <div>{themePack.hardFloors ? themePack.hardFloors.map(f => `F${f}`).join(", ") : "None"}</div>
+                <div>{normal.length ? normal.map(f => `F${f}`).join(", ") : "None"}</div>
+                <div>{hard.length ? hard.map(f => `F${f}`).join(", ") : "None"}</div>
             </div>
         </div>
     </div>
@@ -33,7 +44,7 @@ function TooltipContent({ themePack }) {
 function ThemePackNameTooltip() {
     return <Tooltip
         id={"theme-pack-name-tooltip"}
-        render={({ content }) => <TooltipContent themePack={themePacks[content]} />}
+        render={({ content }) => <TooltipContent themePackId={content} />}
         getTooltipContainer={() => document.body}
         style={{ backgroundColor: "transparent", zIndex: "9999" }}
     />
