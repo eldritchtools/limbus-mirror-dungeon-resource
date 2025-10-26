@@ -1,7 +1,6 @@
 import { Tooltip } from "react-tooltip";
-import { ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
+import { getFloorsForPack, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { tooltipStyle } from "./constants";
-import { getFloorsForPack } from "./themePackUtil";
 
 function ThemePackNameWithTooltip({ id, style = {} }) {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
@@ -21,11 +20,10 @@ function ThemePackNameWithTooltip({ id, style = {} }) {
 
 function TooltipContent({ themePackId }) {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
-    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
+    const {normal, hard} = getFloorsForPack(themePackId);
 
-    if (!themePackId || themePacksLoading || floorPacksLoading) return null;
+    if (!themePackId || themePacksLoading) return null;
     const themePack = themePacksData[themePackId];
-    const {normal, hard} = getFloorsForPack(themePackId, floorPacksData);
 
     return <div style={tooltipStyle}>
         <div style={{ padding: "0.75rem" }}>

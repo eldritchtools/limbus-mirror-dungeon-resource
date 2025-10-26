@@ -1,8 +1,7 @@
-import { EgoImg, Gift, KeywordIcon, useData } from "@eldritchtools/limbus-shared-library";
+import { EgoImg, getFloorsPerPack, Gift, KeywordIcon, useData } from "@eldritchtools/limbus-shared-library";
 import { RarityImg, SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 import { ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
-import { getFloorsPerPack } from "./themePackUtil";
 
 function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
@@ -44,8 +43,7 @@ function TableTip({ tip }) {
 
 function ShowGiftsTip({ tip }) {
     const [giftsData, giftsLoading] = useData("gifts");
-    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
-    const floorsPerPack = floorPacksLoading ? { normal: {}, hard: {} } : getFloorsPerPack(floorPacksData)
+    const floorsPerPack = getFloorsPerPack()
 
     const [normal, hard] = Object.entries(giftsLoading ? {} : giftsData).reduce((acc, [_id, gift]) => {
         if (gift.vestige) return acc;
@@ -165,10 +163,8 @@ function ShowThemePacksTip({ tip }) {
 }
 
 function ShowThemePacksByFloorTip({ tip }) {
-    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
-
-    const { hard } = floorPacksLoading ? { normal: {}, hard: {} } : getFloorsPerPack(floorPacksData)
+    const { hard } = getFloorsPerPack();
 
     const themePacks = Object.entries(themePacksLoading ? {} : themePacksData).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
     const packsByFloor = themePacks.reduce((acc, [id, pack]) => {

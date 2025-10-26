@@ -1,6 +1,5 @@
-import { useMemo, useState } from "react";
-import { Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
-import { getFloorsPerPack } from "./themePackUtil";
+import { useState } from "react";
+import { getFloorsPerPack, Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 
 const formatExclusiveGifts = (exclusiveGifts) => {
     return <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
@@ -37,9 +36,8 @@ function ThemePack({ themePack, normal, hard }) {
 
 function ThemePacksTab() {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
-    const [floorPacksData, floorPacksLoading] = useData("md_floor_packs");
 
-    const floorsPerPack = useMemo(() => floorPacksLoading ? {normal: {}, hard: {}} : getFloorsPerPack(floorPacksData), [floorPacksData, floorPacksLoading]);
+    const floorsPerPack = getFloorsPerPack();
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const handleCategoryToggle = (category, selected) => {
