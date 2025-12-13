@@ -23,13 +23,13 @@ const description = <span>
 </span>;
 
 function SidebarLink({ href, className, style, children }) {
-    return <Link className={className} style={{...style, textAlign: "start"}} to={href}>{children}</Link>;
+    return <Link className={className} style={{ ...style, textAlign: "start" }} to={href}>{children}</Link>;
 }
 
 const paths = [
-    { path: "/achievements", title: "Achievements", tooltip: "test" },
-    { path: "/gifts", title: "Gifts", tooltip: "test" },
-    { path: "/fusions", title: "Fusion Recipes", tooltip: "test" },
+    { path: "/achievements", title: "Achievements" },
+    { path: "/gifts", title: "Gifts" },
+    { path: "/fusions", title: "Fusion Recipes" },
     { path: "/universal", title: "Universal Gifts/Gift Combos" },
     { path: "/themepacks", title: "Notable Theme Packs" },
     { path: "/floorplanner", title: "Floor Planner" },
@@ -70,16 +70,16 @@ function App() {
                             LinkComponent={SidebarLink}
                         >
                             <div className="App-content">
-                                <div style={{width: "95%"}}>
-                                <Routes>
-                                    <Route path="/" element={<AchievementsTab />} />
-                                    <Route path="/achievements" element={<AchievementsTab />} />
-                                    <Route path="/gifts" element={<GiftsTab />} />
-                                    <Route path="/fusions" element={<FusionsTab />} />
-                                    <Route path="/universal" element={<UniversalGiftsTab />} />
-                                    <Route path="/themepacks" element={<ThemePacksTab />} />
-                                    <Route path="/floorplanner" element={<FloorPlannerTab />} />
-                                </Routes>
+                                <div style={{ width: "95%" }}>
+                                    <Routes>
+                                        <Route path="/" element={<AchievementsTab />} />
+                                        <Route path="/achievements" element={<AchievementsTab />} />
+                                        <Route path="/gifts" element={<GiftsTab />} />
+                                        <Route path="/fusions" element={<FusionsTab />} />
+                                        <Route path="/universal" element={<UniversalGiftsTab />} />
+                                        <Route path="/themepacks" element={<ThemePacksTab />} />
+                                        <Route path="/floorplanner" element={<FloorPlannerTab />} />
+                                    </Routes>
                                 </div>
                             </div>
 
