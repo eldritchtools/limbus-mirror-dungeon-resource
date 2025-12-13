@@ -1,5 +1,5 @@
-import { EgoImg, getFloorsPerPack, Gift, KeywordIcon, useData } from "@eldritchtools/limbus-shared-library";
-import { RarityImg, SampleImg } from "./ImageHandler";
+import { EgoImg, getFloorsPerPack, Gift, KeywordIcon, SinnerIcon, useData } from "@eldritchtools/limbus-shared-library";
+import { SampleImg } from "./ImageHandler";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 import { ThemePackImg, IdentityImg } from "@eldritchtools/limbus-shared-library";
 
@@ -85,7 +85,7 @@ function ShowGiftsTip({ tip }) {
         return acc;
     }, [{ general: [], exclusive: {} }, { general: [], exclusive: {} }])
 
-    const giftsStyle = { display: "flex", flexDirection: "row", width: "100%", height: "fit-content", flexWrap: "wrap", padding: "0.5rem" };
+    const giftsStyle = { display: "flex", flexDirection: "row", height: "fit-content", flexWrap: "wrap", padding: "0.5rem" };
     const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" };
 
     const gridComponents = [];
@@ -103,10 +103,10 @@ function ShowGiftsTip({ tip }) {
     }
 
     function constructPackGiftsComponent(packGiftMapping) {
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0.1rem", border: "1px #666 dotted" }}>
-            {Object.entries(packGiftMapping).map(([pack, gifts]) => <div style={{ width: "100%", textAlign: "center" }}>
-                <ThemePackNameWithTooltip id={pack} />
-                <div style={giftsStyle}>{gifts.map(gift => <Gift gift={gift} />)}</div>
+        return <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", alignContent: "flex-start", padding: "0.25rem", border: "1px #666 dotted", gap: "0.5rem" }}>
+            {Object.entries(packGiftMapping).map(([pack, gifts]) => <div style={{ display: "flex", flexDirection: "column", textAlign: "center", border: "1px #777 dotted", borderRadius: "1rem", padding: "0.2rem" }}>
+                <div><ThemePackNameWithTooltip id={pack} /></div>
+                <div style={{ ...giftsStyle, justifyContent: "center" }}>{gifts.map(gift => <Gift gift={gift} />)}</div>
             </div>)
             }
         </div>
@@ -231,38 +231,40 @@ function ShowIdentities({ tip }) {
     const [identitiesData, identitiesLoading] = useData("identities");
     const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
 
-    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
+    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto", overflowY: "hidden" }}>
         {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
-            <IdentityImg identity={identity} uptie={4} displayName={true} scale={.5} />
+            <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={.5} />
         </div>)}
     </div>
 }
 
-function ShowIdentitiesByRarity({ tip }) {
+function ShowIdentitiesBySinner({ tip }) {
     const [identitiesData, identitiesLoading] = useData("identities");
     const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
 
-    const [r1, r2, r3] = identities.reduce((acc, identity) => {
-        acc[identity.rank - 1].push(identity);
-        return acc;
-    }, [[], [], []]);
-
-    const components = [];
-    const insertRows = (list, rarity) => {
-        if (list.length === 0) return;
-
-        components.push(<div style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" }}><RarityImg rarity={rarity} /></div>);
-        components.push(<div style={{ width: "100%", display: "flex", flexDirection: "row", overflowX: "auto" }}>
-            {list.map(identity => <div style={{ border: "1px #666 dotted" }}>
-                <IdentityImg identity={identity} uptie={4} displayName={true} scale={.5} />
-            </div>)}
-        </div>)
+    const start = {};
+    if (tip.showAllSinners) {
+        for (let i=1; i<=12; i++) start[i] = [];
     }
-    insertRows(r3, 3);
-    insertRows(r2, 2);
-    insertRows(r1, 1);
 
-    return <div style={{ width: "100%", display: "grid", gridTemplateColumns: "1fr 9fr" }}>
+    const idsBySinner = identities.reduce((acc, identity) => {
+        if (identity.sinnerId in acc) acc[identity.sinnerId].push(identity);
+        else acc[identity.sinnerId] = [identity];
+        return acc;
+    }, start);
+
+    const components = Object.entries(idsBySinner).sort((a, b) => a[0] - b[0]).map(([sinnerId, list]) =>
+        <div key={sinnerId} style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "480px", border: "1px #777 dotted" }}>
+            <SinnerIcon num={sinnerId} style={{ width: "64px" }} />
+            <div style={{ display: "flex", flexDirection: "row", overflowX: "auto", overflowY: "hidden", height: "138px" }}>
+                {list.reverse().map(identity => <div key={identity.id} style={{ width: "128px", height: "128px" }}>
+                    <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={.5} />
+                </div>)}
+            </div>
+        </div>
+    );
+
+    return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 480px)", justifyContent: "center", width: "100%" }}>
         {components}
     </div>
 }
@@ -379,7 +381,7 @@ function AchievementTips({ achievement }) {
             case "showThemePacks": components.push(<ShowThemePacksTip tip={tip} />); break;
             case "showThemePacksByFloor": components.push(<ShowThemePacksByFloorTip tip={tip} />); break;
             case "showIds": components.push(<ShowIdentities tip={tip} />); break;
-            case "showIdsByRarity": components.push(<ShowIdentitiesByRarity tip={tip} />); break;
+            case "showIdsbySinner": components.push(<ShowIdentitiesBySinner tip={tip} />); break;
             case "refreshCostSummary": components.push(<RefreshCostSummary />); break;
             case "enhanceCostSummary": components.push(<EnhanceCostSummary />); break;
             case "showEGOs": components.push(<ShowEGOsTip tip={tip} />); break;

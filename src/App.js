@@ -1,6 +1,5 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import AchievementsTab from './AchievementsTab';
 import GiftsTab from './GiftsTab';
 import FusionsTab from './FusionsTab';
@@ -8,19 +7,33 @@ import UniversalGiftsTab from './UniversalGiftsTab';
 import ThemePacksTab from './ThemePacksTab';
 import FloorPlannerTab from './FloorPlannerTab';
 
-import { Header, Footer, ProfileProvider } from '@eldritchtools/shared-components';
+import { ProfileProvider, Layout } from '@eldritchtools/shared-components';
 import migrateProfile, { firstMigrate } from './migrateProfile';
 import { DataProvider, getMeta, GiftTooltip, StatusTooltip } from '@eldritchtools/limbus-shared-library';
 import { ThemePackNameTooltip } from './ThemePackNameWithTooltip';
 import { Tooltip } from 'react-tooltip';
 import { tooltipStyle } from './constants';
-import MigrationTab from './MigrationTab';
+
+import { HashRouter, Link, Routes, Route } from 'react-router-dom';
 
 const description = <span>
     Limbus Company Mirror Dungeon Resource and Achievements Tracker is a free fan-made tool to help players plan dungeon runs and track achievement progress.
     <br /><br />
     Get tips and details for each achievement, plus references for fusion recipes, theme packs, and other info related to Mirror Dungeons.
 </span>;
+
+function SidebarLink({ href, className, style, children }) {
+    return <Link className={className} style={{...style, textAlign: "start"}} to={href}>{children}</Link>;
+}
+
+const paths = [
+    { path: "/achievements", title: "Achievements", tooltip: "test" },
+    { path: "/gifts", title: "Gifts", tooltip: "test" },
+    { path: "/fusions", title: "Fusion Recipes", tooltip: "test" },
+    { path: "/universal", title: "Universal Gifts/Gift Combos" },
+    { path: "/themepacks", title: "Notable Theme Packs" },
+    { path: "/floorplanner", title: "Floor Planner" },
+]
 
 function App() {
     const [migrated, setMigrated] = useState(false);
@@ -44,54 +57,38 @@ function App() {
         <ProfileProvider dbName={"limbus-mirror-dungeon-resource"} migrateProfile={migrateProfile}>
             <DataProvider>
                 <div className="App">
-                    <Header title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"} lastUpdated={lastUpdated} />
-                    <div style={{ minHeight: "90vh", height: "auto", paddingBottom: "1rem" }} >
-                        <div className="App-content">
-                            <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
-                                <TabList className="tab-list">
-                                    <Tab className="tab">Achievements</Tab>
-                                    <Tab className="tab">Gifts</Tab>
-                                    <Tab className="tab">Fusion Recipes</Tab>
-                                    <Tab className="tab">Universal Gifts/Gift Combos</Tab>
-                                    <Tab className="tab">Notable Theme Packs</Tab>
-                                    <Tab className="tab">Floor Planner</Tab>
-                                    <Tab className="tab">Click here if your data is missing</Tab>
-                                </TabList>
+                    <HashRouter>
+                        <Layout
+                            title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"}
+                            lastUpdated={lastUpdated}
+                            linkSet={"limbus"}
+                            description={description}
+                            gameName={"Limbus Company"}
+                            developerName={"Project Moon"}
+                            githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
+                            paths={paths}
+                            LinkComponent={SidebarLink}
+                        >
+                            <div className="App-content">
+                                <div style={{width: "95%"}}>
+                                <Routes>
+                                    <Route path="/" element={<AchievementsTab />} />
+                                    <Route path="/achievements" element={<AchievementsTab />} />
+                                    <Route path="/gifts" element={<GiftsTab />} />
+                                    <Route path="/fusions" element={<FusionsTab />} />
+                                    <Route path="/universal" element={<UniversalGiftsTab />} />
+                                    <Route path="/themepacks" element={<ThemePacksTab />} />
+                                    <Route path="/floorplanner" element={<FloorPlannerTab />} />
+                                </Routes>
+                                </div>
+                            </div>
 
-                                <TabPanel className="tab-panel">
-                                    <AchievementsTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <GiftsTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <FusionsTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <UniversalGiftsTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <ThemePacksTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <FloorPlannerTab />
-                                </TabPanel>
-                                <TabPanel className="tab-panel">
-                                    <MigrationTab />
-                                </TabPanel>
-                            </Tabs>
-                        </div>
-                    </div>
-                    <GiftTooltip />
-                    <StatusTooltip />
-                    <ThemePackNameTooltip />
-                    <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
-                    <Footer
-                        description={description}
-                        gameName={"Limbus Company"}
-                        developerName={"Project Moon"}
-                        githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
-                    />
+                            <GiftTooltip />
+                            <StatusTooltip />
+                            <ThemePackNameTooltip />
+                            <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
+                        </Layout>
+                    </HashRouter>
                 </div>
             </DataProvider>
         </ProfileProvider> :

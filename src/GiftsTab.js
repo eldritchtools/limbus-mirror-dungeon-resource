@@ -1,9 +1,8 @@
-import { useMemo, useState } from "react";
-import { Gift, KeywordSelector, replaceStatusVariables, useData } from "@eldritchtools/limbus-shared-library";
+import { useEffect, useMemo, useState } from "react";
+import { Gift, replaceStatusVariables, useData } from "@eldritchtools/limbus-shared-library";
+import { KeywordSelector, GiftTierSelector } from "./Selectors";
 
 const searchTerms = ["power", "coin power", "offense level", "damage", "HP", "SP", "heal", "speed"];
-const buttonStyle = { border: "1px #aaa solid", padding: "4px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transiton: "background-color 0.2s, border-color 0.2s" };
-const iconTextStyle = { fontFamily: "'Archivo Narrow', sans-serif", fontWeight: "bold", fontSize: "20px", color: "#ffd84d" };
 
 function GiftDesc({ gift }) {
     const [expand, setExpand] = useState(false);
@@ -41,19 +40,19 @@ function includesIgnoreCase(s1, s2) {
     return s1.toLowerCase().includes(s2.toLowerCase());
 }
 
-function checkSearchMatch(searchString, searchType, gift) {
+function checkSearchMatch(searchString, includeDescription, gift) {
     if (includesIgnoreCase(gift.names[0], searchString)) return true;
-    if (searchType === "1" && includesIgnoreCase(gift.search_desc, searchString)) return true;
+    if (includeDescription && includesIgnoreCase(gift.search_desc, searchString)) return true;
     return false;
 }
 
-function GiftList({ searchString, selectedKeywords, selectedTiers, searchType, displayType, giftsData }) {
+function GiftList({ searchString, selectedKeywords, selectedTiers, includeDescription, displayType, giftsData }) {
     const list = useMemo(() => Object.entries(giftsData).filter(([_id, gift]) => {
-        if (searchString !== "" && !checkSearchMatch(searchString, searchType, gift)) return false;
+        if (searchString !== "" && !checkSearchMatch(searchString, includeDescription, gift)) return false;
         if (selectedKeywords.length !== 0 && !selectedKeywords.includes(gift.keyword)) return false;
         if (selectedTiers.length !== 0 && !selectedTiers.includes(gift.tier)) return false;
         return true;
-    }), [searchString, selectedKeywords, selectedTiers, searchType, giftsData]);
+    }), [searchString, selectedKeywords, selectedTiers, includeDescription, giftsData]);
 
     const listComponents = list.map(([_, gift]) => {
         switch (displayType) {
@@ -71,47 +70,22 @@ function GiftList({ searchString, selectedKeywords, selectedTiers, searchType, d
     </div>
 }
 
-function tierToString(tier) {
-    switch (tier) {
-        case "1": return "I";
-        case "2": return "II";
-        case "3": return "III";
-        case "4": return "IV";
-        case "5": return "V";
-        case "EX": return "EX";
-        default: return "";
-    }
-}
-
-function TierSelector({ value, onChange }) {
-    const handleTierToggle = (tier, selected) => {
-        if (selected)
-            onChange(value.filter(x => x !== tier));
-        else
-            onChange([...value, tier]);
-    }
-
-    const clearTiers = () => {
-        onChange([]);
-    }
-
-    const toggleComponent = (tier, selected) => {
-        return <div style={{ ...buttonStyle, backgroundColor: selected ? "#3f3f3f" : "#1f1f1f", height: "32px", width: "32px" }} onClick={() => handleTierToggle(tier, selected)}>
-            <span style={{ ...iconTextStyle, transform: "scaleY(1.4)" }}>{tierToString(tier)}</span>
-        </div>
-    }
-
-    return <div style={{ display: "flex" }}>
-        {["1", "2", "3", "4", "5", "EX"].map(tier => toggleComponent(tier, value.includes(tier)))}
-        {<div style={buttonStyle} onClick={clearTiers}>Clear All</div>}
-    </div>
-}
-
 function GiftsTab() {
     const [searchString, setSearchString] = useState("");
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedTiers, setSelectedTiers] = useState([]);
-    const [searchType, setSearchType] = useState("0");
+    const [includeDescription, setIncludeDescription] = useState(false);
+
+    useEffect(() => {
+        const saved = localStorage.getItem("includeDescription");
+        setIncludeDescription(saved ? JSON.parse(saved) : false);
+    }, []);
+
+    const handleDescriptionToggle = (checked) => {
+        localStorage.setItem("includeDescription", JSON.stringify(checked));
+        setIncludeDescription(checked);
+    }
+
     const [displayType, setDisplayType] = useState("icon");
 
     const [giftsData, giftsLoading] = useData("gifts");
@@ -128,24 +102,20 @@ function GiftsTab() {
                 <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
                     <input value={searchString} onChange={handleSearchChange} />
                     <label>
-                        <input type="radio" name="searchType" value={"0"} checked={searchType === "0"} onChange={e => setSearchType(e.target.value)} />
-                        Name Only
-                    </label>
-                    <label>
-                        <input type="radio" name="searchType" value={"1"} checked={searchType === "1"} onChange={e => setSearchType(e.target.value)} />
+                        <input type="checkbox" checked={includeDescription} onChange={e => handleDescriptionToggle(e.target.checked)} />
                         <span
                             data-tooltip-id="genericTooltip"
                             data-tooltip-content={"This will check the description for all enhancement levels of the gift."}
                             style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
                         >
-                            Name and Description
+                            Include Description
                         </span>
                     </label>
                 </div>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Keywords</span>
-                <KeywordSelector value={selectedKeywords} onChange={v => setSelectedKeywords(v)} />
+                <div style={{ display: "flex" }}><KeywordSelector selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords} /></div>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Tiers</span>
-                <TierSelector value={selectedTiers} onChange={v => setSelectedTiers(v)} />
+                <div style={{ display: "flex" }}><GiftTierSelector selectedTiers={selectedTiers} setSelectedTiers={setSelectedTiers} /></div>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Common Search Terms</span>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                     {searchTerms.map(term => <span style={{ borderBottom: "1px #888 solid", cursor: "pointer" }} onClick={() => setSearchString(term)}>{term}</span>)}
@@ -167,9 +137,9 @@ function GiftsTab() {
                 </div>
             </div>
         </details>
-        {giftsLoading ? 
-            <div style={{textAlign: "center", fontSize: "1.5rem"}}>Loading Gifts...</div> : 
-            <GiftList searchString={searchString} selectedKeywords={selectedKeywords} selectedTiers={selectedTiers} searchType={searchType} displayType={displayType} giftsData={giftsData} />
+        {giftsLoading ?
+            <div style={{ textAlign: "center", fontSize: "1.5rem" }}>Loading Gifts...</div> :
+            <GiftList searchString={searchString} selectedKeywords={selectedKeywords} selectedTiers={selectedTiers} includeDescription={includeDescription} displayType={displayType} giftsData={giftsData} />
         }
     </div>;
 }

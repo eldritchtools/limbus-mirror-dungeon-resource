@@ -15,7 +15,7 @@ function FloorSelector({ value, setValue, options }) {
     return (
         <Select.Root value={value} onValueChange={handleUpdateValue} open={isOpen} onOpenChange={setIsOpen}>
             <Select.Trigger className="floor-select-trigger" ref={triggerRef}>
-                <ThemePackImg id={value} displayName={true} scale={0.45} />
+                {value ? <ThemePackImg id={value} displayName={true} scale={0.45} /> : null}
             </Select.Trigger>
 
             <Select.Content className="floor-select-content" position="popper">
@@ -66,8 +66,8 @@ function FloorSelection({ difficulty, selectedFloors, setSelectedFloors }) {
     if (difficulty === "E")
         for (let i = 10; i < 15; i++) selectors.push(<FloorSelector value={selectedFloors[i]} setValue={v => setSelectedFloor(v, i)} options={getOptions(i + 1)} />);
 
-    return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 400px)", width: "100%", justifyContent: "center", overflowY: "auto" }}>
-        {selectors.map((selector, index) => <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", width: "400px" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 400px)", width: "100%", justifyContent: "center", overflowY: "auto", gap: "0.5rem" }}>
+        {selectors.map((selector, index) => <div key={index} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", width: "400px" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <span>Floor {index+1}</span>
                 {

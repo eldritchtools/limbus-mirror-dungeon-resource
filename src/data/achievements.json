@@ -631,8 +631,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Burn"
+                    "type": "showIdsbySinner",
+                    "keyword": "Burn",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -646,8 +647,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Bleed"
+                    "type": "showIdsbySinner",
+                    "keyword": "Bleed",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -661,8 +663,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Tremor"
+                    "type": "showIdsbySinner",
+                    "keyword": "Tremor",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -676,8 +679,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Rupture"
+                    "type": "showIdsbySinner",
+                    "keyword": "Rupture",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -691,8 +695,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Sinking"
+                    "type": "showIdsbySinner",
+                    "keyword": "Sinking",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -706,8 +711,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Poise"
+                    "type": "showIdsbySinner",
+                    "keyword": "Poise",
+                    "showAllSinners": true
                 }
             ]
         },
@@ -721,8 +727,9 @@
                     "text": "Bring at least 5 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
                 },
                 {
-                    "type": "showIdsByRarity",
-                    "keyword": "Charge"
+                    "type": "showIdsbySinner",
+                    "keyword": "Charge",
+                    "showAllSinners": true
                 }
             ]
         },

@@ -2,7 +2,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./AchievementsTab.css"
 import { useState } from 'react';
 import AchievementTips from './AchievementsTips';
-import { Tooltip } from 'react-tooltip';
 import { useProfiles } from '@eldritchtools/shared-components';
 import data from './data';
 
@@ -189,17 +188,16 @@ function AchievementsTab() {
         setSortClearedToBottom(!sortClearedToBottom);
     }
 
+    const tooltipText = "You can get additional projection/achievement points from completing MD runs so this will not reflect your actual achievement level.";
+
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
-            <div data-tooltip-id={"level"} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+            <div data-tooltip-id={"genericTooltip"} data-tooltip-content={tooltipText} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
                 <div>Level: {Math.floor(profileData.totalPoints / 100)}</div>
                 <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
                     <div style={{ width: `${profileData.totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
                     <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {profileData.totalPoints % 100}/100 </span>
                 </div>
-                <Tooltip id={"level"} style={{ outlineStyle: "solid", outlineColor: "#ffffff", outlineWidth: "1px", backgroundColor: "#000000" }}>
-                    You can get additional projection/achievement points from completing MD runs so this may not reflect your actual achievement level.
-                </Tooltip>
             </div>
             <button className={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>

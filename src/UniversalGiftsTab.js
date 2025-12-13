@@ -4,8 +4,8 @@ import universalGifts from "./data/universalGifts.json";
 function GiftRow({ list=null, dict=null }) {
     return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))", width: "100%", justifyContent: "center" }}>
         {list ? 
-            list.map(giftId => <Gift id={giftId} includeTooltip={true} />) : 
-            dict.map(([giftId, notes]) => <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            list.map((giftId, i) => <Gift key={i} id={giftId} includeTooltip={true} />) : 
+            dict.map(([giftId, notes], i) => <div key={i} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <Gift id={giftId} includeTooltip={true} />
                 <span style={{whiteSpace: "pre-wrap"}}>{notes}</span>
                 </div>)}
@@ -18,7 +18,7 @@ function Container({ category }) {
         {
             "gifts" in category ?
                 <GiftRow list={category.gifts} /> :
-                category.sections.map(section => <div style={{ display: "flex", flexDirection: "column" }}>
+                category.sections.map((section, i) => <div key={i} style={{ display: "flex", flexDirection: "column" }}>
                     <div>{section.title}</div>
                     <GiftRow list={section.gifts} />
                 </div>)
@@ -31,7 +31,7 @@ function ComboContainer({ data }) {
         <div style={{ fontSize: "1.25rem", fontWeight: "bold", display: "flex", flexDirection: "row", alignItems: "center" }}><KeywordIcon id={data.title} />{data.title}</div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
             {data.sections.map((section, index) =>
-                <div style={{ display: "flex", flexDirection: "column", borderRight: index === 0 ? "1px #aaa dotted" : null, padding: "0.5rem" }}>
+                <div key={index} style={{ display: "flex", flexDirection: "column", borderRight: index === 0 ? "1px #aaa dotted" : null, padding: "0.5rem" }}>
                     <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{section.title}</div>
                     {<GiftRow dict={section.gifts} />}
                 </div>
@@ -49,11 +49,11 @@ function UniversalGiftsTab() {
         <br />
         I have tried to order them by relevance for each category, but this varies between team compositions and different situations, so take the ordering with a grain of salt. I have deprioritized gifts that have conditions that aren't always achievable like killing enemies.
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 520px)", width: "100%", justifyContent: "center" }}>
-            {universalGifts.individual.map((category) => <Container category={category} />)}
+            {universalGifts.individual.map((category, i) => <Container key={i} category={category} />)}
         </div>
         All 7 archetypes have combinations of gifts that can provide benefits for all team compositions. Gifts will generally be Enablers (gifts that apply the status) or Exploiters (gifts that provide benefits against enemies with the status), with some being both.
         <div style={{ display: "grid", gridTemplateColumns: "1fr", width: "100%" }}>
-            {universalGifts.combo.map((status) => <ComboContainer data={status} />)}
+            {universalGifts.combo.map((status, i) => <ComboContainer key={i} data={status} />)}
         </div>
     </div>;
 }

@@ -9,12 +9,12 @@
   background-color: #1f1f1f;
   min-height: 100vh;
   height: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* justify-content: center; */
   color: #ddd;
-  padding: 0.5rem;
 }
 
 button,

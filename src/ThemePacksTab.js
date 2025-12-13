@@ -3,12 +3,12 @@ import { getFloorsPerPack, Gift, ThemePackImg, useData } from "@eldritchtools/li
 
 const formatExclusiveGifts = (exclusiveGifts) => {
     return <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
-        {exclusiveGifts.map(gift => <Gift id={gift} />)}
+        {exclusiveGifts.map((gift, i) => <Gift key={i} id={gift} />)}
     </div>
 }
 
 function ThemePack({ themePack, normal, hard }) {
-    return <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gridAutoRows: "auto", alignItems: "start", height: "auto", minWidth: "700px", padding: "3px", boxSizing: "border-box", border: "1px grey dotted" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gridAutoRows: "auto", alignItems: "start", height: "auto", minWidth: "640px", padding: "3px", boxSizing: "border-box", border: "1px grey dotted" }}>
         <div style={{ height: "fit-content", boxSizing: "border-box" }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", padding: "3px" }}>
                 <ThemePackImg themePack={themePack} displayName={true} scale={0.5} />
@@ -56,7 +56,7 @@ function ThemePacksTab() {
     Object.entries(themePacksLoading ? {} : themePacksData).forEach(([id, themePack]) => {
         if (selectedCategories.length !== 0 && !selectedCategories.some(selectedCategory => themePack.category.includes(selectedCategory))) return;
 
-        components.push(<ThemePack themePack={themePack} normal={floorsPerPack.normal[id]} hard={floorsPerPack.hard[id]} />);
+        components.push(<ThemePack key={id} themePack={themePack} normal={floorsPerPack.normal[id]} hard={floorsPerPack.hard[id]} />);
     })
 
     const categories = {};
@@ -75,9 +75,9 @@ function ThemePacksTab() {
                     <table style={{ borderCollapse: "collapse" }}>
                         <tbody>
                             {
-                                Object.entries(categories).map(([category, innerCategories]) => {
+                                Object.entries(categories).map(([category, innerCategories], i) => {
                                     const selected = selectedCategories.includes(category);
-                                    return <tr>
+                                    return <tr key={i}>
                                         <td style={{ border: "1px grey dotted", padding: "2px" }}>
                                             <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
                                                 {<input type="checkbox" onChange={() => handleCategoryToggle(category, selected)} checked={selected} />}
@@ -86,9 +86,9 @@ function ThemePacksTab() {
                                         </td>
                                         <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
                                             <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
-                                                {innerCategories.map(innerCategory => {
+                                                {innerCategories.map((innerCategory, i) => {
                                                     const innerSelected = selectedCategories.includes(innerCategory);
-                                                    return <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
+                                                    return <label key={i} style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
                                                         {<input type="checkbox" onChange={() => handleCategoryToggle(innerCategory, innerSelected)} checked={innerSelected} />}
                                                         {innerCategory}
                                                     </label>
@@ -105,7 +105,7 @@ function ThemePacksTab() {
             </details>
         </div>
         <div style={{ height: "100%", width: "100%", overflowX: "hidden", overflowY: "auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(700px, 1fr))", height: "auto", width: "100%", boxSizing: "border-box" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(640px, 1fr))", height: "auto", width: "100%", boxSizing: "border-box" }}>
                 {components}
             </div>
         </div>
