@@ -22,8 +22,8 @@ const description = <span>
     Get tips and details for each achievement, plus references for fusion recipes, theme packs, and other info related to Mirror Dungeons.
 </span>;
 
-function SidebarLink({ href, className, style, children }) {
-    return <Link className={className} style={{ ...style, textAlign: "start" }} to={href}>{children}</Link>;
+function SidebarLink({ href, className, style, onClick, children }) {
+    return <Link className={className} style={{ ...style, textAlign: "start" }} to={href} onClick={onClick}>{children}</Link>;
 }
 
 const paths = [

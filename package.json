@@ -4,8 +4,8 @@
   "homepage": "https://limbus-md.eldritchtools.com",
   "private": true,
   "dependencies": {
-    "@eldritchtools/limbus-shared-library": "github:eldritchtools/limbus-shared-library#v0.6.0",
-    "@eldritchtools/shared-components": "github:eldritchtools/shared-components#v1.4.1",
+    "@eldritchtools/limbus-shared-library": "github:eldritchtools/limbus-shared-library#v0.6.4",
+    "@eldritchtools/shared-components": "github:eldritchtools/shared-components#v1.5.11",
     "@radix-ui/react-select": "^2.2.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
