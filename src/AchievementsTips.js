@@ -209,8 +209,8 @@ function filterIdentities(tip, identitiesData) {
     return Object.values(identitiesData).filter(identity => {
         let filter = true;
         if ("keyword" in tip) {
-            if (Array.isArray(tip.keyword)) filter &= tip.keyword.some(keyword => identity.statuses.includes(keyword));
-            else filter &= identity.statuses.includes(tip.keyword);
+            if (Array.isArray(tip.keyword)) filter &= tip.keyword.some(keyword => identity.skillKeywordList?.includes(keyword));
+            else filter &= identity.skillKeywordList?.includes(tip.keyword);
         }
         if (!filter) return false;
 
