@@ -7,7 +7,7 @@ import UniversalGiftsTab from './UniversalGiftsTab';
 import ThemePacksTab from './ThemePacksTab';
 import FloorPlannerTab from './FloorPlannerTab';
 
-import { ProfileProvider, Layout } from '@eldritchtools/shared-components';
+import { ProfileProvider, Layout, useBreakpoint } from '@eldritchtools/shared-components';
 import migrateProfile, { firstMigrate } from './migrateProfile';
 import { DataProvider, getMeta, GiftTooltip, StatusTooltip } from '@eldritchtools/limbus-shared-library';
 import { ThemePackNameTooltip } from './ThemePackNameWithTooltip';
@@ -38,6 +38,7 @@ const paths = [
 function App() {
     const [migrated, setMigrated] = useState(false);
     const [lastUpdated, setLastUpdated] = useState(process.env.REACT_APP_LAST_UPDATED);
+    const { isDesktop } = useBreakpoint();
 
     useEffect(() => {
         if (!migrated) {
@@ -70,7 +71,7 @@ function App() {
                             LinkComponent={SidebarLink}
                         >
                             <div className="App-content">
-                                <div style={{ width: "95%" }}>
+                                <div style={{ width: isDesktop ? "95%" : "100%" }}>
                                     <Routes>
                                         <Route path="/" element={<AchievementsTab />} />
                                         <Route path="/achievements" element={<AchievementsTab />} />
@@ -81,12 +82,12 @@ function App() {
                                         <Route path="/floorplanner" element={<FloorPlannerTab />} />
                                     </Routes>
                                 </div>
-                            </div>
 
-                            <GiftTooltip />
-                            <StatusTooltip />
-                            <ThemePackNameTooltip />
-                            <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
+                                <GiftTooltip />
+                                <StatusTooltip />
+                                <ThemePackNameTooltip />
+                                <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
+                            </div>
                         </Layout>
                     </HashRouter>
                 </div>

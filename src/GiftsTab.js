@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Gift, replaceStatusVariables, useData } from "@eldritchtools/limbus-shared-library";
 import { KeywordSelector, GiftTierSelector } from "./Selectors";
+import { useBreakpoint } from "@eldritchtools/shared-components";
 
 const searchTerms = ["power", "coin power", "offense level", "damage", "HP", "SP", "heal", "speed"];
 
@@ -20,16 +21,22 @@ function GiftDesc({ gift }) {
     </div>
 }
 
-function GiftCard({ gift }) {
+function GiftCard({ gift, isSmall }) {
     const [expand, setExpand] = useState(false);
 
-    return <div style={{ display: "flex", flexDirection: "column", padding: "0.5rem", width: "400px", height: "250px", border: "1px #aaa solid", borderRadius: "1rem", cursor: "pointer" }} onClick={() => setExpand(!expand)}>
+    return <div style={{
+        display: "flex", flexDirection: "column", padding: "0.5rem", width: "min(400px, 95%)", height: isSmall ? "175px" : "250px",
+        border: "1px #aaa solid", borderRadius: "1rem", cursor: "pointer"
+    }} onClick={() => setExpand(!expand)}>
         <div style={{ marginBottom: "0.5rem", fontSize: "1.25rem", fontWeight: "bold", textAlign: "center" }}>{gift.names[0]}</div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <Gift gift={gift} includeTooltip={false} expandOverride={expand} setExpandOverride={() => setExpand(false)} />
+                <Gift gift={gift} includeTooltip={false} expandOverride={expand} setExpandOverride={() => setExpand(false)} scale={isSmall ? .6 : 1} />
             </div>
-            <div style={{ display: "inline-block", fontSize: "1rem", lineHeight: "1.5", inlineSize: "50ch", textWrap: "wrap", whiteSpace: "pre-wrap", textAlign: "start", height: "200px", overflowY: "auto" }}>
+            <div style={{
+                display: "inline-block", fontSize: "1rem", lineHeight: "1.5", inlineSize: "50ch", textWrap: "wrap",
+                whiteSpace: "pre-wrap", textAlign: "start", height: isSmall ? "150px" : "200px", overflowY: "auto"
+            }}>
                 <span>{replaceStatusVariables(gift.descs[0], true)}</span>
             </div>
         </div>
@@ -46,7 +53,7 @@ function checkSearchMatch(searchString, includeDescription, gift) {
     return false;
 }
 
-function GiftList({ searchString, selectedKeywords, selectedTiers, includeDescription, displayType, giftsData }) {
+function GiftList({ searchString, selectedKeywords, selectedTiers, includeDescription, displayType, giftsData, isSmall }) {
     const list = useMemo(() => Object.entries(giftsData).filter(([_id, gift]) => {
         if (searchString !== "" && !checkSearchMatch(searchString, includeDescription, gift)) return false;
         if (selectedKeywords.length !== 0 && !selectedKeywords.includes(gift.keyword)) return false;
@@ -56,16 +63,20 @@ function GiftList({ searchString, selectedKeywords, selectedTiers, includeDescri
 
     const listComponents = list.map(([_, gift]) => {
         switch (displayType) {
-            case "icon": return <Gift gift={gift} includeTooltip={true} />;
-            case "card": return <GiftCard gift={gift} />;
+            case "icon": return <Gift gift={gift} includeTooltip={true} scale={isSmall ? .6 : 1} />;
+            case "card": return <GiftCard gift={gift} isSmall={isSmall} />;
             case "desc": return <GiftDesc gift={gift} />;
             default: return null;
         }
     });
 
-    const columns = displayType === "icon" ? "repeat(auto-fill, minmax(100px, 1fr))" : displayType === "card" ? "repeat(auto-fill, minmax(400px, 1fr))" : "1fr"
+    const columns = displayType === "icon" ?
+        `repeat(auto-fit, minmax(${isSmall ? 60 : 100}px, 1fr))` :
+        displayType === "card" ?
+            `repeat(auto-fit, minmax(${isSmall ? "100%" : "400px"}, 1fr))` :
+            "1fr"
 
-    return <div style={{ display: "grid", gridTemplateColumns: columns, width: "100%", overflowY: "auto", rowGap: "0.5rem" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: columns, width: "100%", rowGap: "0.5rem" }}>
         {listComponents}
     </div>
 }
@@ -75,6 +86,7 @@ function GiftsTab() {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedTiers, setSelectedTiers] = useState([]);
     const [includeDescription, setIncludeDescription] = useState(false);
+    const { isDesktop } = useBreakpoint();
 
     useEffect(() => {
         const saved = localStorage.getItem("includeDescription");
@@ -94,12 +106,12 @@ function GiftsTab() {
         setSearchString(e.target.value);
     }
 
-    return <div style={{ display: "flex", flexDirection: "column", maxHeight: "100%", width: "100%", gap: "1rem", alignItems: "center" }}>
+    return <div style={{ display: "flex", flexDirection: "column", width: "100%", gap: "1rem", alignItems: "center" }}>
         <details open>
             <summary><span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Filters</span></summary>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "0.5rem", alignItems: "center" }}>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Search</span>
-                <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+                <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
                     <input value={searchString} onChange={handleSearchChange} />
                     <label>
                         <input type="checkbox" checked={includeDescription} onChange={e => handleDescriptionToggle(e.target.checked)} />
@@ -117,7 +129,7 @@ function GiftsTab() {
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Tiers</span>
                 <div style={{ display: "flex" }}><GiftTierSelector selectedTiers={selectedTiers} setSelectedTiers={setSelectedTiers} /></div>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Common Search Terms</span>
-                <div style={{ display: "flex", gap: "0.5rem" }}>
+                <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                     {searchTerms.map(term => <span style={{ borderBottom: "1px #888 solid", cursor: "pointer" }} onClick={() => setSearchString(term)}>{term}</span>)}
                 </div>
                 <span style={{ fontWeight: "bold", textAlign: "end" }}>Display Type</span>
@@ -139,7 +151,15 @@ function GiftsTab() {
         </details>
         {giftsLoading ?
             <div style={{ textAlign: "center", fontSize: "1.5rem" }}>Loading Gifts...</div> :
-            <GiftList searchString={searchString} selectedKeywords={selectedKeywords} selectedTiers={selectedTiers} includeDescription={includeDescription} displayType={displayType} giftsData={giftsData} />
+            <GiftList
+                searchString={searchString}
+                selectedKeywords={selectedKeywords}
+                selectedTiers={selectedTiers}
+                includeDescription={includeDescription}
+                displayType={displayType}
+                giftsData={giftsData}
+                isSmall={!isDesktop}
+            />
         }
     </div>;
 }

@@ -1432,6 +1432,7 @@
                 },
                 {
                     "type": "table",
+                    "nowrap": true,
                     "headers": [
                         "",
                         "Base Power",

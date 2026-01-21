@@ -7,23 +7,24 @@ function TextTip({ tip }) {
     return <span style={{ whiteSpace: "pre-line" }}>{tip.text}</span>;
 }
 
-function TableTip({ tip }) {
+function TableTip({ tip, isSmall }) {
     const [giftsData, giftsLoading] = useData("gifts");
+    const wrapping = tip.nowrap ? "pre" : "pre-line";
 
     const getCellComponent = (cell) => {
-        if (typeof cell === "string") return <div style={{ whiteSpace: "pre-line", padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
+        if (typeof cell === "string") return <div style={{ whiteSpace: wrapping, padding: "0.1rem", textAlign: "center" }}>{cell}</div>;
         if (typeof cell === "object" && cell !== null && !Array.isArray(cell)) {
             if ("gifts" in cell && !giftsLoading) {
                 const gifts = Object.values(giftsData).filter(gift => cell.gifts.includes(gift.names[0]))
                 return <div style={{ display: "flex", flexDirection: "row", padding: "0.1rem", justifyContent: "center" }}>
-                    {gifts.map(gift => <Gift gift={gift} />)}
+                    {gifts.map(gift => <Gift gift={gift} scale={isSmall ? .5 : 1} />)}
                 </div>
             }
         }
         return null;
     }
 
-    return <div style={{ display: "flex", justifyContent: "center" }}>
+    return <div style={{ display: "flex", alignSelf: "center", overflowX: "auto", maxWidth: "100%" }}>
         <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
             <thead>
                 <tr>
@@ -41,7 +42,7 @@ function TableTip({ tip }) {
     </div>;
 }
 
-function ShowGiftsTip({ tip }) {
+function ShowGiftsTip({ tip, isSmall }) {
     const [giftsData, giftsLoading] = useData("gifts");
     const floorsPerPack = getFloorsPerPack()
 
@@ -86,34 +87,44 @@ function ShowGiftsTip({ tip }) {
     }, [{ general: [], exclusive: {} }, { general: [], exclusive: {} }])
 
     const giftsStyle = { display: "flex", flexDirection: "row", height: "fit-content", flexWrap: "wrap", padding: "0.5rem" };
-    const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", border: "1px #666 dotted" };
+    const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", border: "1px #666 dotted" };
+    const constructGift = gift => <Gift gift={gift} scale={isSmall ? 0.5 : 1} />
 
     const gridComponents = [];
     // Headers
-    if (tip.keyword) gridComponents.push(<div style={{ ...centerStyle, gap: "0.5rem" }}><KeywordIcon id={tip.keyword} /> {tip.keyword} Gifts</div>);
+    if (tip.keyword)
+        gridComponents.push(isSmall ?
+            <div style={centerStyle}>
+                <KeywordIcon id={tip.keyword} size={24} />
+            </div> :
+            <div style={{ ...centerStyle, gap: "0.2rem" }}>
+                <KeywordIcon id={tip.keyword} size={isSmall ? 24 : 32} /> {tip.keyword} Gifts
+            </div>
+        );
     else gridComponents.push(<div style={centerStyle}>Gifts</div>);
     gridComponents.push(<div style={{ ...centerStyle, color: "#4ade80" }}>Normal</div>);
     gridComponents.push(<div style={{ ...centerStyle, color: "#f87171" }}>Hard</div>);
 
     // General
     if (normal.general.length + hard.general.length > 0) {
-        gridComponents.push(<div style={centerStyle}>General</div>);
-        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{normal.general.map(gift => <Gift gift={gift} />)}</div></div>);
-        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{hard.general.map(gift => <Gift gift={gift} />)}</div></div>);
+        gridComponents.push(<div style={centerStyle}>{isSmall ? "Any" : "General"}</div>);
+        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{normal.general.map(constructGift)}</div></div>);
+        gridComponents.push(<div style={{ border: "1px #666 dotted" }}><div style={giftsStyle}>{hard.general.map(constructGift)}</div></div>);
     }
 
     function constructPackGiftsComponent(packGiftMapping) {
         return <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", alignContent: "flex-start", padding: "0.25rem", border: "1px #666 dotted", gap: "0.5rem" }}>
-            {Object.entries(packGiftMapping).map(([pack, gifts]) => <div style={{ display: "flex", flexDirection: "column", textAlign: "center", border: "1px #777 dotted", borderRadius: "1rem", padding: "0.2rem" }}>
-                <div><ThemePackNameWithTooltip id={pack} /></div>
-                <div style={{ ...giftsStyle, justifyContent: "center" }}>{gifts.map(gift => <Gift gift={gift} />)}</div>
-            </div>)
-            }
+            {Object.entries(packGiftMapping).map(([pack, gifts]) =>
+                <div style={{ display: "flex", flexDirection: "column", textAlign: "center", border: "1px #777 dotted", borderRadius: "1rem", padding: "0.2rem" }}>
+                    <div><ThemePackNameWithTooltip id={pack} /></div>
+                    <div style={{ ...giftsStyle, justifyContent: "center" }}>{gifts.map(constructGift)}</div>
+                </div>
+            )}
         </div>
     }
 
     function insertFloorRow(floor, normal, hard) {
-        gridComponents.push(<div style={centerStyle}>Floor {floor}</div>);
+        gridComponents.push(<div style={centerStyle}>{isSmall ? `F${floor}` : `Floor ${floor}`}</div>);
         if (normal) gridComponents.push(constructPackGiftsComponent(normal));
         else gridComponents.push(<div />);
         if (hard) gridComponents.push(constructPackGiftsComponent(hard));
@@ -136,17 +147,17 @@ function ShowGiftsTip({ tip }) {
     </div>
 }
 
-function ShowGiftListTip({ tip }) {
+function ShowGiftListTip({ tip, isSmall }) {
     const [giftsData, giftsLoading] = useData("gifts");
 
-    const gifts = Object.values(giftsLoading ? {} : giftsData).filter(gift => tip.gifts.includes(gift.name))
+    const gifts = Object.values(giftsLoading ? {} : giftsData).filter(gift => tip.gifts.includes(gift.names[0]));
 
     return <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "fit-content", justifyContent: "center", flexWrap: "wrap" }}>
-        {gifts.map(gift => <Gift gift={gift} />)}
+        {gifts.map(gift => <Gift gift={gift} scale={isSmall ? 0.5 : 1} />)}
     </div>
 }
 
-function ShowThemePacksTip({ tip }) {
+function ShowThemePacksTip({ tip, isSmall }) {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
 
     const themePacks = [];
@@ -155,10 +166,10 @@ function ShowThemePacksTip({ tip }) {
         if (tip.themePacks) themePacks.push(...tip.themePacks.map(id => themePacksData[id]));
     }
 
-    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
-        {themePacks.map(pack => <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-            <ThemePackImg themePack={pack} displayName={true} scale={.5} />
-        </div>)}
+    return <div style={{ overflowX: "auto", alignSelf: "center", maxWidth: "100%" }}>
+        <div style={{ width: "100%", display: "flex", gap: "0.2rem" }}>
+            {themePacks.map(pack => <ThemePackImg themePack={pack} displayName={true} scale={isSmall ? 0.25 : .5} />)}
+        </div>
     </div>
 }
 
@@ -227,24 +238,26 @@ function filterIdentities(tip, identitiesData) {
     })
 }
 
-function ShowIdentities({ tip }) {
+function ShowIdentities({ tip, isSmall }) {
     const [identitiesData, identitiesLoading] = useData("identities");
     const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
 
-    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto", overflowY: "hidden" }}>
-        {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
-            <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={.5} />
-        </div>)}
+    return <div style={{ overflowX: "auto", overflowY: "hidden", alignSelf: "center", maxWidth: "100%" }}>
+        <div style={{ width: "100%", display: "flex" }}>
+            {identities.map(identity => <div style={{ border: "1px #666 dotted" }}>
+                <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={isSmall ? 0.33 : .5} />
+            </div>)}
+        </div>
     </div>
 }
 
-function ShowIdentitiesBySinner({ tip }) {
+function ShowIdentitiesBySinner({ tip, isSmall }) {
     const [identitiesData, identitiesLoading] = useData("identities");
     const identities = identitiesLoading ? [] : filterIdentities(tip, identitiesData);
 
     const start = {};
     if (tip.showAllSinners) {
-        for (let i=1; i<=12; i++) start[i] = [];
+        for (let i = 1; i <= 12; i++) start[i] = [];
     }
 
     const idsBySinner = identities.reduce((acc, identity) => {
@@ -254,26 +267,26 @@ function ShowIdentitiesBySinner({ tip }) {
     }, start);
 
     const components = Object.entries(idsBySinner).sort((a, b) => a[0] - b[0]).map(([sinnerId, list]) =>
-        <div key={sinnerId} style={{ display: "flex", flexDirection: "row", alignItems: "center", width: "480px", border: "1px #777 dotted" }}>
+        <div key={sinnerId} style={{ display: "flex", alignItems: "center", width: isSmall ? "100%" : "480px", border: "1px #777 dotted" }}>
             <SinnerIcon num={sinnerId} style={{ width: "64px" }} />
-            <div style={{ display: "flex", flexDirection: "row", overflowX: "auto", overflowY: "hidden", height: "138px" }}>
-                {list.reverse().map(identity => <div key={identity.id} style={{ width: "128px", height: "128px" }}>
-                    <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={.5} />
+            <div style={{ display: "flex", overflowX: "auto", overflowY: "hidden" }}>
+                {list.reverse().map(identity => <div key={identity.id}>
+                    <IdentityImg identity={identity} uptie={4} displayName={true} displayRarity={true} scale={isSmall ? 0.33 : .5} />
                 </div>)}
             </div>
         </div>
     );
 
-    return <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, 480px)", justifyContent: "center", width: "100%" }}>
+    return <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, ${isSmall ? "100%" : "480px"})`, justifyContent: "center", width: "100%" }}>
         {components}
     </div>
 }
 
-function RefreshCostSummary() {
+function RefreshCostSummary({ isSmall }) {
     const arr = Array.from({ length: 10 }, (_, i) => i + 1);
     const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     let sum = 0;
-    return <div style={{ display: "flex", justifyContent: "center" }}>
+    return <div style={{ display: "flex", alignSelf: "center", overflowX: "auto", maxWidth: "100%" }}>
         <table style={{ width: "fit-content", borderCollapse: "collapse" }}>
             <thead>
                 <tr>
@@ -294,7 +307,7 @@ function RefreshCostSummary() {
                     <td style={style}>15(n(n+1)/2)</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><Gift id={9188} /></div></th>
+                    <th style={style}><div style={{ display: "flex", justifyContent: "center" }}><Gift id={9188} scale={isSmall ? .6 : 1} /></div></th>
                     {arr.map(number => {
                         sum += Math.floor(10.5 * number);
                         return <td style={style}>{Math.floor(10.5 * number)}<br /><br />{sum}</td>
@@ -306,7 +319,7 @@ function RefreshCostSummary() {
     </div>
 }
 
-function EnhanceCostSummary() {
+function EnhanceCostSummary({ isSmall }) {
     const giftTierStyle = { fontFamily: "'Archivo Narrow', sans-serif", fontWeight: "bold", fontSize: "24px", color: "#ffd84d" }
     const style = { textAlign: "center", padding: "0.5rem", border: "1px #666 dotted" }
     return <div style={{ display: "flex", justifyContent: "center" }}>
@@ -329,7 +342,12 @@ function EnhanceCostSummary() {
                     <td style={style}>100</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Gift id={9189} /><span style={giftTierStyle}>+</span></div></th>
+                    <th style={style}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                            <Gift id={9189} scale={isSmall ? .6 : 1} />
+                            <span style={giftTierStyle}>+</span>
+                        </div>
+                    </th>
                     <td style={style}>35</td>
                     <td style={style}>42</td>
                     <td style={style}>53</td>
@@ -343,7 +361,12 @@ function EnhanceCostSummary() {
                     <td style={style}>200</td>
                 </tr>
                 <tr>
-                    <th style={style}><div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Gift id={9189} /><span style={giftTierStyle}>++</span></div></th>
+                    <th style={style}>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                            <Gift id={9189} scale={isSmall ? .6 : 1} />
+                            <span style={giftTierStyle}>++</span>
+                        </div>
+                    </th>
                     <td style={style}>70</td>
                     <td style={style}>84</td>
                     <td style={style}>105</td>
@@ -354,11 +377,13 @@ function EnhanceCostSummary() {
     </div>
 }
 
-function ShowEGOsTip({ tip }) {
-    return <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "center", overflowX: "auto" }}>
-        {tip.EGOs.map(EGOId => <div style={{ border: "1px #666 dotted" }}>
-            <EgoImg id={EGOId} scale={0.5} displayName={true} type={"awaken"} />
-        </div>)}
+function ShowEGOsTip({ tip, isSmall }) {
+    return <div style={{ overflowX: "auto", overflowY: "hidden", alignSelf: "center", maxWidth: "100%" }}>
+        <div style={{ width: "100%", display: "flex" }}>
+            {tip.EGOs.map(EGOId => <div style={{ border: "1px #666 dotted" }}>
+                <EgoImg id={EGOId} scale={isSmall ? .33 : 0.5} displayName={true} type={"awaken"} />
+            </div>)}
+        </div>
     </div>
 }
 
@@ -368,23 +393,23 @@ function ShowSampleTip({ tip }) {
     </div >
 }
 
-function AchievementTips({ achievement }) {
+function AchievementTips({ achievement, isSmall }) {
     if (!("tips" in achievement)) return <div>Coming soon...</div>;
 
     const components = [];
     achievement.tips.forEach(tip => {
         switch (tip.type) {
             case "text": components.push(<TextTip tip={tip} />); break;
-            case "table": components.push(<TableTip tip={tip} />); break;
-            case "showGifts": components.push(<ShowGiftsTip tip={tip} />); break;
-            case "showGiftList": components.push(<ShowGiftListTip tip={tip} />); break;
-            case "showThemePacks": components.push(<ShowThemePacksTip tip={tip} />); break;
+            case "table": components.push(<TableTip tip={tip} isSmall={isSmall} />); break;
+            case "showGifts": components.push(<ShowGiftsTip tip={tip} isSmall={isSmall} />); break;
+            case "showGiftList": components.push(<ShowGiftListTip tip={tip} isSmall={isSmall} />); break;
+            case "showThemePacks": components.push(<ShowThemePacksTip tip={tip} isSmall={isSmall} />); break;
             case "showThemePacksByFloor": components.push(<ShowThemePacksByFloorTip tip={tip} />); break;
-            case "showIds": components.push(<ShowIdentities tip={tip} />); break;
-            case "showIdsbySinner": components.push(<ShowIdentitiesBySinner tip={tip} />); break;
-            case "refreshCostSummary": components.push(<RefreshCostSummary />); break;
-            case "enhanceCostSummary": components.push(<EnhanceCostSummary />); break;
-            case "showEGOs": components.push(<ShowEGOsTip tip={tip} />); break;
+            case "showIds": components.push(<ShowIdentities tip={tip} isSmall={isSmall} />); break;
+            case "showIdsbySinner": components.push(<ShowIdentitiesBySinner tip={tip} isSmall={isSmall} />); break;
+            case "refreshCostSummary": components.push(<RefreshCostSummary isSmall={isSmall} />); break;
+            case "enhanceCostSummary": components.push(<EnhanceCostSummary isSmall={isSmall} />); break;
+            case "showEGOs": components.push(<ShowEGOsTip tip={tip} isSmall={isSmall} />); break;
             case "showSample": components.push(<ShowSampleTip tip={tip} />); break;
             default: break;
         }

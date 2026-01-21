@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
 import { KeywordIcon, FusionRecipe, useData } from "@eldritchtools/limbus-shared-library";
 import { KeywordSelector } from "./Selectors";
+import { useBreakpoint } from "@eldritchtools/shared-components";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -85,17 +86,20 @@ function filterFusionRecipes(gifts, fusionsList, searchString, includeDescriptio
     return list;
 }
 
-function FusionRow({ recipe, giftsData }) {
+function FusionRow({ recipe, giftsData, isSmall }) {
     const tdStyle = { borderTop: "1px grey dotted", borderBottom: "1px grey dotted", padding: "5px" };
 
     return <tr>
-        <td style={tdStyle}><FusionRecipe recipe={recipe} /></td>
+        <td style={tdStyle}><FusionRecipe recipe={recipe} scale={isSmall ? .6 : 1} /></td>
         <td style={tdStyle}>
-            {giftsData[recipe.id].hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
+            {giftsData[recipe.id].hardonly ? 
+                <div style={{ color: "#f87171" }}>Hard only</div> : 
+                <div style={{ minWidth: "3.5rem", color: "#4ade80" }}>Normal or Hard</div>
+            }
         </td>
         <td style={tdStyle}>
             {giftsData[recipe.id].exclusiveTo ?
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", whiteSpace: "pre" }}>
                     <span>Requires:</span>
                     {giftsData[recipe.id].exclusiveTo.map((source, i) => <ThemePackNameWithTooltip key={i} id={source} />)}
                 </div> :
@@ -104,7 +108,7 @@ function FusionRow({ recipe, giftsData }) {
     </tr>
 }
 
-function FusionsDisplay({ searchString, includeDescription, includeIngredients, selectedKeywords, selectedThemePacks, giftsData }) {
+function FusionsDisplay({ searchString, includeDescription, includeIngredients, selectedKeywords, selectedThemePacks, giftsData, isSmall }) {
     const fusionRecipesList = useMemo(() => getFusionRecipes(giftsData), [giftsData]);
 
     if (searchString === "" && selectedKeywords.length === 0 && selectedThemePacks.length === 0) {
@@ -122,7 +126,7 @@ function FusionsDisplay({ searchString, includeDescription, includeIngredients, 
                 components.push(<tr key={keyword}><td style={tdstyle} colSpan={3}><div style={style}>Keywordless</div></td></tr>);
             else
                 components.push(<tr key={keyword}><td style={tdstyle} colSpan={3}><div style={style}><KeywordIcon id={keyword} scale={1.5} />{keyword}</div></td></tr>);
-            fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow key={components.length} recipe={recipe} giftsData={giftsData} />));
+            fusionsByKeyword[keyword].forEach(recipe => components.push(<FusionRow key={components.length} recipe={recipe} giftsData={giftsData} isSmall={isSmall} />));
         });
 
         return <table style={{ borderCollapse: "collapse", width: "100%" }}><tbody>{components}</tbody></table>
@@ -136,6 +140,7 @@ function FusionsTab() {
     const [searchString, setSearchString] = useState("");
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedThemePacks, setSelectedThemePacks] = useState([]);
+    const { isDesktop } = useBreakpoint();
 
     const [giftsData, giftsLoading] = useData("gifts");
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
@@ -190,17 +195,18 @@ function FusionsTab() {
                 selectedKeywords={selectedKeywords}
                 selectedThemePacks={selectedThemePacks}
                 giftsData={giftsData}
+                isSmall={!isDesktop}
             /> : null,
-        [searchString, includeDescription, includeIngredients, selectedKeywords, selectedThemePacks, giftsData, giftsLoading]
+        [searchString, includeDescription, includeIngredients, selectedKeywords, selectedThemePacks, giftsData, giftsLoading, isDesktop]
     );
 
-    return <div style={{ display: "flex", flexDirection: "column", maxHeight: "100%", minWidth: "80%", gap: "1rem", justifyContent: "center" }}>
+    return <div style={{ display: "flex", flexDirection: "column", width: "100%", gap: "1rem", justifyContent: "center" }}>
         <details open>
             <summary><span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Filters</span></summary>
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "0.5rem", alignItems: "center" }}>
                     <span style={{ fontWeight: "bold", textAlign: "end" }}>Search</span>
-                    <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+                    <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
                         <input value={searchString} onChange={handleSearchChange} />
                         <label>
                             <input type="checkbox" checked={includeDescription} onChange={e => handleDescriptionToggle(e.target.checked)} />
@@ -226,7 +232,7 @@ function FusionsTab() {
                     <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Keywords</span>
                     <KeywordSelector selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords} />
                 </div>
-                <div style={{ width: "80%" }}>
+                <div style={{ width: "100%", maxWidth: "1800px" }}>
                     <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Theme Packs <button onClick={clearSources}>Clear All</button></div>
                     <table style={{ borderCollapse: "collapse" }}>
                         <tbody>

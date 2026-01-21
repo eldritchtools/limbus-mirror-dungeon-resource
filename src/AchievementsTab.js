@@ -2,10 +2,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./AchievementsTab.css"
 import { useState } from 'react';
 import AchievementTips from './AchievementsTips';
-import { useProfiles } from '@eldritchtools/shared-components';
+import { useBreakpoint, useProfiles } from '@eldritchtools/shared-components';
 import data from './data';
 
-function Achievement({ achievement, tracking, setAchievementTracking }) {
+function Achievement({ achievement, tracking, setAchievementTracking, isSmall }) {
     let subAchievements = null;
     let achievementText = achievement.text;
 
@@ -17,7 +17,7 @@ function Achievement({ achievement, tracking, setAchievementTracking }) {
             let text = achievement.text;
             Object.entries(achievement.replace).forEach(([key, values]) => text = text.replace(`[${key}]`, values[i]));
             subAchievements.push(<div className="subitem">
-                <div style={{ display: "flex", gap: "0.2rem", width: "85%", alignItems: "center" }}>
+                <div style={{ display: "flex", gap: "0.2rem", alignItems: "center" }}>
                     <label className="checkbox-container">
                         <input type="checkbox" onChange={() => {
                             if (tracking[achievement.index] > i) setAchievementTracking(i);
@@ -28,7 +28,10 @@ function Achievement({ achievement, tracking, setAchievementTracking }) {
                     <span className="points">+{achievement.points[i]}</span>
                     <span className="item-label">{text}</span>
                 </div>
-                {achievement.hardonly[i] ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
+                {achievement.hardonly[i] ? 
+                    <span style={{ minWidth: "4rem", textAlign: "center", color: "#f87171" }}>Hard only</span> : 
+                    <span style={{ minWidth: "4rem", textAlign: "center", color: "#4ade80" }}>Normal or Hard</span>
+                }
             </div>);
         }
     }
@@ -39,7 +42,7 @@ function Achievement({ achievement, tracking, setAchievementTracking }) {
 
     return <details className="details">
         <summary className="summary">
-            <div style={{ display: "flex", gap: "0.2rem", width: "85%", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "0.1rem", width: "85%", alignItems: "center" }}>
                 <label className="checkbox-container">
                     <input type="checkbox" onChange={() => {
                         if (tracking[achievement.index] > len - 1) setAchievementTracking(0);
@@ -51,18 +54,40 @@ function Achievement({ achievement, tracking, setAchievementTracking }) {
                 <span className="item-label">{achievementText}</span>
             </div>
             <div style={{ display: "flex", gap: "0.5rem", width: "15%", justifyContent: "end", alignItems: "center" }}>
-                {hardonly ? <span style={{ color: "#f87171" }}>Hard only</span> : <span style={{ color: "#4ade80" }}>Normal or Hard</span>}
+                {hardonly ?
+                    <span style={{ minWidth: "4rem", color: "#f87171" }}>Hard only</span> :
+                    <span style={{ minWidth: "4rem", color: "#4ade80" }}>Normal or Hard</span>
+                }
                 <span className="arrow">▼</span>
             </div>
         </summary>
         <div style={{ padding: "0.5rem 1.5rem 0.1rem 1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
             {subAchievements ? <div>{subAchievements}</div> : null}
-            <div style={{ width: "100%", textAlign: "start" }}> <AchievementTips achievement={achievement} /> </div>
+            <div style={{ width: "100%", textAlign: "start" }}> <AchievementTips achievement={achievement} isSmall={isSmall} /> </div>
         </div>
     </details>
 }
 
-function AchievementTab({ achievements, sortClearedToBottom, category, tracking, setAchievementTracking }) {
+function AchievementTab({ achievements, sortClearedToBottom, category, tracking, setAchievementTracking, isSmall }) {
+    const { isDesktop } = useBreakpoint();
+
+    const style = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: isDesktop ? "90%" : "100%",
+        paddingBottom: "2.5rem"
+    };
+
+    const constructAchievement = achievement =>
+        <Achievement
+            key={achievement.index}
+            achievement={achievement}
+            tracking={tracking}
+            setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)}
+            isSmall={isSmall}
+        />
+
     if (sortClearedToBottom) {
         const [ticked, unticked] = achievements.reduce((acc, achievement) => {
             if (tracking[achievement.index] === (Array.isArray(achievement.points) ? achievement.points.length : 1)) acc[0].push(achievement);
@@ -70,16 +95,16 @@ function AchievementTab({ achievements, sortClearedToBottom, category, tracking,
             return acc;
         }, [[], []])
 
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem" }}>
+        return <div style={style}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
-                {unticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
-                {ticked.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {unticked.map(constructAchievement)}
+                {ticked.map(constructAchievement)}
             </div>
         </div>
     } else {
-        return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "75vw", paddingBottom: "2.5rem" }}>
+        return <div style={style}>
             <div style={{ display: "flex", flexDirection: "column", width: "100%", flexShrink: 0 }}>
-                {achievements.map(achievement => <Achievement key={achievement.index} achievement={achievement} tracking={tracking} setAchievementTracking={(value) => setAchievementTracking(category, achievement, value)} />)}
+                {achievements.map(constructAchievement)}
             </div>
         </div>
     }
@@ -132,7 +157,7 @@ function RewardsTab({ totalPoints, columns = 2 }) {
     }
 
     return <div style={{ display: "flex", flexDirection: "column", gap: "0.5em" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.1rem" }}>
             <div>
                 <div style={{ fontWeight: "bold" }}>Rewards Obtained:</div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
@@ -156,6 +181,7 @@ function RewardsTab({ totalPoints, columns = 2 }) {
 function AchievementsTab() {
     const [sortClearedToBottom, setSortClearedToBottom] = useState(false);
     const { profileData, setProfileData } = useProfiles();
+    const { isDesktop } = useBreakpoint();
 
     const setAchievementTracking = (category, achievement, value) => {
         let tracking = profileData.tracking;
@@ -180,8 +206,8 @@ function AchievementsTab() {
                 else return x;
             })
         }
-        
-        setProfileData({...profileData, tracking: tracking, totalPoints: totalPoints});
+
+        setProfileData({ ...profileData, tracking: tracking, totalPoints: totalPoints });
     }
 
     const toggleSortClearedToBottom = () => {
@@ -202,14 +228,23 @@ function AchievementsTab() {
             <button className={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
-            <TabList className="tab-list">
-                {Object.entries(data.achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
-                <Tab className="tab">Rewards</Tab>
-            </TabList>
+            <div style={{ overflowX: "auto", justifySelf: "center", maxWidth: "90vw" }}>
+                <TabList className="tab-list">
+                    {Object.entries(data.achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
+                    <Tab className="tab">Rewards</Tab>
+                </TabList>
+            </div>
 
             {Object.entries(data.achievements).map(([category, list]) =>
                 <TabPanel className="tab-panel">
-                    <AchievementTab achievements={list} sortClearedToBottom={sortClearedToBottom} category={category} tracking={profileData.tracking[category]} setAchievementTracking={setAchievementTracking} />
+                    <AchievementTab
+                        achievements={list}
+                        sortClearedToBottom={sortClearedToBottom}
+                        category={category}
+                        tracking={profileData.tracking[category]}
+                        setAchievementTracking={setAchievementTracking}
+                        isSmall={!isDesktop}
+                    />
                 </TabPanel>)}
             <TabPanel className="tab-panel">
                 <RewardsTab totalPoints={profileData.totalPoints} />
