@@ -217,6 +217,7 @@ function AchievementsTab() {
     const tooltipText = "You can get additional projection/achievement points from completing MD runs so this will not reflect your actual achievement level.";
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
+        <div>Achievements will be reset once the new achievements are released.</div>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
             <div data-tooltip-id={"genericTooltip"} data-tooltip-content={tooltipText} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
                 <div>Level: {Math.floor(profileData.totalPoints / 100)}</div>
