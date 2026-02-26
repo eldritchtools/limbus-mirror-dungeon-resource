@@ -60,7 +60,7 @@ function App() {
                 <div className="App">
                     <HashRouter>
                         <Layout
-                            title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"}
+                            title={"Mirror Dungeon Resource & Achievements Tracker"}
                             lastUpdated={lastUpdated}
                             linkSet={"limbus"}
                             description={description}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Gift, replaceStatusVariables, useData } from "@eldritchtools/limbus-shared-library";
+import { Gift, ReplacedStatusesText, useData } from "@eldritchtools/limbus-shared-library";
 import { KeywordSelector, GiftTierSelector } from "./Selectors";
 import { useBreakpoint } from "@eldritchtools/shared-components";
 
@@ -15,7 +15,7 @@ function GiftDesc({ gift }) {
                 <Gift gift={gift} includeTooltip={false} expandOverride={expand} setExpandOverride={() => setExpand(false)} />
             </div>
             <div style={{ display: "inline-block", fontSize: "1rem", lineHeight: "1.5", textWrap: "wrap", whiteSpace: "pre-wrap", textAlign: "start" }}>
-                <span>{replaceStatusVariables(gift.descs[0], true)}</span>
+                <ReplacedStatusesText templateText={gift.descs[0]} />
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@ function GiftCard({ gift, isSmall }) {
                 display: "inline-block", fontSize: "1rem", lineHeight: "1.5", inlineSize: "50ch", textWrap: "wrap",
                 whiteSpace: "pre-wrap", textAlign: "start", height: isSmall ? "150px" : "200px", overflowY: "auto"
             }}>
-                <span>{replaceStatusVariables(gift.descs[0], true)}</span>
+                <ReplacedStatusesText templateText={gift.descs[0]} />
             </div>
         </div>
     </div>
@@ -71,9 +71,9 @@ function GiftList({ searchString, selectedKeywords, selectedTiers, includeDescri
     });
 
     const columns = displayType === "icon" ?
-        `repeat(auto-fit, minmax(${isSmall ? 60 : 100}px, 1fr))` :
+        `repeat(auto-fill, minmax(${isSmall ? 60 : 100}px, 1fr))` :
         displayType === "card" ?
-            `repeat(auto-fit, minmax(${isSmall ? "100%" : "400px"}, 1fr))` :
+            `repeat(auto-fill, minmax(${isSmall ? "100%" : "400px"}, 1fr))` :
             "1fr"
 
     return <div style={{ display: "grid", gridTemplateColumns: columns, width: "100%", rowGap: "0.5rem" }}>

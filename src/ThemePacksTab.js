@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getFloorsPerPack, Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
+import { useFloorsPerPack, Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { useBreakpoint } from "@eldritchtools/shared-components";
 
 const formatExclusiveGifts = (exclusiveGifts, isSmall) => {
@@ -43,7 +43,7 @@ function ThemePacksTab() {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
     const { isDesktop } = useBreakpoint();
 
-    const floorsPerPack = getFloorsPerPack();
+    const floorsPerPack = useFloorsPerPack();
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const handleCategoryToggle = (category, selected) => {

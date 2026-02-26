@@ -28,25 +28,11 @@ function organizeThemePacks(giftsData, themePacksData) {
         if (!("exclusive_gifts" in themePack) || !fusionThemePacks.has(id))
             return acc;
 
-        switch (id[0]) {
-            case "C":
-                acc["Canto"].push(id);
-                break;
-            case "I":
-                acc["Intervallo"].push(id);
-                break;
-            case "R":
-                acc["Railway"].push(id);
-                break;
-            case "W":
-                acc["Walpurgisnacht"].push(id);
-                break;
-            default:
-                break;
-        }
+        if (themePack.category[0] in acc) acc[themePack.category[0]].push(id);
+        else acc[themePack.category[0]] = [id];
 
         return acc;
-    }, { "Canto": [], "Intervallo": [], "Railway": [], "Walpurgisnacht": [] });
+    }, {});
 
     const result = Object.entries(typeMap).reduce((acc, [k, v]) => {
         if (v.length > 0) acc[k] = v;
@@ -92,8 +78,8 @@ function FusionRow({ recipe, giftsData, isSmall }) {
     return <tr>
         <td style={tdStyle}><FusionRecipe recipe={recipe} scale={isSmall ? .6 : 1} /></td>
         <td style={tdStyle}>
-            {giftsData[recipe.id].hardonly ? 
-                <div style={{ color: "#f87171" }}>Hard only</div> : 
+            {giftsData[recipe.id].hardonly ?
+                <div style={{ color: "#f87171" }}>Hard only</div> :
                 <div style={{ minWidth: "3.5rem", color: "#4ade80" }}>Normal or Hard</div>
             }
         </td>
