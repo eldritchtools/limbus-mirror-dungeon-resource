@@ -31,7 +31,7 @@ const paths = [
     { path: "/gifts", title: "Gifts" },
     { path: "/fusions", title: "Fusion Recipes" },
     { path: "/universal", title: "Universal Gifts/Gift Combos" },
-    { path: "/themepacks", title: "Notable Theme Packs" },
+    { path: "/themepacks", title: "Theme Packs" },
     { path: "/floorplanner", title: "Floor Planner" },
 ]
 

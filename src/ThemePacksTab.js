@@ -61,12 +61,15 @@ function ThemePacksTab() {
 
     Object.entries(themePacksLoading ? {} : themePacksData).forEach(([id, themePack]) => {
         if (selectedCategories.length !== 0 && !selectedCategories.some(selectedCategory => themePack.category.includes(selectedCategory))) return;
+        if(["Attack Type", "Affinity", "Keyword"].includes(themePack.category[0])) return;
 
         components.push(<ThemePack key={id} themePack={themePack} normal={floorsPerPack.normal[id]} hard={floorsPerPack.hard[id]} isSmall={!isDesktop} />);
     })
 
     const categories = {};
     Object.values(themePacksLoading ? {} : themePacksData).forEach(themePack => {
+        if(["Attack Type", "Affinity", "Keyword"].includes(themePack.category[0])) return;
+
         if (!(themePack.category[0] in categories))
             categories[themePack.category[0]] = []
         if (themePack.category.length === 2 && !categories[themePack.category[0]].includes(themePack.category[1]))
