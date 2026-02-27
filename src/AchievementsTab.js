@@ -224,7 +224,7 @@ function AchievementsTab() {
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
         <div>Achievements will be reset once the new achievements are released.</div>
-        <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", justifyContent: "center" }}>
             <div data-tooltip-id={"genericTooltip"} data-tooltip-content={tooltipText} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
                 <div>Level: {Math.floor(xp / 100)}</div>
                 <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
@@ -246,7 +246,7 @@ function AchievementsTab() {
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
             <div style={{ overflowX: "auto", justifySelf: "center", maxWidth: "90vw" }}>
                 <TabList className="tab-list">
-                    {Object.entries(data.achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
+                    {Object.entries(data.achievements).map(([category, _list]) => <Tab key={category} className="tab">{category}</Tab>)}
                     <Tab className="tab">Rewards</Tab>
                 </TabList>
             </div>

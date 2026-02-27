@@ -1,7 +1,7 @@
 function handleSetNumberInput(val, setValue, force, min, max) {
     const parsed = parseInt(val, 10);
-    if(force) {
-        if(isNaN(parsed)) setValue(min);
+    if (force) {
+        if (isNaN(parsed)) setValue(min);
         else {
             let v = parsed;
             if (min) v = Math.max(min, v);

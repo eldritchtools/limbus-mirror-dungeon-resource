@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useFloorsPerPack, Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { useBreakpoint } from "@eldritchtools/shared-components";
+import Select from "react-select";
+import { selectStyle } from "./styles";
 
 const formatExclusiveGifts = (exclusiveGifts, isSmall) => {
     return <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
@@ -39,6 +41,48 @@ function ThemePack({ themePack, normal, hard, isSmall }) {
     </div>
 }
 
+function CategorySelector({ selected, setSelected, categories }) {
+    const [options, toOption] = useMemo(() => {
+        const list = [];
+        const reverse = {};
+
+        Object.entries(categories).forEach(([category, innerCategories]) => {
+            const obj = { value: category, label: category, name: category };
+            list.push(obj);
+            reverse[category] = obj;
+
+            innerCategories.forEach(innerCategory => {
+                const name = `${category}: ${innerCategory}`;
+                const innerObj = { value: innerCategory, label: name, name: name };
+                list.push(innerObj);
+                reverse[innerCategory] = innerObj;
+            })
+        })
+
+        return [list, reverse];
+    }, [categories]);
+
+    function normalizeString(str) {
+        return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+    }
+
+    function checkSearch(name, str) {
+        const normStr = normalizeString(str);
+        return normalizeString(name).includes(normStr);
+    }
+
+    return <Select
+        isMulti={true}
+        isClearable={true}
+        options={options}
+        value={selected.map(id => toOption[id])}
+        onChange={v => setSelected(v.map(x => x.value))}
+        placeholder={"Select categories..."}
+        filterOption={(candidate, input) => checkSearch(candidate.data.name, input)}
+        styles={selectStyle}
+    />;
+}
+
 function ThemePacksTab() {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
     const { isDesktop } = useBreakpoint();
@@ -46,16 +90,6 @@ function ThemePacksTab() {
     const floorsPerPack = useFloorsPerPack();
 
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const handleCategoryToggle = (category, selected) => {
-        if (selected)
-            setSelectedCategories(selectedCategories.filter(x => x !== category));
-        else
-            setSelectedCategories([...selectedCategories, category]);
-    }
-
-    const clearCategories = () => {
-        setSelectedCategories([]);
-    }
 
     const components = [];
 
@@ -74,41 +108,13 @@ function ThemePacksTab() {
     });
 
     return <div style={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", gap: "1rem", justifyContent: "start" }}>
-        <div style={{ width: "100%" }}>
-            <details open>
-                <summary><span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Filters</span></summary>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                    <table style={{ borderCollapse: "collapse" }}>
-                        <tbody>
-                            {
-                                Object.entries(categories).map(([category, innerCategories], i) => {
-                                    const selected = selectedCategories.includes(category);
-                                    return <tr key={i}>
-                                        <td style={{ border: "1px grey dotted", padding: "2px" }}>
-                                            <label style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                                {<input type="checkbox" onChange={() => handleCategoryToggle(category, selected)} checked={selected} />}
-                                                {category}
-                                            </label>
-                                        </td>
-                                        <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
-                                            <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
-                                                {innerCategories.map((innerCategory, i) => {
-                                                    const innerSelected = selectedCategories.includes(innerCategory);
-                                                    return <label key={i} style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                                        {<input type="checkbox" onChange={() => handleCategoryToggle(innerCategory, innerSelected)} checked={innerSelected} />}
-                                                        {innerCategory}
-                                                    </label>
-                                                })}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                })
-                            }
-                        </tbody>
-                    </table>
-                    <button onClick={clearCategories}>Clear Categories</button>
-                </div>
-            </details>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", textAlign: "start" }}>
+            <span>Filter Categories:</span>
+            <CategorySelector
+                selected={selectedCategories}
+                setSelected={setSelectedCategories}
+                categories={categories}
+            />
         </div>
         <div style={{ width: "100%" }}>
             <div style={{

@@ -4,25 +4,25 @@
             {"title": "General", "gifts": [9703, 9011, 9420, 9146, 9035]},
             {"title": "Slash", "gifts": [9142, 9196, 9195, 9140, 9193]},
             {"title": "Pierce", "gifts": [9147, 9200, 9145, 9197, 9199]},
-            {"title": "Blunt", "gifts": [9152, 9204, 9150, 9201, 9786]}
+            {"title": "Blunt", "gifts": [9152, 9204, 9220, 9150, 9210]}
         ]},
         {"title": "Damage", "sections": [
-            {"title": "General", "gifts": [9083, 9705, 9065, 9067, 9022, 9015, 9007, 9085, 9025, 9036]},
+            {"title": "General", "gifts": [9083, 9705, 9065, 9067, 9022, 9219, 9007, 9085, 9025, 9228]},
             {"title": "Type Specific", "gifts": [9141, 9768, 9151, 9138, 9143]}
         ]},
         {"title": "E.G.O Resources", "gifts": [9068, 9021, 9006, 9002, 9037, 9153, 9058, 9712, 9439]},
-        {"title": "HP", "gifts": [9754, 9756, 9813, 9004, 9076, 9028, 9039, 9733, 9794, 9077]},
+        {"title": "HP", "gifts": [9754, 9756, 9813, 9004, 9209, 9232, 9076, 9028, 9039, 9733, 9794, 9077]},
         {"title": "SP", "gifts": [9081, 9748, 9749, 9810]},
         {"title": "Cost", "gifts": [9079, 9080, 9078, 9191, 9189, 9190, 9188, 9185, 9186]},
-        {"title": "Others", "gifts": [9082, 9014, 9084, 9433, 9040, 9764, 9762, 9763]}
+        {"title": "Others", "gifts": [9082, 9014, 9084, 9230, 9433, 9040, 9764, 9762, 9763]}
     ],
     "combo": [
         {"title": "Burn", "sections": [
-            {"title": "Enablers", "gifts": [[9053, "Wave Start\nSloth Res"], [9776, "Turn Start"], [9001, "Apply Burn\nWrath Res"], [9003, "Combat Start"], [9009, "Lust Hit"], [9034, "Envy Hit"]]},
+            {"title": "Enablers", "gifts": [[9053, "Wave Start\nSloth Res"], [9776, "Turn Start"], [9001, "Apply Burn\nWrath Res"], [9003, "Combat Start"], [9009, "Lust Hit"], [9221, "Envy or Counter Hit"], [9034, "Envy Hit"]]},
             {"title": "Exploiters", "gifts": [[9071, "Offense Level Down"], [9104, "+Damage"], [9045, "Defense Level Down"]]}
         ]},
         {"title": "Bleed", "sections": [
-            {"title": "Enablers", "gifts": [[9050, "Wave Start"], [9089, "Deal Dmg"], [9704, "First Skill"], [9008, "Single-coin Skill"], [9440, "Backup Enemies"], [9020, "Stagger"]]},
+            {"title": "Enablers", "gifts": [[9050, "Wave Start"], [9089, "Deal Dmg"], [9704, "First Skill"], [9221, "Envy or Counter Hit"], [9008, "Single-coin Skill"], [9440, "Backup Enemies"], [9020, "Stagger"]]},
             {"title": "Exploiters", "gifts": [[9050, "Lose Offense and Defense Level"], [9106, "Haste\nDamage\nOffense Level"], [9029, "+Dmg Dealt\n-Dmg Taken"], [9042, "-Speed"]]}
         ]},
         {"title": "Tremor", "sections": [

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import ThemePackNameWithTooltip from "./ThemePackNameWithTooltip";
-import { KeywordIcon, FusionRecipe, useData } from "@eldritchtools/limbus-shared-library";
+import { KeywordIcon, FusionRecipe, useData, ThemePackImg } from "@eldritchtools/limbus-shared-library";
 import { KeywordSelector } from "./Selectors";
 import { useBreakpoint } from "@eldritchtools/shared-components";
+import Select from "react-select";
+import { selectStyle } from "./styles";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -122,6 +124,52 @@ function FusionsDisplay({ searchString, includeDescription, includeIngredients, 
     }
 }
 
+function ThemePackSelector({ selected, setSelected, options, themePacksData }) {
+    const optionsFinal = useMemo(() => {
+        const list = [];
+        Object.entries(options).forEach(([category, themePacks]) =>
+            themePacks.forEach(id => {
+                list.push({
+                    value: id,
+                    label: <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        <ThemePackImg id={id} scale={.1} />
+                        <span>{category}: {themePacksData[id].name}</span>
+                    </div>,
+                    name: `${category}: ${themePacksData[id].name}`
+                })
+            })
+        );
+        return list;
+    }, [options, themePacksData]);
+
+    const toOption = id => ({
+        value: id,
+        label: <div style={{ display: "flex", alignItems: "center" }}>
+            <span>{themePacksData[id].category[0]}: {themePacksData[id].name}</span>
+        </div>
+    })
+        
+    function normalizeString(str) {
+        return str.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
+    }
+
+    function checkSearch(name, str) {
+        const normStr = normalizeString(str);
+        return normalizeString(name).includes(normStr);
+    }
+
+    return <Select
+        isMulti={true}
+        isClearable={true}
+        options={optionsFinal}
+        value={selected.map(id => toOption(id))}
+        onChange={v => setSelected(v.map(x => x.value))}
+        placeholder={"Select theme packs..."}
+        filterOption={(candidate, input) => checkSearch(candidate.data.name, input)}
+        styles={selectStyle}
+    />;
+}
+
 function FusionsTab() {
     const [searchString, setSearchString] = useState("");
     const [selectedKeywords, setSelectedKeywords] = useState([]);
@@ -155,21 +203,12 @@ function FusionsTab() {
         setIncludeIngredients(checked);
     }
 
-    const themePackList = useMemo(() => (giftsLoading || themePacksLoading) ? {} : organizeThemePacks(giftsData, themePacksData), [giftsData, giftsLoading, themePacksData, themePacksLoading]);
+    const themePackList = useMemo(() => (giftsLoading || themePacksLoading) ? {} :
+        organizeThemePacks(giftsData, themePacksData), [giftsData, giftsLoading, themePacksData, themePacksLoading]
+    );
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value);
-    }
-
-    const handleSourceToggle = (themePack, selected) => {
-        if (selected)
-            setSelectedThemePacks(selectedThemePacks.filter(x => x !== themePack));
-        else
-            setSelectedThemePacks([...selectedThemePacks, themePack]);
-    }
-
-    const clearSources = () => {
-        setSelectedThemePacks([]);
     }
 
     const fusionsComponent = useMemo(() =>
@@ -187,63 +226,43 @@ function FusionsTab() {
     );
 
     return <div style={{ display: "flex", flexDirection: "column", width: "100%", gap: "1rem", justifyContent: "center" }}>
-        <details open>
-            <summary><span style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Filters</span></summary>
-            <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "0.5rem", alignItems: "center" }}>
-                    <span style={{ fontWeight: "bold", textAlign: "end" }}>Search</span>
-                    <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
-                        <input value={searchString} onChange={handleSearchChange} />
-                        <label>
-                            <input type="checkbox" checked={includeDescription} onChange={e => handleDescriptionToggle(e.target.checked)} />
-                            <span
-                                data-tooltip-id="genericTooltip"
-                                data-tooltip-content={"This will check the description for all enhancement levels of the gift."}
-                                style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
-                            >
-                                Include Description
-                            </span>
-                        </label>
-                        <label>
-                            <input type="checkbox" checked={includeIngredients} onChange={e => handleIngredientsToggle(e.target.checked)} />
-                            <span
-                                data-tooltip-id="genericTooltip"
-                                data-tooltip-content={"This will check for the search text in the ingredients as well. Also affected by 'Include Description'."}
-                                style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
-                            >
-                                Include Ingredients
-                            </span>
-                        </label>
-                    </div>
-                    <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Keywords</span>
-                    <KeywordSelector selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords} />
+        <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, auto)", gap: "0.5rem", alignItems: "center" }}>
+                <span style={{ fontWeight: "bold", textAlign: "end" }}>Search</span>
+                <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+                    <input value={searchString} onChange={handleSearchChange} />
+                    <label>
+                        <input type="checkbox" checked={includeDescription} onChange={e => handleDescriptionToggle(e.target.checked)} />
+                        <span
+                            data-tooltip-id="genericTooltip"
+                            data-tooltip-content={"This will check the description for all enhancement levels of the gift."}
+                            style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
+                        >
+                            Include Description
+                        </span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={includeIngredients} onChange={e => handleIngredientsToggle(e.target.checked)} />
+                        <span
+                            data-tooltip-id="genericTooltip"
+                            data-tooltip-content={"This will check for the search text in the ingredients as well. Also affected by 'Include Description'."}
+                            style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
+                        >
+                            Include Ingredients
+                        </span>
+                    </label>
                 </div>
-                <div style={{ width: "100%", maxWidth: "1800px" }}>
-                    <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>Theme Packs <button onClick={clearSources}>Clear All</button></div>
-                    <table style={{ borderCollapse: "collapse" }}>
-                        <tbody>
-                            {
-                                Object.entries(themePackList).map(([category, themePacks], i) => <tr key={i}>
-                                    <td style={{ border: "1px grey dotted", padding: "2px" }}>{category}</td>
-                                    <td style={{ border: "1px grey dotted", padding: "2px", textAlign: "start", gap: "2px" }}>
-                                        <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
-                                            {themePacks.map((themePack, i) => {
-                                                const selected = selectedThemePacks.includes(themePack);
-                                                return <label key={i} style={{ paddingLeft: "2px", paddingRight: "2px", whiteSpace: "nowrap" }}>
-                                                    {<input type="checkbox" onChange={() => handleSourceToggle(themePack, selected)} checked={selected} />}
-                                                    {themePacksData[themePack].name}
-                                                </label>
-                                            })}
-                                        </div>
-                                    </td>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
-
-                </div>
+                <span style={{ fontWeight: "bold", textAlign: "end" }}>Filter Keywords</span>
+                <KeywordSelector selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords} />
+                <span style={{ fontWeight: "bold", textAlign: "end" }}>Theme Packs</span>
+                <ThemePackSelector 
+                    selected={selectedThemePacks} 
+                    setSelected={setSelectedThemePacks} 
+                    options={themePackList}
+                    themePacksData={themePacksData}
+                /> 
             </div>
-        </details>
+        </div>
         <div style={{ flex: 1, height: "50%", display: "flex", justifyContent: "center", width: "100%" }}>
             <div style={{ height: "100%", minWidth: "80%", maxWidth: "100%", overflowY: "auto" }}>
                 {fusionsComponent}

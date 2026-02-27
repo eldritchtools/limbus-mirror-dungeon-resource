@@ -4,7 +4,7 @@
   "homepage": "https://limbus-md.eldritchtools.com",
   "private": true,
   "dependencies": {
-    "@eldritchtools/limbus-shared-library": "github:eldritchtools/limbus-shared-library#v0.9.6",
+    "@eldritchtools/limbus-shared-library": "github:eldritchtools/limbus-shared-library#v0.9.7",
     "@eldritchtools/shared-components": "github:eldritchtools/shared-components#v1.5.26",
     "@radix-ui/react-select": "^2.2.6",
     "@testing-library/dom": "^10.4.1",
@@ -16,6 +16,7 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.10.1",
     "react-scripts": "5.0.1",
+    "react-select": "^5.10.2",
     "react-tabs": "^6.1.0",
     "react-tooltip": "^5.29.1",
     "web-vitals": "^2.1.4"
