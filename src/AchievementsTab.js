@@ -1,9 +1,10 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "./AchievementsTab.css"
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import AchievementTips from './AchievementsTips';
 import { useBreakpoint, useProfiles } from '@eldritchtools/shared-components';
 import data from './data';
+import { NumInputComponent } from './utils';
 
 function Achievement({ achievement, tracking, setAchievementTracking, isSmall }) {
     let subAchievements = null;
@@ -28,8 +29,8 @@ function Achievement({ achievement, tracking, setAchievementTracking, isSmall })
                     <span className="points">+{achievement.points[i]}</span>
                     <span className="item-label">{text}</span>
                 </div>
-                {achievement.hardonly[i] ? 
-                    <span style={{ minWidth: "4rem", textAlign: "center", color: "#f87171" }}>Hard only</span> : 
+                {achievement.hardonly[i] ?
+                    <span style={{ minWidth: "4rem", textAlign: "center", color: "#f87171" }}>Hard only</span> :
                     <span style={{ minWidth: "4rem", textAlign: "center", color: "#4ade80" }}>Normal or Hard</span>
                 }
             </div>);
@@ -210,6 +211,11 @@ function AchievementsTab() {
         setProfileData({ ...profileData, tracking: tracking, totalPoints: totalPoints });
     }
 
+    const xp = useMemo(() => {
+        if(!profileData.additionalPoints || isNaN(profileData.additionalPoints)) return profileData.totalPoints;
+        return Math.min(profileData.totalPoints + profileData.additionalPoints, 10000);
+    }, [profileData.totalPoints, profileData.additionalPoints])
+
     const toggleSortClearedToBottom = () => {
         setSortClearedToBottom(!sortClearedToBottom);
     }
@@ -217,20 +223,30 @@ function AchievementsTab() {
     const tooltipText = "You can get additional projection/achievement points from completing MD runs so this will not reflect your actual achievement level.";
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}>
-        <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
+        <div>Achievements will be reset once the new achievements are released.</div>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", justifyContent: "center" }}>
             <div data-tooltip-id={"genericTooltip"} data-tooltip-content={tooltipText} style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
-                <div>Level: {Math.floor(profileData.totalPoints / 100)}</div>
+                <div>Level: {Math.floor(xp / 100)}</div>
                 <div style={{ width: "5rem", height: "20px", backgroundColor: "#333", borderRadius: "5px", overflow: "hidden", position: "relative" }}>
-                    <div style={{ width: `${profileData.totalPoints % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
-                    <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {profileData.totalPoints % 100}/100 </span>
+                    <div style={{ width: `${xp % 100}%`, height: "100%", backgroundColor: "#4caf50", transition: "width 0.3s ease" }} />
+                    <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontWeight: "bold", textShadow: "0 0 8px #000" }}> {xp % 100}/100 </span>
                 </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
+                Additional XP:
+                <NumInputComponent
+                    value={profileData.additionalPoints ?? 0}
+                    setValue={v => setProfileData(p => ({ ...p, additionalPoints: v }))}
+                    min={0}
+                    width={6}
+                />
             </div>
             <button className={`toggle-button ${sortClearedToBottom ? 'active' : ''}`} onClick={toggleSortClearedToBottom}>Sort Cleared to Bottom</button>
         </div>
         <Tabs className="tabs" selectedTabClassName="selected-tab" selectedTabPanelClassName="selected-tab-panel">
             <div style={{ overflowX: "auto", justifySelf: "center", maxWidth: "90vw" }}>
                 <TabList className="tab-list">
-                    {Object.entries(data.achievements).map(([category, _list]) => <Tab className="tab">{category}</Tab>)}
+                    {Object.entries(data.achievements).map(([category, _list]) => <Tab key={category} className="tab">{category}</Tab>)}
                     <Tab className="tab">Rewards</Tab>
                 </TabList>
             </div>
@@ -247,7 +263,7 @@ function AchievementsTab() {
                     />
                 </TabPanel>)}
             <TabPanel className="tab-panel">
-                <RewardsTab totalPoints={profileData.totalPoints} />
+                <RewardsTab totalPoints={xp} />
             </TabPanel>
         </Tabs>
     </div>

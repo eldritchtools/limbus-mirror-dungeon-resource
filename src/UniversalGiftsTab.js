@@ -5,8 +5,8 @@ import { useBreakpoint } from "@eldritchtools/shared-components";
 function GiftRow({ list = null, dict = null, isSmall }) {
     return <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, minmax(${isSmall ? 60 : 100}px, 1fr))`, width: "100%", justifyContent: "center" }}>
         {list ?
-            list.map((giftId, i) => <Gift key={i} id={giftId} includeTooltip={true} scale={isSmall ? .6 : 1} />) :
-            dict.map(([giftId, notes], i) => <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            list.map((giftId) => <Gift key={giftId} id={giftId} includeTooltip={true} scale={isSmall ? .6 : 1} />) :
+            dict.map(([giftId, notes]) => <div key={giftId} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <Gift id={giftId} includeTooltip={true} scale={isSmall ? .6 : 1} />
                 <span style={{ whiteSpace: "pre-wrap" }}>{notes}</span>
             </div>)}
@@ -19,7 +19,7 @@ function Container({ category, isSmall }) {
         {
             "gifts" in category ?
                 <GiftRow list={category.gifts} isSmall={isSmall} /> :
-                category.sections.map((section, i) => <div key={i} style={{ display: "flex", flexDirection: "column" }}>
+                category.sections.map(section => <div key={section.title} style={{ display: "flex", flexDirection: "column" }}>
                     <div>{section.title}</div>
                     <GiftRow list={section.gifts} isSmall={isSmall} />
                 </div>)
@@ -32,7 +32,7 @@ function ComboContainer({ data, isSmall }) {
         <div style={{ fontSize: "1.25rem", fontWeight: "bold", display: "flex", flexDirection: "row", alignItems: "center" }}><KeywordIcon id={data.title} />{data.title}</div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
             {data.sections.map((section, index) =>
-                <div key={index} style={{ display: "flex", flexDirection: "column", borderRight: index === 0 ? "1px #aaa dotted" : null, padding: "0.5rem" }}>
+                <div key={section.title} style={{ display: "flex", flexDirection: "column", borderRight: index === 0 ? "1px #aaa dotted" : null, padding: "0.5rem" }}>
                     <div style={{ fontSize: "1rem", fontWeight: "bold" }}>{section.title}</div>
                     {<GiftRow dict={section.gifts} isSmall={isSmall} />}
                 </div>
@@ -53,11 +53,11 @@ function UniversalGiftsTab() {
         <br />
         I have tried to order them by relevance for each category, but this varies between team compositions and different situations, so take the ordering with a grain of salt. I have deprioritized gifts that have conditions that aren't always achievable like killing enemies.
         <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, ${isSmall ? 320 : 520}px)`, width: "100%", justifyContent: "center" }}>
-            {universalGifts.individual.map((category, i) => <Container key={i} category={category} isSmall={isSmall} />)}
+            {universalGifts.individual.map(category => <Container key={category.title} category={category} isSmall={isSmall} />)}
         </div>
         All 7 archetypes have combinations of gifts that can provide benefits for all team compositions. Gifts will generally be Enablers (gifts that apply the status) or Exploiters (gifts that provide benefits against enemies with the status), with some being both.
         <div style={{ display: "grid", gridTemplateColumns: "1fr", width: "100%" }}>
-            {universalGifts.combo.map((status, i) => <ComboContainer key={i} data={status} isSmall={isSmall} />)}
+            {universalGifts.combo.map(status => <ComboContainer key={status.title} data={status} isSmall={isSmall} />)}
         </div>
     </div>;
 }

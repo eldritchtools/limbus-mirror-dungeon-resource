@@ -145,3 +145,26 @@ a:visited {
 a:active {
   color: #ffcc66; /* amber for click */
 }
+
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.toggle-text {
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.toggle-text:hover {
+  filter: brightness(1.2);
+}
