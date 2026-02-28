@@ -583,7 +583,7 @@
                     "tag": "Refraction Railway",
                     "highlight": {
                         "4": [
-                            "R2"
+                            "1109"
                         ]
                     }
                 }
@@ -607,13 +607,13 @@
                     "tag": "Canto Name",
                     "highlight": {
                         "1": [
-                            "C1-2"
+                            "1002"
                         ],
                         "2": [
-                            "C2-3"
+                            "1005"
                         ],
                         "3": [
-                            "C3-3"
+                            "1008"
                         ]
                     }
                 }
@@ -1736,7 +1736,7 @@
                 {
                     "type": "showThemePacks",
                     "themePacks": [
-                        "W5"
+                        "1114"
                     ]
                 },
                 {

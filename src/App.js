@@ -31,7 +31,7 @@ const paths = [
     { path: "/gifts", title: "Gifts" },
     { path: "/fusions", title: "Fusion Recipes" },
     { path: "/universal", title: "Universal Gifts/Gift Combos" },
-    { path: "/themepacks", title: "Notable Theme Packs" },
+    { path: "/themepacks", title: "Theme Packs" },
     { path: "/floorplanner", title: "Floor Planner" },
 ]
 
@@ -60,7 +60,7 @@ function App() {
                 <div className="App">
                     <HashRouter>
                         <Layout
-                            title={"Limbus Company Mirror Dungeon Resource & Achievements Tracker"}
+                            title={"Mirror Dungeon Resource & Achievements Tracker"}
                             lastUpdated={lastUpdated}
                             linkSet={"limbus"}
                             description={description}
