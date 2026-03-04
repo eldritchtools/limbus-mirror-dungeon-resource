@@ -1,0 +1,163 @@
+html {
+  font-size: clamp(12px, 1.5vw, 16px);
+}
+
+body {
+  background: #1f1f1f;
+  color: #ddd;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px;
+}
+
+button,
+select,
+input,
+textarea {
+  background-color: #2a2a2a;
+  color: #ddd;
+  border: 1px solid #555;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px;
+  transition: background-color 0.2s, border-color 0.2s;
+  font-size: 1rem;
+}
+
+button:hover,
+select:hover {
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #7ba7ff;
+  background-color: #262626;
+}
+
+button:disabled {
+  background-color: #1a1a1a;
+  color: #777;
+  cursor: "not-allowed";
+  opacity: 0.6;
+}
+
+input[type="checkbox"] {
+  accent-color: #0af;
+}
+
+.toggle-button {
+  background-color: #2a2a2a;
+  color: #ddd;
+  border: 1px solid #555;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 2px;
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.toggle-button:hover {
+  background-color: #3a3a3a;
+}
+
+.toggle-button:disabled {
+  background-color: #1a1a1a;
+  color: #777;
+  cursor: "not-allowed";
+  opacity: 0.6;
+}
+
+.toggle-button.active {
+  background-color: #4a4a4a;
+  color: #fff;
+  border-color: #4a4a4a;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.toggle-button.active:hover {
+  background-color: #4a4a4a;
+}
+
+a {
+  color: #4da6ff; /* bright blue */
+  text-decoration: underline;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: #80cfff; /* lighter blue on hover */
+  text-shadow: 0 0 4px rgba(128, 207, 255, 0.6); /* subtle glow */
+}
+
+a:visited {
+  color: #b366ff; /* purple that's still bright enough */
+}
+
+a:active {
+  color: #ffcc66; /* amber for click */
+}
+
+* {
+  scrollbar-color: #999 #2a2a2a; /* Firefox: thumb color, track color */
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #1a1a1a; /* dark track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #444; /* medium-dark thumb */
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* slightly lighter on hover */
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.text-link {
+  color: #ddd;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.text-link:hover,
+.text-link:visited:hover {
+  color: #80cfff;
+  text-shadow: 0 0 4px rgba(128, 207, 255, 0.6);
+}
+
+.text-link:visited {
+  color: #ddd;
+}
+
+.toggle-text {
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.toggle-text:hover {
+  filter: brightness(1.2);
+}
