@@ -7,7 +7,7 @@ import { KeywordSelector } from "../components/Selectors";
 import { useBreakpoint } from "@eldritchtools/shared-components";
 import Select from "react-select";
 import { selectStyle } from "../styles";
-import useLocalState from "../components/useLocalState";
+import useLocalState from "../lib/useLocalState";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 

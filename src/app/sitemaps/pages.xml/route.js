@@ -5,9 +5,12 @@ export async function GET() {
 
     const urls = [
         { loc: `${SITE_URL}/`, lastmod: today },
-        { loc: `${SITE_URL}/builds`, lastmod: today },
-        { loc: `${SITE_URL}/identities`, lastmod: today },
-        { loc: `${SITE_URL}/egos`, lastmod: today },
+        { loc: `${SITE_URL}/achievements`, lastmod: today },
+        { loc: `${SITE_URL}/floorplanner`, lastmod: today },
+        { loc: `${SITE_URL}/fusions`, lastmod: today },
+        { loc: `${SITE_URL}/gifts`, lastmod: today },
+        { loc: `${SITE_URL}/themepacks`, lastmod: today },
+        { loc: `${SITE_URL}/universal`, lastmod: today },
     ];
 
     return new Response(buildUrlSet(urls), {
