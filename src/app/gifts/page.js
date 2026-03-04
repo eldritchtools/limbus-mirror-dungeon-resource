@@ -231,7 +231,7 @@ function TagFilterSelector({ tagFilter, setTagFilter }) {
         { value: "Enhanceable", label: <span style={{ color: "#4ade80" }}>Enhanceable</span> },
         { value: "Fusion Only", label: <span style={{ color: "#facc15" }}>Fusion Only</span> },
         { value: "Hard Only", label: <span style={{ color: "#f87171" }}>Hard Only</span> },
-        { value: "Cursed", label: <span style={{ color: "#facc15" }}>Cursed</span> },
+        { value: "Cursed", label: <span style={{ color: "#a78bfa" }}>Cursed</span> },
         { value: "Blessed", label: <span style={{ color: "#38bdf8" }}>Blessed</span> },
     ]
 
