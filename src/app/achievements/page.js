@@ -11,7 +11,7 @@ import { achievementsStore } from '../database/localDB';
 import { constructAchievementsData, getDefaultMigration, handleMigration } from './migration';
 import { useData } from '@eldritchtools/limbus-shared-library';
 import { useAuth } from '../database/authProvider';
-import useLocalState from '../components/useLocalState';
+import useLocalState from '../lib/useLocalState';
 import { getAchievementsProgress, updateAchievementsProgress } from '../database/achievements';
 import ReactTimeAgo from 'react-time-ago';
 // import achievementsPre from "./testachievements.json";

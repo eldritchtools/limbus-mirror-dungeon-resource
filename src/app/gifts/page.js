@@ -6,7 +6,7 @@ import { useBreakpoint } from "@eldritchtools/shared-components";
 import { TierComponent } from "@eldritchtools/limbus-shared-library";
 import Select from "react-select";
 import { selectStyleVariable } from "../styles";
-import useLocalState from "../components/useLocalState";
+import useLocalState from "../lib/useLocalState";
 
 function GiftDesc({ gift, tagStrips }) {
     const [expand, setExpand] = useState(false);

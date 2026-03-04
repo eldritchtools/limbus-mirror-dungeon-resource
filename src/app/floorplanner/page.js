@@ -6,6 +6,7 @@ import "./floorSelector.css";
 import { Gift, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import { useBreakpoint, useProfiles } from "@eldritchtools/shared-components";
 import { createPortal } from "react-dom";
+import useLocalState from "../lib/useLocalState";
 
 function FloorSelector({ value, setValue, options, isSmall }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ function FloorSelector({ value, setValue, options, isSmall }) {
                             </div>
                         </Select.Item> : null}
                     </div>
-                    {options.length > 10 ? <div className="floor-select-fade-bottom" > ▼ </div> : null}
+                    {options.length > 10 ? <div className="floor-select-fade-bottom" style={{textAlign: "center"}} > ▼ </div> : null}
                 </Select.Viewport>
             </Select.Content>
         </Select.Root>
@@ -144,7 +145,7 @@ function FloorSelection({ mode, difficulty, selectedFloors, setSelectedFloors, s
                             {themePacks[selectedFloors[selectIndex]].exclusive_gifts
                                 .filter(giftId => !selectedGifts[selectIndex].includes(giftId))
                                 .map(giftId =>
-                                    <div key={giftId} nClick={() => addGift(giftId, selectIndex)}>
+                                    <div key={giftId} onClick={() => addGift(giftId, selectIndex)}>
                                         <Gift key={giftId} id={giftId} includeTooltip={true} scale={isDesktop ? .75 : .5} expandable={false} />
                                     </div>)
                             }
@@ -170,18 +171,13 @@ function FloorSelection({ mode, difficulty, selectedFloors, setSelectedFloors, s
 function FloorPlannerTab() {
     const [selectedFloors, setSelectedFloors] = useState(new Array(15).fill(null));
     const [selectedGifts, setSelectedGifts] = useState(new Array(15).fill([]));
-    const { profileData, setProfileData } = useProfiles();
-    const [selectedPlan, setSelectedPlan] = useState("");
-    const [mode, setMode] = useState(localStorage.getItem("floorPlannerMode") ?? "view");
+    // const [selectedPlan, setSelectedPlan] = useState("");
+    const [mode, setMode] = useLocalState("floorPlannerMode", "view");
     const [difficulty, setDifficulty] = useState("E");
 
-    const [planName, setPlanName] = useState("");
-    const [saveIsOpen, setSaveIsOpen] = useState(false);
-    const [deleteIsOpen, setDeleteIsOpen] = useState(false);
-
-    useEffect(() => {
-        if (mode !== null) localStorage.setItem("floorPlannerMode", mode);
-    }, [mode]);
+    // const [planName, setPlanName] = useState("");
+    // const [saveIsOpen, setSaveIsOpen] = useState(false);
+    // const [deleteIsOpen, setDeleteIsOpen] = useState(false);
 
     const handleSetDifficulty = v => {
         if (difficulty === "N" || v === "N") setSelectedFloors(new Array(15).fill(null));
@@ -193,50 +189,53 @@ function FloorPlannerTab() {
         setSelectedGifts(new Array(15).fill([]));
     }
 
-    const savePlan = () => {
-        if (planName.trim().length === 0) return;
-        const plans = profileData.plans ?? {};
-        setProfileData({ ...profileData, plans: { ...plans, [planName]: { floors: selectedFloors, gifts: selectedGifts } } });
-        setSelectedPlan(planName);
-        setSaveIsOpen(false);
-    }
+    // const savePlan = () => {
+    //     if (planName.trim().length === 0) return;
+    //     const plans = profileData.plans ?? {};
+    //     setProfileData({ ...profileData, plans: { ...plans, [planName]: { floors: selectedFloors, gifts: selectedGifts } } });
+    //     setSelectedPlan(planName);
+    //     setSaveIsOpen(false);
+    // }
 
-    const openSavePlan = () => {
-        setPlanName("");
-        setSaveIsOpen(true);
-    }
+    // const openSavePlan = () => {
+    //     setPlanName("");
+    //     setSaveIsOpen(true);
+    // }
 
-    const loadPlan = () => {
-        if (selectedPlan in (profileData.plans ?? {})) {
-            const plan = profileData.plans[selectedPlan];
-            setSelectedFloors(plan.floors);
-            setSelectedGifts(plan.gifts);
-        }
-    }
+    // const loadPlan = () => {
+    //     if (selectedPlan in (profileData.plans ?? {})) {
+    //         const plan = profileData.plans[selectedPlan];
+    //         setSelectedFloors(plan.floors);
+    //         setSelectedGifts(plan.gifts);
+    //     }
+    // }
 
-    const deletePlan = () => {
-        const { [selectedPlan]: _, ...rest } = profileData.plans;
-        setProfileData({ ...profileData, plans: rest })
-        setSelectedPlan("");
-        setDeleteIsOpen(false);
-    }
+    // const deletePlan = () => {
+    //     const { [selectedPlan]: _, ...rest } = profileData.plans;
+    //     setProfileData({ ...profileData, plans: rest })
+    //     setSelectedPlan("");
+    //     setDeleteIsOpen(false);
+    // }
 
-    const openDeletePlan = () => {
-        if (selectedPlan in (profileData.plans ?? {})) {
-            setDeleteIsOpen(true);
-        }
-    }
+    // const openDeletePlan = () => {
+    //     if (selectedPlan in (profileData.plans ?? {})) {
+    //         setDeleteIsOpen(true);
+    //     }
+    // }
 
     return <div style={{ display: "flex", flexDirection: "column", gap: "5px", alignItems: "center", width: "100%" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-            Floor Plans:
+        <div style={{ display: "flex", alignItems: "center", gap: "0.2rem", textAlign: "center" }}>
+            {/* Floor Plans:
             <select name="plan" id="plan" value={selectedPlan} onChange={e => setSelectedPlan(e.target.value)} style={{ minWidth: "10rem" }}>
                 <option value="" />
                 {Object.keys((profileData.plans ?? {})).map((k, i) => <option key={i} value={k}>{k}</option>)}
             </select>
             <button onClick={openSavePlan}>Save</button>
             <button onClick={loadPlan}>Load</button>
-            <button onClick={openDeletePlan}>Delete</button>
+            <button onClick={openDeletePlan}>Delete</button> */}
+            Saved floor plans have been temporarily removed due to conflicts with new systems on the site. Big apologies for the inconvenience!
+            <br/>
+            Floor plans are currently being improved and a much better version will be available soon.
         </div>
         <div style={{ display: "flex", flexDirection: "row", gap: "0.5rem", alignItems: "center" }}>
             <label>
@@ -268,7 +267,7 @@ function FloorPlannerTab() {
             selectedGifts={selectedGifts}
             setSelectedGifts={setSelectedGifts}
         />
-        <Modal isOpen={saveIsOpen} onClose={() => setSaveIsOpen(false)}>
+        {/* <Modal isOpen={saveIsOpen} onClose={() => setSaveIsOpen(false)}>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem", alignItems: "center" }}>
                 <input value={planName} onChange={e => setPlanName(e.target.value)} placeholder="Input name..." />
                 <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -285,7 +284,7 @@ function FloorPlannerTab() {
                     <button onClick={() => setDeleteIsOpen(false)}>Cancel</button>
                 </div>
             </div>
-        </Modal>
+        </Modal> */}
     </div>;
 }
 
