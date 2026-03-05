@@ -184,7 +184,7 @@ function MainFilterSelector({ selectedMainFilters, setSelectedMainFilters }) {
         let icon;
         switch (category) {
             case "tiers":
-                icon = <div style={{ width: "32px" }}><TierComponent tier={filter} /></div>;
+                icon = <div style={{ width: "32px", textAlign: "center" }}><TierComponent tier={filter} /></div>;
                 break;
             case "keyword":
                 icon = <Icon path={filter} style={{ height: "32px" }} />
