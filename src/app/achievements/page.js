@@ -363,7 +363,7 @@ export default function AchievementsPage() {
     if (achievementsLoading || dataLoading) return <div>Loading...</div>;
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", width: "100%" }}>
-        <div>Achievement progress will be reset once the new achievements are released.</div>
+        <div>Most tips or descriptions under achievements are taken from the previous season since they are still largely relevant. Anything outdated will be updated over time.</div>
         {!user ? <div>Users can now log in to save their progress to their accounts instead of only on the local device.</div> : null}
         <div>Progress is automatically saved after a few seconds of inactivity.</div>
         <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", justifyContent: "center" }}>

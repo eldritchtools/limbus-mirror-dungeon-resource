@@ -1,0 +1,18 @@
+.grace-grid {
+  display: grid;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Default (large screens): 6 columns */
+.grace-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* Mobile fallback: 1–2 columns */
+@container (max-width: 399px) {
+  .grace-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

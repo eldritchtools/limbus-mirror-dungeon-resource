@@ -1,0 +1,38 @@
+.sinner-grid {
+  display: grid;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Default (large screens): 6 columns */
+.sinner-grid {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Medium screens: switch to 4 columns */
+@container (max-width: 1399px) {
+  .sinner-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Smaller screens: switch to 3 columns */
+@container (max-width: 999px) {
+  .sinner-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile fallback: 1–2 columns */
+@container (max-width: 599px) {
+  .sinner-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (max-width: 299px) {
+  .sinner-grid {
+    grid-template-columns: 1fr;
+  }
+}
