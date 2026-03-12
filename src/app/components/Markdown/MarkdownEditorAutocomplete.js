@@ -1,13 +1,13 @@
 import { autocompletion, startCompletion } from "@codemirror/autocomplete";
 import { Facet } from "@codemirror/state";
 import { useData } from "@eldritchtools/limbus-shared-library";
-import { keywordToIdMapping } from "../../keywordIds";
-import { fuzzyScore, sinnerMapping } from "../../utils";
 import { createAutocompleteLabel } from "./MarkdownEditorAutocompleteLabel";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { keymap } from "@codemirror/view";
 import constructMarkdownEditorAutocompleteTooltip from "./MarkdownEditorAutocompleteTooltip";
 import { convertMarkdownAlias } from "./MarkdownAliases";
+import { keywordToIdMapping } from "@/app/keywordIds";
+import { fuzzyScore, sinnerMapping } from "@/app/utils";
 
 const autocompleteDataFacet = Facet.define();
 

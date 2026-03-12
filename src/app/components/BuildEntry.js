@@ -2,10 +2,10 @@
 
 import { KeywordIcon } from "@eldritchtools/limbus-shared-library";
 import { keywordIdMapping } from "../keywordIds";
-import Username from "../components/Username";
+import Username from "./Username";
 import IdentityImgSpread from "./IdentityImgSpread";
 import ReactTimeAgo from "react-time-ago";
-import { decodeBuildExtraOpts } from "./BuildExtraOpts";
+import { decodeBuildExtraOpts } from "../run-planner/BuildExtraOpts";
 import "./BuildEntry.css";
 
 export default function BuildEntry({ build }) {

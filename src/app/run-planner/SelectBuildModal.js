@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BuildsSearchComponent from "../builds/BuildsSearchComponent";
 import { useAuth } from "../database/authProvider";
-import BuildEntry from "./BuildEntry";
+import BuildEntry from "../components/BuildEntry";
 import { Modal } from "./Modal";
 import { prepareBuildFilters } from "../builds/search/SearchBuildsContent";
 import { getFilteredBuilds } from "../database/builds";

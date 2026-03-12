@@ -2,8 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { getFilteredBuilds } from "../database/builds";
-import "./buildSelector.css";
-import { Gift, Icon, KeywordIcon, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
+import { Gift, Icon, ThemePackImg, useData } from "@eldritchtools/limbus-shared-library";
 import TagSelector, { tagToTagSelectorOption } from "../components/TagSelector";
 import { useAuth } from "../database/authProvider";
 import { useRouter } from "next/navigation";
@@ -11,12 +10,10 @@ import MarkdownEditorWrapper from "../components/Markdown/MarkdownEditorWrapper"
 import "./SinnerGrid.css";
 import "./GraceGrid.css";
 import { extractYouTubeId } from "../YoutubeUtils";
-import { generalTooltipProps } from "../components/GeneralTooltip";
-import { decodeBuildExtraOpts } from "../components/BuildExtraOpts";
-import DisplayTypeButton from "./DisplayTypeButton";
 import SinnerGrid from "./SinnerGrid";
 import { runPlansStore } from "../database/localDB";
 import Select from "react-select";
+import { decodeBuildExtraOpts } from "./BuildExtraOpts";
 
 function GraceComponent({ data, level, setLevel, setCurrentGrace }) {
     const handleLevelSet = l => {
@@ -162,7 +159,6 @@ export default function RunPlanEditor({ mode, runPlanId }) {
     const [loading, setLoading] = useState(mode === "edit");
     const [message, setMessage] = useState("");
     const [saving, setSaving] = useState(false);
-    const [displayType, setDisplayType] = useState("edit");
     const [createdAt, setCreatedAt] = useState(null);
     const { user } = useAuth();
     const router = useRouter();
@@ -309,13 +305,7 @@ export default function RunPlanEditor({ mode, runPlanId }) {
             </select>
         </div>
         <input type="text" value={title} style={{ width: "clamp(20ch, 80%, 100ch)" }} onChange={e => setTitle(e.target.value)} />
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <span style={{ fontSize: "1.2rem" }}>Team Build</span>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.2rem" }}>
-                <div>Display Type</div>
-                <DisplayTypeButton value={displayType} setValue={setDisplayType} includeEdit={true} />
-            </div>
-        </div>
+        <span style={{ fontSize: "1.2rem" }}>Team Build</span>
         {buildDisplay()}
 
         <span style={{ fontSize: "1.2rem" }}>Description</span>

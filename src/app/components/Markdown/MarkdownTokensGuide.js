@@ -1,6 +1,6 @@
 import Link from "next/link";
 import DropdownButton from "../DropdownButton";
-import { EgoSelector, GiftSelector, IdentitySelector, KeywordSelector, SinnerSelector, StatusSelector } from "../Selectors";
+import { EgoSelector, GiftSelector, IdentitySelector, KeywordSelector, SinnerSelector, StatusSelector } from "../SelectorsDropdown";
 import MarkdownRenderer from "./MarkdownRenderer";
 import { useEffect, useState } from "react";
 

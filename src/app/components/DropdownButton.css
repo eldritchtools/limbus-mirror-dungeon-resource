@@ -1,0 +1,14 @@
+.dropdown-button-option {
+    padding: 8px 12px; 
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown-button-option:hover {
+    background: #3f3f3f;
+}
+
+.dark-scrollable {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #444 #1a1a1a; /* Firefox thumb | track */
+}
