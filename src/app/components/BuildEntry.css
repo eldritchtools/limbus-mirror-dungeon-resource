@@ -1,0 +1,54 @@
+.build-entry {
+    position: relative;
+    border: 2px #7c6a55 solid;
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    background: #1c1a17;
+    transition: all 0.2s ease;
+    pointer-events: all;
+    /* margin-top: 14px; */
+    /* margin-left: 0px; */
+}
+
+.build-entry:hover:not(:has(.build-buttons-container > *:hover, .tag:hover, .username:hover)) {
+    background: #3a3a3a;
+}
+
+.build-entry-link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+
+.build-icon-rails {
+    display: flex;
+    flex-direction: column;
+    border: 2px #7c6a55 solid;
+    border-radius: 14px;
+    background: #101010;
+    position: absolute;
+    top: 8px;
+    left: -16px;
+    padding: 4px 0 4px 0;
+}
+
+.build-contents {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 6px 2px 6px 18px;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.build-title {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

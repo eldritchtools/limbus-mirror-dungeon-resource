@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { affinityColorMapping, Gift, Icon, ReplacedStatusesText, useData } from "@eldritchtools/limbus-shared-library";
+import { affinityColorMapping, Gift, giftTagColors, Icon, ReplacedStatusesText, useData } from "@eldritchtools/limbus-shared-library";
 import { useBreakpoint } from "@eldritchtools/shared-components";
 import { TierComponent } from "@eldritchtools/limbus-shared-library";
 import Select from "react-select";
@@ -116,6 +116,8 @@ function GiftList({ searchString, selectedMainFilters, tagFilter, tagFilterExclu
             if (tagFilterExcluding) {
                 if (tagFilter === "Enhanceable") {
                     if (gift.enhanceable) return false;
+                } else if (tagFilter === "Ingredient") {
+                    if (gift.ingredientOf) return false;
                 } else if (tagFilter === "Fusion Only") {
                     if (gift.fusion) return false;
                 } else if (tagFilter === "Hard Only") {
@@ -128,6 +130,8 @@ function GiftList({ searchString, selectedMainFilters, tagFilter, tagFilterExclu
             } else {
                 if (tagFilter === "Enhanceable") {
                     if (!gift.enhanceable) return false;
+                } else if (tagFilter === "Ingredient") {
+                    if (!gift.ingredientOf) return false;
                 } else if (tagFilter === "Fusion Only") {
                     if (!gift.fusion) return false;
                 } else if (tagFilter === "Hard Only") {
@@ -184,7 +188,7 @@ function MainFilterSelector({ selectedMainFilters, setSelectedMainFilters }) {
         let icon;
         switch (category) {
             case "tiers":
-                icon = <div style={{ width: "32px" }}><TierComponent tier={filter} /></div>;
+                icon = <div style={{ width: "32px", textAlign: "center" }}><TierComponent tier={filter} /></div>;
                 break;
             case "keyword":
                 icon = <Icon path={filter} style={{ height: "32px" }} />
@@ -228,11 +232,12 @@ function MainFilterSelector({ selectedMainFilters, setSelectedMainFilters }) {
 
 function TagFilterSelector({ tagFilter, setTagFilter }) {
     const options = [
-        { value: "Enhanceable", label: <span style={{ color: "#4ade80" }}>Enhanceable</span> },
-        { value: "Fusion Only", label: <span style={{ color: "#facc15" }}>Fusion Only</span> },
-        { value: "Hard Only", label: <span style={{ color: "#f87171" }}>Hard Only</span> },
-        { value: "Cursed", label: <span style={{ color: "#facc15" }}>Cursed</span> },
-        { value: "Blessed", label: <span style={{ color: "#38bdf8" }}>Blessed</span> },
+        { value: "Enhanceable", label: <span style={{ color: giftTagColors.enhanceable }}>Enhanceable</span> },
+        { value: "Ingredient", label: <span style={{ color: giftTagColors.ingredient }}>Ingredient</span> },
+        { value: "Fusion Only", label: <span style={{ color: giftTagColors.fusion }}>Fusion Only</span> },
+        { value: "Hard Only", label: <span style={{ color: giftTagColors.hardonly }}>Hard Only</span> },
+        { value: "Cursed", label: <span style={{ color: giftTagColors.cursed }}>Cursed</span> },
+        { value: "Blessed", label: <span style={{ color: giftTagColors.blessed }}>Blessed</span> },
     ]
 
     return <Select

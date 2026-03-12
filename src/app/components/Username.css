@@ -1,0 +1,15 @@
+.username {
+    color: #ddd;
+    font-weight: bold;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+.username:visited {
+    color: #ddd;
+}
+
+a:hover,
+a:visited:hover {
+  color: #38bdf8; /* or whatever hover color you want */
+}

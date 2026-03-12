@@ -1,0 +1,15 @@
+import { sinnerMapping } from "@/app/utils";
+
+function createAutocompleteLabel(entry, type) {
+    if (type === "identity" || type === "ego")
+        return `[${sinnerMapping[entry.sinnerId]}] ${entry.name}`;
+    if (type === "status")
+        return entry.name;
+    if (type === "giftname" || type === "gifticons")
+        return entry.names[0];
+    if (type === "keyword" || type === "sinner")
+        return entry;
+    return "";
+}
+
+export { createAutocompleteLabel };

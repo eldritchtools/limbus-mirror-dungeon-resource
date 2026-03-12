@@ -13,6 +13,8 @@ import en from "javascript-time-ago/locale/en"
 import { ThemePackNameTooltip } from './components/ThemePackNameWithTooltip';
 import { Tooltip } from 'react-tooltip';
 import { tooltipStyle } from "./styles";
+import { IdentityTooltip } from "./components/IdentityTooltip";
+import { EgoTooltip } from "./components/EgoTooltip";
 
 TimeAgo.addDefaultLocale(en)
 
@@ -54,6 +56,8 @@ export default function LayoutComponent({ children }) {
             >
                 <DataProvider>
                     {children}
+                    <IdentityTooltip />
+                    <EgoTooltip />
                     <GiftTooltip />
                     <StatusTooltip />
                     <ThemePackNameTooltip />
