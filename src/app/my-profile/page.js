@@ -179,7 +179,7 @@ export default function ProfilePage() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", maxWidth: "1600px" }}>
                     <h2 style={headerStyle}>Details</h2>
                     <h4 style={headerStyle}>Username</h4>
-                    <span style={subHeaderStyle}>Name to display across the site. This must be updated separately from the rest of the profile.</span>
+                    <span style={subHeaderStyle}>Name to display across the site.</span>
                     <div><input value={username} onChange={e => setUsername(e.target.value)} /></div>
                     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                         <button onClick={handleUpdateUsername} disabled={updating}>Update Username</button>
