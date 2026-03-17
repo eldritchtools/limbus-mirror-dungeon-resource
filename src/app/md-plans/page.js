@@ -36,7 +36,7 @@ export default function MdPlansPage() {
             try {
                 setLoading(true);
                 const params = {
-                    limit: 10,
+                    limit: 20,
                     offset: 0,
                     published: true
                 };

@@ -26,6 +26,7 @@ const paths = [
     { path: "/universal", title: "Universal Gifts/Gift Combos" },
     { path: "/themepacks", title: "Theme Packs" },
     { path: "/md-plans", title: "MD Plans" },
+    { path: "/my-profile", title: "My Profile" }
 ]
 
 const description = <span>

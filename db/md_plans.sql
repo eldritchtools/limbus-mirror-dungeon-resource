@@ -735,3 +735,60 @@ BEGIN
 
 END;
 $$;
+
+CREATE OR REPLACE FUNCTION public.get_saved_md_plans(
+  p_user_id UUID,
+  p_sort_by text DEFAULT NULL,
+  p_limit int DEFAULT 20,
+  p_offset int DEFAULT 0
+)
+returns table (
+  id uuid,
+  user_id uuid,
+  username text,
+  user_flair text,
+  title text,
+  body text,
+  difficulty text,
+  cost int,
+  keyword_id int,
+  created_at timestamptz,
+  published_at timestamptz,
+  tags text[],
+  like_count int,
+  comment_count int
+)
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  saved_ids UUID[];
+BEGIN
+  -- get all saved md plan IDs for the user
+  SELECT COALESCE(ARRAY_AGG(target_id), ARRAY[]::UUID[])
+  INTO saved_ids
+  FROM public.saves s
+  WHERE s.user_id = p_user_id
+    AND target_type = 'md_plan';
+
+  IF saved_ids = '{}' THEN
+    RETURN;
+  END IF;
+
+  -- call search_md_plans with the filter
+  RETURN QUERY
+    SELECT *
+    FROM public.search_md_plans_v1(
+      p_query := NULL,
+      plan_id_filter := saved_ids,
+      username_exact_filter := NULL,
+      user_id_filter := NULL,
+      tag_filter := NULL,
+      p_sort_by := p_sort_by,
+      p_limit := p_limit,
+      p_offset := p_offset,
+      p_published := TRUE,
+      p_ignore_block_discovery := TRUE
+    );
+END;
+$$;
