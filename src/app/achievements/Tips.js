@@ -88,7 +88,7 @@ function ShowGiftsTip({ tip, isSmall }) {
 
     const giftsStyle = { display: "flex", flexDirection: "row", height: "fit-content", flexWrap: "wrap", padding: "0.5rem" };
     const centerStyle = { display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", border: "1px #666 dotted" };
-    const constructGift = gift => <Gift gift={gift} scale={isSmall ? 0.5 : 1} />
+    const constructGift = gift => <Gift key={gift.id} gift={gift} scale={isSmall ? 0.5 : 1} />
 
     const gridComponents = [];
     // Headers

@@ -2,26 +2,29 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/database/authProvider';
-import { achievementsStore, runPlansStore, checklistsStore, activeChecklistsStore } from '@/app/database/localDB';
+import { achievementsStore, checklistsStore, activeChecklistsStore, mdPlansStore, savedMdPlansStore } from '@/app/database/localDB';
 import { updateAchievementsProgress } from '@/app/database/achievements';
-// import { useRequestsCache } from '@/app/database/RequestsCacheProvider';
+import { createMdPlan } from '@/app/database/mdPlans';
+import { useRequestsCache } from '@/app/database/RequestsCacheProvider';
 // import { insertBuild } from '@/app/database/builds';
 
 export default function UsernameSetup() {
     const router = useRouter();
     const { user, profile, loading, updateUsername, refreshProfile } = useAuth();
-    // const { toggleSave } = useRequestsCache();
+    const { toggleSave } = useRequestsCache();
 
     const [username, setUsername] = useState('');
     const [error, setError] = useState('');
     const [submitting, setSubmitting] = useState(false);
 
     const [localAchievements, setLocalAchievements] = useState([]);
-    const [localRunPlans, setLocalRunPlans] = useState([]);
+    const [localMdPlans, setLocalMdPlans] = useState([]);
+    const [localSavedMdPlans, setLocalSavedMdPlans] = useState([]);
     const [localChecklists, setLocalChecklists] = useState([]);
     const [localActiveChecklists, setLocalActiveChecklists] = useState([]);
     const [achievementSync, setAchievementSync] = useState(true);
-    const [runPlanSync, setRunPlanSync] = useState(false);
+    const [mdPlanSync, setMdPlanSync] = useState(false);
+    const [savedMdPlanSync, setSavedMdPlanSync] = useState(false);
     const [checklistSync, setChecklistSync] = useState(false);
     const [activeChecklistSync, setActiveChecklistSync] = useState(false);
     const [syncDone, setSyncDone] = useState(false);
@@ -30,7 +33,8 @@ export default function UsernameSetup() {
 
     const fetchLocal = async () => {
         setLocalAchievements(await achievementsStore.getAll());
-        setLocalRunPlans(await runPlansStore.getAll());
+        setLocalMdPlans(await mdPlansStore.getAll());
+        setLocalSavedMdPlans(await savedMdPlansStore.getAll());
         setLocalChecklists(await checklistsStore.getAll());
         setLocalActiveChecklists(await activeChecklistsStore.getAll());
         setLocalLoading(false);
@@ -97,7 +101,7 @@ export default function UsernameSetup() {
         return <p style={{ textAlign: 'center', marginTop: '2rem' }}>Checking for local data...</p>;
     }
 
-    if(!syncDone && (localAchievements.length !== 0 || localRunPlans.length !== 0 || localChecklists.length !== 0 || localActiveChecklists.length !== 0)) {
+    if(!syncDone && (localAchievements.length !== 0 || localMdPlans.length !== 0 || localSavedMdPlans.length !== 0 || localChecklists.length !== 0 || localActiveChecklists.length !== 0)) {
         const handleSync = async () => {
             setSyncing(true);
             setError("");
@@ -107,8 +111,30 @@ export default function UsernameSetup() {
                 achievementsStore.remove("main");
             }
 
-            if(runPlanSync && localRunPlans.length !== 0) {
-                
+            if(mdPlanSync && localMdPlans.length !== 0) {
+                for (const plan of localMdPlans) {
+                    try {
+                        const data = await createMdPlan(plan);
+                        if (data) await mdPlansStore.remove(plan.id);
+                    } catch (err) {
+                        setError("Failed to sync an md plan, try again or cancel syncing.");
+                        setSyncing(false);
+                        break;
+                    }
+                }
+            }
+
+            if(savedMdPlanSync && localSavedMdPlans.length !== 0) {
+                for (const planId of localSavedMdPlans) {
+                    try {
+                        const data = await toggleSave("md_plan", planId);
+                        if (data) await savedMdPlansStore.remove(planId);
+                    } catch (err) {
+                        setError("Failed to sync an md plan save, try again or cancel syncing.");
+                        setSyncing(false);
+                        break;
+                    }
+                }
             }
 
             if(checklistSync && localChecklists.length !== 0) {
@@ -152,10 +178,18 @@ export default function UsernameSetup() {
                 null
             }
             {
-                localRunPlans.length !== 0 ?
+                localMdPlans.length !== 0 ?
                 <label>
-                    <input type="checkbox" checked={runPlanSync} onChange={e => setRunPlanSync(e.target.checked)} />
-                    Run Plans
+                    <input type="checkbox" checked={mdPlanSync} onChange={e => setMdPlanSync(e.target.checked)} />
+                    MD Plans
+                </label> :
+                null
+            }
+            {
+                localSavedMdPlans.length !== 0 ?
+                <label>
+                    <input type="checkbox" checked={savedMdPlanSync} onChange={e => setSavedMdPlanSync(e.target.checked)} />
+                    Saved MD Plans
                 </label> :
                 null
             }

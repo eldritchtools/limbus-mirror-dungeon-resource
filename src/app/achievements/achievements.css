@@ -93,6 +93,22 @@
   transition: all 0.2s ease;
 }
 
+.checkmark.partial {
+  background-color: #e6b800; /* yellow */
+  border-color: #e6b800;
+}
+
+.checkmark.partial:after {
+  display: block;
+  left: 3px;
+  top: 6px;
+  width: 8px;
+  height: 2px;
+  background-color: white;
+  border: none;
+  transform: none;
+}
+
 .checkbox-container input:checked ~ .checkmark {
   background-color: #3fa76d;
   border-color: #3fa76d;

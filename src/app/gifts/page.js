@@ -7,6 +7,7 @@ import { TierComponent } from "@eldritchtools/limbus-shared-library";
 import Select from "react-select";
 import { selectStyleVariable } from "../styles";
 import useLocalState from "../lib/useLocalState";
+import { generalTooltipProps } from "../components/GeneralTooltip";
 
 function GiftDesc({ gift, tagStrips }) {
     const [expand, setExpand] = useState(false);
@@ -272,9 +273,7 @@ function GiftsTab() {
                     <input value={searchString} onChange={handleSearchChange} />
                     <label>
                         <input type="checkbox" checked={includeDescription} onChange={e => setIncludeDescription(e.target.checked)} />
-                        <span
-                            data-tooltip-id="genericTooltip"
-                            data-tooltip-content={"This will check the description for all enhancement levels of the gift."}
+                        <span {...generalTooltipProps("This will check the description for all enhancement levels of the gift.")}
                             style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
                         >
                             Include Description
@@ -313,9 +312,7 @@ function GiftsTab() {
                 <div style={{display: "flex"}}>
                     <label>
                         <input type="checkbox" checked={showTagStrips} onChange={e => setShowTagStrips(e.target.checked)} />
-                        <span
-                            data-tooltip-id="genericTooltip"
-                            data-tooltip-content={"Display colored strips on gifts to quickly see their tags. (Experimental Feature)"}
+                        <span {...generalTooltipProps("Display colored strips on gifts to quickly see their tags. (Experimental Feature)")}
                             style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
                         >
                             Show Tag Strips

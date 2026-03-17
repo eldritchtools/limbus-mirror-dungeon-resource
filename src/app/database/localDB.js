@@ -4,9 +4,10 @@ export const db = new Dexie("limbus-mirror-dungeon-resource");
 
 db.version(1).stores({
     achievements: "id",
-    runplans: "++id",
+    mdplans: "++id",
     checklists: "++id",
-    activechecklists: "id"
+    activechecklists: "id",
+    savedplans: "id"
 });
 
 function makeStore(table) {
@@ -25,8 +26,9 @@ function isLocalId(id) {
 }
 
 export const achievementsStore = makeStore(db.achievements);
-export const runPlansStore = makeStore(db.runplans);
+export const mdPlansStore = makeStore(db.mdplans);
 export const checklistsStore = makeStore(db.checklists);
 export const activeChecklistsStore = makeStore(db.activechecklists);
+export const savedMdPlansStore = makeStore(db.savedplans);
 
 export { isLocalId };
