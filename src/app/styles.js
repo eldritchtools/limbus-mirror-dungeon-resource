@@ -101,5 +101,6 @@ const selectStyleVariable = {
 };
 
 const tooltipStyle = { outline: "1px #ddd solid", backgroundColor: "#000000", borderRadius: "1rem", zIndex: "9999" };
+const tabStyle = { fontSize: "1.2rem", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" };
 
-export {selectStyle, selectStyleVariable, selectStyleWide, tooltipStyle};
+export {selectStyle, selectStyleVariable, selectStyleWide, tooltipStyle, tabStyle};

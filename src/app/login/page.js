@@ -91,6 +91,7 @@ function AuthForm() {
                 {isLogin ? 'Login' : 'Sign Up'}
             </h2>
             <div style={{ fontSize: "0.8rem", marginBottom: "0.75rem", textAlign: "center" }}>(Authentication via Supabase)</div>
+            <div style={{ fontSize: "0.8rem", marginBottom: "0.75rem", textAlign: "center", maxWidth: "30ch" }}>{"If you're coming from the Team Building Hub, you can use the same account. Simply login again with the same credentials."}</div>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />

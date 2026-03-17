@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/database/authProvider';
-import { achievementsStore, runPlansStore, checklistsStore, activeChecklistsStore } from '@/app/database/localDB';
+import { achievementsStore, checklistsStore, activeChecklistsStore, mdPlansStore, savedMdPlansStore } from '@/app/database/localDB';
 
 export default function AuthCallback() {
     const router = useRouter();
@@ -28,11 +28,12 @@ export default function AuthCallback() {
 
         const checkLocal = async () => {
             const achievements = await achievementsStore.getAll();
-            const runPlans = await runPlansStore.getAll();
+            const mdPlans = await mdPlansStore.getAll();
+            const savedMdPlans = await savedMdPlansStore.getAll();
             const checklists = await checklistsStore.getAll();
             const activeChecklists = await activeChecklistsStore.getAll();
 
-            if (achievements.length !== 0 || runPlans.length !== 0 || checklists.length !== 0 || activeChecklists.length !== 0) {
+            if (achievements.length !== 0 || mdPlans.length !== 0 || savedMdPlans.length !== 0 || checklists.length !== 0 || activeChecklists.length !== 0) {
                 (async () => {
                     router.replace('/login/setup');
                 })();

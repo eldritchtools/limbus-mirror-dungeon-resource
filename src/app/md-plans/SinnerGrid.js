@@ -2,7 +2,7 @@ import { EgoImg, IdentityImg, RarityImg, SinnerIcon, useData } from "@eldritchto
 import "./SinnerGrid.css";
 import { useMemo } from "react";
 
-function IdentityProfile({ identity, displayType, sinnerId, uptie, level }) {
+function IdentityProfile({ identity, sinnerId, uptie, level }) {
     if (!identity) return <div style={{ width: "100%", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <SinnerIcon num={sinnerId} style={{ width: "75%" }} />
     </div>
@@ -11,9 +11,9 @@ function IdentityProfile({ identity, displayType, sinnerId, uptie, level }) {
     if (uptie) otherProps.displayUptie = true;
     if (level) otherProps.level = level;
 
-    return identity && displayType !== null ?
-        <div tooltipId={"identity-tooltip"} tooltipContent={identity.id} style={{ position: "relative", width: "100%" }}>
-            <IdentityImg identity={identity} uptie={(!uptie || uptie === "") ? 4 : uptie} displayName={displayType === "names"} displayRarity={true} {...otherProps} />
+    return identity ?
+        <div data-tooltip-id={"identity-tooltip"} data-tooltip-content={identity.id} style={{ position: "relative", width: "100%" }}>
+            <IdentityImg identity={identity} uptie={(!uptie || uptie === "") ? 4 : uptie} displayName={true} displayRarity={true} {...otherProps} />
         </div> :
         <div style={{ width: "100%", aspectRatio: "1/1", boxSizing: "border-box" }} />
 }
@@ -26,7 +26,7 @@ const egoRankReverseMapping = {
     4: "aleph"
 }
 
-function EgoProfile({ ego, displayType, rank, threadspin }) {
+function EgoProfile({ ego, rank, threadspin }) {
     if (!ego) return <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", width: "100%", aspectRatio: "4/1" }}>
         <RarityImg rarity={egoRankReverseMapping[rank]} alt={true} style={{ width: "18%", height: "auto" }} />
     </div>
@@ -38,10 +38,10 @@ function EgoProfile({ ego, displayType, rank, threadspin }) {
         tooltipId = `${tooltipId}|${threadspin}`;
     }
 
-    return ego && displayType !== null ?
-        <div tooltipId={"ego-tooltip"} tooltipContent={tooltipId}
+    return ego ?
+        <div data-tooltip-id={"ego-tooltip"} data-tooltip-content={tooltipId}
             style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", width: "100%", aspectRatio: "4/1" }}>
-            <EgoImg ego={ego} banner={true} type={"awaken"} displayName={displayType === "names"} displayRarity={false} {...otherProps} />
+            <EgoImg ego={ego} banner={true} type={"awaken"} displayName={true} displayRarity={false} {...otherProps} />
         </div> :
         <div style={{ width: "100%", aspectRatio: "4/1", boxSizing: "border-box" }} />
 }
@@ -88,7 +88,6 @@ export default function SinnerGrid({ identityIds, egoIds, identityUpties, identi
                     <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
                         <IdentityProfile
                             identity={identities[identityIds[index]] || null}
-                            displayType={displayType}
                             sinnerId={index + 1}
                             uptie={upties ? upties[index] : null}
                             level={levels ? levels[index] : null}
@@ -100,7 +99,6 @@ export default function SinnerGrid({ identityIds, egoIds, identityUpties, identi
                             <EgoProfile
                                 key={rank}
                                 ego={egos[egoIds[index][rank]] || null}
-                                displayType={displayType}
                                 rank={rank}
                                 threadspin={threadspins ? threadspins[index][rank] : null}
                             />)}

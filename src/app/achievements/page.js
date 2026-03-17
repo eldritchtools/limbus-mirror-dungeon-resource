@@ -17,6 +17,17 @@ import ReactTimeAgo from 'react-time-ago';
 // import achievementsPre from "./testachievements.json";
 
 function Achievement({ achievement, tracking, setAchievementTracking, isSmall }) {
+    const checkboxRef = useRef(null);
+
+    const isChecked = tracking[achievement.id] > achievement.points.length - 1;
+    const isPartial = tracking[achievement.id] > 0 && tracking[achievement.id] <= achievement.points.length - 1;
+
+    useEffect(() => {
+        if (checkboxRef.current) {
+            checkboxRef.current.indeterminate = isPartial;
+        }
+    }, [isPartial]);
+
     let subAchievements = null;
     let achievementText = achievement.text;
 
@@ -57,11 +68,11 @@ function Achievement({ achievement, tracking, setAchievementTracking, isSmall })
         <summary className="summary">
             <div style={{ display: "flex", gap: "0.1rem", width: "85%", alignItems: "center" }}>
                 <label className="checkbox-container">
-                    <input type="checkbox" onChange={() => {
-                        if (tracking[achievement.id] > len - 1) setAchievementTracking(0);
+                    <input ref={checkboxRef} type="checkbox" onChange={() => {
+                        if (isChecked) setAchievementTracking(0);
                         else setAchievementTracking(len);
-                    }} checked={tracking[achievement.id] > len - 1} />
-                    <span className="checkmark" />
+                    }} checked={isChecked} />
+                    <span className={`checkmark ${isPartial ? "partial" : isChecked ? "checked" : ""}`}/>
                 </label>
                 <span className="points">+{points}</span>
                 <span className="item-label">{achievementText}</span>
@@ -234,7 +245,7 @@ export default function AchievementsPage() {
                 if (tier === 0) return;
                 const achievement = achievementsMapped[id];
                 if (Array.isArray(achievement.points)) {
-                    for(let i=0; i<tier; i++) pts += achievement.points[i];
+                    for (let i = 0; i < tier; i++) pts += achievement.points[i];
                 } else {
                     pts += achievement.points
                 }

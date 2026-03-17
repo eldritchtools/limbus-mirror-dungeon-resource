@@ -1,0 +1,42 @@
+.grace-grid {
+  display: grid;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+/* Default (large screens): 5 columns */
+.grace-grid {
+  grid-template-columns: repeat(5, 175px);
+}
+
+/* Mobile fallback: 1–2 columns */
+@container (max-width: 399px) {
+  .grace-grid {
+    grid-template-columns: repeat(2, 175px);
+  }
+}
+
+.grace-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  border: 1px #aaa solid;
+  border-radius: 1rem;
+  width: 175px;
+  box-sizing: border-box;
+  transition: ease 0.2s all;
+}
+
+.grace-component.active {
+  background: #2f2f2f;
+}
+
+.grace-component.inactive {
+  opacity: 0.7;
+}
+
+.grace-component:hover {
+  background: #3f3f3f;
+}

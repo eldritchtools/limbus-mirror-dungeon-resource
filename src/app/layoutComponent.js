@@ -2,7 +2,6 @@
 
 import { DataProvider, getMeta, GiftTooltip, StatusTooltip } from "@eldritchtools/limbus-shared-library";
 import { Layout } from "@eldritchtools/shared-components";
-import Link from "next/link";
 import UserStatus from "./components/UserStatus";
 import { AuthProvider } from "./database/authProvider";
 import { useEffect, useState } from "react";
@@ -15,6 +14,8 @@ import { Tooltip } from 'react-tooltip';
 import { tooltipStyle } from "./styles";
 import { IdentityTooltip } from "./components/IdentityTooltip";
 import { EgoTooltip } from "./components/EgoTooltip";
+import NoPrefetchLink from "./NoPrefetchLink";
+import { GeneralTooltip } from "./components/GeneralTooltip";
 
 TimeAgo.addDefaultLocale(en)
 
@@ -24,7 +25,7 @@ const paths = [
     { path: "/fusions", title: "Fusion Recipes" },
     { path: "/universal", title: "Universal Gifts/Gift Combos" },
     { path: "/themepacks", title: "Theme Packs" },
-    { path: "/floorplanner", title: "Floor Planner" },
+    { path: "/md-plans", title: "MD Plans" },
 ]
 
 const description = <span>
@@ -51,7 +52,7 @@ export default function LayoutComponent({ children }) {
                 developerName={"Project Moon"}
                 githubLink={"https://github.com/eldritchtools/limbus-mirror-dungeon-resource"}
                 paths={paths}
-                LinkComponent={Link}
+                LinkComponent={NoPrefetchLink}
                 topComponent={<UserStatus />}
             >
                 <DataProvider>
@@ -61,6 +62,7 @@ export default function LayoutComponent({ children }) {
                     <GiftTooltip />
                     <StatusTooltip />
                     <ThemePackNameTooltip />
+                    <GeneralTooltip />
                     <Tooltip id={"genericTooltip"} render={({ content }) => <div style={{ whiteSpace: "pre-wrap" }}>{content}</div>} style={tooltipStyle} />
                 </DataProvider>
             </Layout>

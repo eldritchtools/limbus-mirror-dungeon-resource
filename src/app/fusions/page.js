@@ -8,6 +8,7 @@ import { useBreakpoint } from "@eldritchtools/shared-components";
 import Select from "react-select";
 import { selectStyle } from "../styles";
 import useLocalState from "../lib/useLocalState";
+import { generalTooltipProps } from "../components/GeneralTooltip";
 
 const keywords = ["Burn", "Bleed", "Tremor", "Rupture", "Sinking", "Poise", "Charge", "Slash", "Pierce", "Blunt", "Keywordless"];
 
@@ -219,9 +220,7 @@ function FusionsTab() {
                     <input value={searchString} onChange={handleSearchChange} />
                     <label>
                         <input type="checkbox" checked={includeDescription} onChange={e => setIncludeDescription(e.target.checked)} />
-                        <span
-                            data-tooltip-id="genericTooltip"
-                            data-tooltip-content={"This will check the description for all enhancement levels of the gift."}
+                        <span {...generalTooltipProps("This will check the description for all enhancement levels of the gift.")}
                             style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
                         >
                             Include Description
@@ -229,9 +228,7 @@ function FusionsTab() {
                     </label>
                     <label>
                         <input type="checkbox" checked={includeIngredients} onChange={e => setIncludeIngredients(e.target.checked)} />
-                        <span
-                            data-tooltip-id="genericTooltip"
-                            data-tooltip-content={"This will check for the search text in the ingredients as well. Also affected by 'Include Description'."}
+                        <span {...generalTooltipProps("This will check for the search text in the ingredients as well. Also affected by 'Include Description'.")}
                             style={{ borderBottom: "1px #aaa dotted", cursor: "help" }}
                         >
                             Include Ingredients
