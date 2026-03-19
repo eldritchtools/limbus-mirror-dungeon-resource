@@ -1,5 +1,5 @@
 {
-    "__Season__": 7,
+    "__Season__": "7",
     "Collection": [
         {
             "id": "col_clear_with_count", 
@@ -7,19 +7,16 @@
             "points": [
                 10,
                 30,
-                40,
                 50
             ],
             "replace": {
                 "count": [
                     10,
                     20,
-                    25,
                     30
                 ]
             },
             "hardonly": [
-                false,
                 false,
                 false,
                 false
@@ -55,7 +52,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "This should be doable on either normal or hard as long as you're able to get a few theme pack specific gifts. Don't forget to use fusion and keyword refresh.\n\nWARNING: A fusion only counts as one gift, so fusing reduces your total number of gifts for that keyword. Make sure you can still reach 15 before fusing if you're aiming for this achievement. Because of this, they're not included in the list below.\nIf you plan to fuse Bloody Mist, subtract 3 from your total Bleed gifts count. If you plan to fuse Hemorrhagic Shock, subtract 2. Subtract 1 for the canto/intervallo fusions."
+                    "text": "This should be doable on either normal or hard even without the theme pack specific gifts. Don't forget to use fusion and keyword refresh.\n\nWARNING: A fusion only counts as one gift, so fusing reduces your total number of gifts for that keyword. Make sure you can still reach 15 before fusing if you're aiming for this achievement. Because of this, they're not included in the list below.\nIf you plan to fuse Bloody Mist, subtract 3 from your total Bleed gifts count. If you plan to fuse Hemorrhagic Shock, subtract 2. Subtract 1 for the canto/intervallo fusions."
                 },
                 {
                     "type": "showGifts",
@@ -196,7 +193,7 @@
             "text": "Clear Mirror Dungeon at Floor 5 or higher with [count]+ Tier 4 E.G.O Gifts",
             "points": [
                 30,
-                40,
+                50,
                 80
             ],
             "replace": {
@@ -228,13 +225,11 @@
             "text": "Clear Mirror Dungeon at Floor 5 or higher with [count]+ Fusion Recipe-only Tier 4 E.G.O Gifts",
             "points": [
                 10,
-                30,
                 50
             ],
             "replace": {
                 "count": [
                     2,
-                    5,
                     10
                 ]
             },
@@ -274,25 +269,6 @@
             ]
         },
         {
-            "id": "col_clear_with_tier5", 
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 1+ Tier 5 or EX E.G.O Gifts",
-            "points": 100,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You're most likely going to have to fuse Lunar Memory on hard mode to get this acheivement since the two EX gifts are very difficult to get.\n\nIn case you're unaware, this is how you get the EX gifts:\nA Certain Philosophy: Fail a 99% chance fusion (You can get 99% chance by using starlight boost while fusing 3 items or by fusing 4 items in a super shop on hard)\nWealth: Succeed in the slot machine event."
-                },
-                {
-                    "type": "showGifts",
-                    "tier": [
-                        "5",
-                        "EX"
-                    ]
-                }
-            ]
-        },
-        {
             "id": "col_unlock_normal", 
             "text": "Unlock 40 or more Normal Difficulty Theme Packs",
             "points": 50,
@@ -313,6 +289,18 @@
                 {
                     "type": "text",
                     "text": "Should be achieved normally by doing MDs and picking new theme packs whenever they appear."
+                }
+            ]
+        },
+        {
+            "id": "col_unlock_extreme", 
+            "text": "Unlock 10 or more EXTREME Difficulty Theme Packs",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Should be achieved normally by doing MDEs and picking new theme packs whenever they appear."
                 }
             ]
         },
@@ -437,13 +425,22 @@
         },
         {
             "id": "col_unlock_gifts",
-            "text": "Unlock 300 E.G.O Gifts in the E.G.O Gift Compendium",
-            "points": 50,
-            "hardonly": true,
+            "text": "Unlock [count] E.G.O Gifts in the E.G.O Gift Compendium",
+            "points": [
+                50,
+                80
+            ],
+            "replace": {
+                "count": [
+                    300,
+                    350
+                ]
+            },
+            "hardonly": [false, true],
             "tips": [
                 {
                     "type": "text",
-                    "text": "Should be achieved normally by doing MDs and picking new gifts whenever they appear. Unfortunately there are too many hard only gifts for this to be achievable on normal, but this may change when the intervallo and other future events are released."
+                    "text": "Should be achieved normally by doing MDs and picking new gifts whenever they appear. Unfortunately there are too many hard only gifts for 350 to be achievable on normal, but this may change when more gifts are added in the future."
                 }
             ]
         }
@@ -453,6 +450,7 @@
             "id": "clr_any_count",
             "text": "Clear Mirror Dungeon at Floor 5 or higher [count] time(s)",
             "points": [
+                10,
                 10,
                 20,
                 30,
@@ -465,10 +463,12 @@
                     10,
                     20,
                     30,
+                    40,
                     50
                 ]
             },
             "hardonly": [
+                false,
                 false,
                 false,
                 false,
@@ -488,15 +488,13 @@
             "points": [
                 20,
                 30,
-                40,
-                50
+                40
             ],
             "replace": {
                 "count": [
                     1,
                     5,
-                    10,
-                    15
+                    10
                 ]
             },
             "hardonly": [
@@ -508,7 +506,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Running MDH once a week should be enough to get you most of the way there (or the entire way if the next season is delayed). If you're clearing the other hard only achievements, you'll probably finish this way before you complete everything else."
+                    "text": "Running MDH once a week should be enough to get you through this achievement (unless you start really late into the season). If you're clearing the other hard only achievements, you'll probably finish this way before you complete everything else."
                 }
             ]
         },
@@ -522,8 +520,8 @@
                 10,
                 10,
                 20,
+                20,
                 30,
-                40,
                 40,
                 50,
                 60,
@@ -575,11 +573,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Everything below was written prior to the release of Extreme which extended this achievement from F10 to F15."
-                },
-                {
-                    "type": "text",
-                    "text": "This basically means clear to the end of MDI. There's way too many ways to clear it to actually recommend anything regarding team building. Just bring your strongest team do the best you can.\n\nIf you're struggling, there's a number of things that can help:\n- Pick theme packs that have exclusive gifts for your team's main keyword(s). The fusions are especially useful, but the rest of the gifts are also good. Remember that you can choose theme packs using starlight now, so there's no reason for you to miss them.\n- Buy more starlight buffs at the beginning of the run. They can make a massive difference.\n- Avoid Refraction Railway theme packs. They add an additional +3 levels to all enemies on clear.\n- Avoid difficult theme packs (e.g. The Dream Ending and The Surrendered Witnessing are particularly hard because you have to fight Sancho and possibly Jia Qiu) or theme packs that counter your keyword (e.g. Murder on the WARP Express for Bleed or Yield My Flesh to Claim Their Bones for Sinking).\n- Try picking the least painful Mounting Trials at the end of every floor. Remember that 3 offense levels = 1 clash power. Picking +3 offense levels is better than picking +2 clash power. Also, unless you're using Sinking or have some other ways of reducing enemy SP, always avoid coin power.\n- Aim to fuse Lunar Memory after you've gotten all the important gifts for your keyword. Potentially dealing up to 4x damage speeds up fights a lot and reduces chances for enemies to damage you. You also stagger them much faster, which makes high atk weight E.G.Os incredibly useful to stagger entire waves at higher floors."
+                    "text": "There's way too many different ways and strategies to clear MDI and MDE to actually recommend anything specific regarding team building. Just bring your strongest team and do the best you can.\n\nIf you're struggling, there's a number of tips that can help:\n- Using multi-status teams can help a lot since you can activate more fusions and more gifts\n- Pick theme packs that have exclusive gifts for your team's main keyword(s). The fusions are especially useful, but the rest of the gifts are also good. Remember that you can choose theme packs using starlight, so there's no reason for you to miss them.\n- Buy more starlight buffs at the beginning of the run. They can make a massive difference. Most MDE runs, especially at A50, assume that you take all starlight buffs at ++ level.\n- Avoid Refraction Railway theme packs unless you need a specific gift from them (e.g. Bridle from RR2). They add an additional +3 levels to all enemies on clear.\n- Avoid difficult theme packs (e.g. The Dream Ending and The Surrendered Witnessing are particularly hard because you have to fight Sancho and possibly Jia Qiu) or theme packs that counter your keyword (e.g. Murder on the WARP Express for Bleed or Yield My Flesh to Claim Their Bones for Sinking).\n- Try picking the least painful Mounting Trials at the end of every floor. Remember that 3 offense levels = 1 clash power. Picking +3 offense levels is better than picking +2 clash power. Also, unless you're using Sinking or have some other ways of reducing enemy SP, always avoid coin power.\n- Aim to fuse Lunar Memory after you've gotten all the important gifts for your keyword. The increase in damage speeds up fights a lot and reduces chances for enemies to damage you. You also stagger them much faster, which makes high atk weight E.G.Os incredibly useful to stagger entire waves at higher floors."
                 }
             ]
         },
@@ -594,68 +588,13 @@
                     "text": "See the 'Clear Mirror Dungeon up to Floor 1~10 once' achievement for tips if you're struggling with clearing MDI."
                 }
             ]
-        },
-        {
-            "id": "clr_railway",
-            "text": "Clear 6 Refraction Railway related Theme Packs in a single Mirror Dungeon run",
-            "points": 100,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "showThemePacks",
-                    "tag": "Refraction Railway"
-                },
-                {
-                    "type": "text",
-                    "text": "You're required to take Line #2 on Floor 4, but you're free to choose the rest in any order on the floors after that. You have a 1 floor leeway to choose whatever you want between F5-10, so you can choose a theme pack that will give you good gifts to help. Just remember that pushing the remaining RR packs back will also make them stronger.\n\nBring a team that can clash really well. RR theme packs give enemies an additional +3 levels on clear. This adds up quickly making enemies clash higher than usual especially on higher floors.\n\nIf you have weak AOE options, you might want to take Lines 4 and 5 earlier to deal with the envy peccatula while they're still weaker."
-                },
-                {
-                    "type": "showThemePacksByFloor",
-                    "tag": "Refraction Railway",
-                    "highlight": {
-                        "4": [
-                            "1109"
-                        ]
-                    }
-                }
-            ]
-        },
-        {
-            "id": "clr_story",
-            "text": "Clear 8 or more Story Theme Packs with Canto names in a single Mirror Dungeon run",
-            "points": 100,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "showThemePacks",
-                    "tag": "Canto Name"
-                },
-                {
-                    "type": "text",
-                    "text": "For the first 3 floors, you're required to take 'The Outcast', 'The Unloving', and 'The Unconfronting' in that order. The rest of the theme packs can be chosen in any order after that. You're free to take on up to 2 theme packs of your choice if you feel you need the exclusive gifts."
-                },
-                {
-                    "type": "showThemePacksByFloor",
-                    "tag": "Canto Name",
-                    "highlight": {
-                        "1": [
-                            "1002"
-                        ],
-                        "2": [
-                            "1005"
-                        ],
-                        "3": [
-                            "1008"
-                        ]
-                    }
-                }
-            ]
         }
     ],
+    
     "Loadout": [
         {
             "id": "lod_burn",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Burn Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Burn Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -672,7 +611,7 @@
         },
         {
             "id": "lod_bleed",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Bleed Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Bleed Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -689,7 +628,7 @@
         },
         {
             "id": "lod_tremor",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Tremor Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Tremor Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -706,7 +645,7 @@
         },
         {
             "id": "lod_rupture",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Rupture Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Rupture Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -723,7 +662,7 @@
         },
         {
             "id": "lod_sinking",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Sinking Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Sinking Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -740,7 +679,7 @@
         },
         {
             "id": "lod_poise",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Poise Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Poise Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -757,7 +696,7 @@
         },
         {
             "id": "lod_charge",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Charge Keyword Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Charge Keyword Identities in your Loadout at the time of completion",
             "points": 10,
             "hardonly": false,
             "tips": [
@@ -773,91 +712,8 @@
             ]
         },
         {
-            "id": "lod_tcorp",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 3+ T Corp. and 2+ Yurodiviye Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
-            "points": 30,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Bring at least 3 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
-                },
-                {
-                    "type": "showIds",
-                    "faction": [
-                        "T Corp.",
-                        "Yurodiviye"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "lod_rcorp",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 4 or more R Corp. Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
-            "points": 30,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Bring the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "R Corp."
-                }
-            ]
-        },
-        {
-            "id": "lod_zwei",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 4 or more Zwei Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
-            "points": 50,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Bring at least 4 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "Zwei Association"
-                }
-            ]
-        },
-        {
-            "id": "lod_cinq",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 3 or more Cinq Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
-            "points": 30,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Bring at least 3 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "Cinq Association"
-                }
-            ]
-        },
-        {
-            "id": "lod_rosespanner",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 3 or more Rosespanner Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
-            "points": 50,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Bring the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "Rosespanner Workshop"
-                }
-            ]
-        },
-        {
-            "id": "lod_heishou",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Heishou Pack Identities in your Loadout at the time of completion (Incompletable by Rental Teams)",
+            "id": "lod_liu",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 5 or more Liu Identities in your Loadout at the time of completion",
             "points": 30,
             "hardonly": false,
             "tips": [
@@ -868,94 +724,235 @@
                 {
                     "type": "showIds",
                     "faction": [
-                        "Heishou Pack"
+                        "Liu Association"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_middle",
+            "text": "Clear Mirror Dungeon at Floor 5 or higher with 3 or more Middle Identities in your Loadout at the time of completion",
+            "points": 30,
+            "hardonly": false,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring at least 3 of the following ids. You don't have to use them in combat if you don't want to. They just have to be in your loadout."
+                },
+                {
+                    "type": "showIds",
+                    "faction": [
+                        "The Middle"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_canto9",
+            "text": "Defeat the 4 bosses of  'Charm, Wander, Doubt', 'Textbook', 'Blade and Artwork' and 'The Unsevering' Theme Packs with 3 or more House of Spiders Identities, including LCB Sinner Ryoshu or House of Spiders Ryoshu (거미집 료슈) in your Loadout (Excluding Backup Units; incompletable by Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the following ids and complete all 4 listed theme packs. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "faction": "The House of Spiders"
+                },
+                {
+                    "type": "showThemePacksByFloor",
+                    "tag": "Canto IX"
+                }
+            ]
+        },
+        {
+            "id": "lod_canto6",
+            "text": "Defeat 'The Heartbreaking' Theme Pack boss with 3 or more Wuthering Heights Identities, including 'Wild Hunt Heathcliff', in your Loadout (Excluding Backup Units; incompletable by Rental Teams)",
+            "points": 50,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the following ids and complete the listed theme pack. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "faction": "Wuthering Heights"
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1018"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_canto7",
+            "text": "Defeat 'The Infinite Procession' Theme Pack boss with a Loadout consisting of Cinq Assoc. West Section 3 Meursault, Zwei Assoc. West Section 3 Sinclair, Fanghunt Office Fixer Hong Lu, and Firefist Office Survivor Gregor (Excluding Backup Units; incompletable by Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the following ids and complete the listed theme pack. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "ids": [
+                        "10511",
+                        "11010",
+                        "10610",
+                        "11211"
+                    ]
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1020"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_motwe",
+            "text": "Defeat 'Murder on the Warp Express BokGak' Theme Pack boss with 4 or more Bloodfiend Identities in your Loadout (Excluding Backup Units; incompletable with Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the following ids and complete the listed theme pack. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "faction": [
+                        "Bloodfiend"
+                    ]
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1123"
                     ]
                 }
             ]
         },
         {
             "id": "lod_canto3",
-            "text": "Defeat the 'The Unconfronting' Theme Pack boss with 4 or more N Corp. Fanatic Identities, including 'The One Who Shall Grip Sinclair', in your Loadout (Counting Backup Units; incompletable by Rental Teams)",
+            "text": "Defeat 'The Unconfronting' Theme Pack boss with 2 or more Mechanical Amalgan Identities in your Loadout (Excluding Backup Units; incompletable with Rental Teams)",
             "points": 30,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "At least 4 of the following ids must be part of your loadout when fighting the boss. 'The Unconfronting' only appears on F3 so make sure not to miss it."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "N Corp. Fanatic"
-                },
-                {
-                    "type": "text",
-                    "text": "This achievement can be done in the same run as the other loadout related achievements if you buy identity replacements in the shop since it only requires that you use them during the boss fight."
-                }
-            ]
-        },
-        {
-            "id": "lod_canto4",
-            "text": "Defeat the 'The Unchanging' Theme Pack boss with 4 or more Technology Liberation Alliance Identities, including 'Effloresced E.G.O::Spicebush Yi Sang', in your Loadout (Counting Backup Units; incompletable by Rental Teams)",
-            "points": 40,
             "hardonly": true,
             "tips": [
                 {
                     "type": "text",
-                    "text": "The following ids must be part of your loadout when fighting the boss. 'The Unchanging' appears on F4 or above and only on hard."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "Technology Liberation Alliance"
-                },
-                {
-                    "type": "text",
-                    "text": "This achievement can be done in the same run as the other loadout related achievements if you buy identity replacements in the shop since it only requires that you use them during the boss fight."
-                }
-            ]
-        },
-        {
-            "id": "lod_canto5",
-            "text": "Defeat the 'The Evil Defining' Theme Pack boss with 3 or more of The Pequod Identities, including 'The Pequod Captain Ishmael', in your Loadout (Counting Backup Units; incompletable by Rental Teams)",
-            "points": 50,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "The following ids must be part of your loadout when fighting the boss. 'The Evil Defining' appears on F4 or above and only on hard."
-                },
-                {
-                    "type": "showIds",
-                    "faction": "The Pequod"
-                },
-                {
-                    "type": "text",
-                    "text": "This achievement can be done in the same run as the other loadout related achievements if you buy identity replacements in the shop since it only requires that you use them during the boss fight."
-                }
-            ]
-        },
-        {
-            "id": "lod_canto8",
-            "text": "Defeat the 'The Surrendered Witnessing' Theme Pack boss with 6 or more Identities Deployed. (Team must include 'The Lord of Hongyuan Hong Lu', 'Family Hierarch Candidate Ishmael', and at least 4 Heishou Pack Identities; counting Backup Units; incompletable by Rental Teams)",
-            "points": 60,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "The following ids, with the exception of at most 1 Heishou id, must be part of your loadout when fighting the boss. 'The Surrendered Witnessing' appears on F5 or above and only on hard."
+                    "text": "Bring the following ids and complete the listed theme pack. You must use them in combat. This theme pack is available in Floors 2 and 3."
                 },
                 {
                     "type": "showIds",
                     "faction": [
-                        "Jia Family",
-                        "Heishou Pack - Mao Branch",
-                        "Heishou Pack - Si Branch",
-                        "Heishou Pack - You Branch",
-                        "Heishou Pack - Wu Branch"
+                        "Mechanical Amalgam"
                     ]
                 },
                 {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1008"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_mid20",
+            "text": "Defeat 'Miracle in District 20 BokGak' Theme Pack boss with only the Identities of Heathcliff and Don Quixote participating in the battle. (Excluding Backup Units; incompletable with Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
                     "type": "text",
-                    "text": "This achievement can be done in the same run as the other loadout related achievements if you buy identity replacements in the shop since it only requires that you use them during the boss fight."
+                    "text": "You can use any id, but only bring Heathcliff and Don Quixote."
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1113"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_tkt",
+            "text": "Defeat 'Timekilling Time BokGak' Theme Pack boss with 3 or more T Corp. Identities in your Loadout (Excluding Backup Units; incompletable with Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the following ids and complete the listed theme pack. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "faction": "T Corp."
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1120"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_distort",
+            "text": "Defeat 'A Beautiful Voice' Theme Pack boss with 'Wild Hunt Heathcliff''s Identity in your Loadout (Excluding Backup Units; incompletable with Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the Wild Hunt id and complete the listed theme pack. You must use them in combat. This theme pack is only available on Extreme."
+                },
+                {
+                    "type": "showIds",
+                    "ids": [
+                        "10710"
+                    ]
+                },
+                {
+                    "type": "showThemePacks",
+                    "themePacks": [
+                        "1508"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "lod_sancho",
+            "text": "Defeat the 5 bosses of 'Murder on the Warp Express', 'Murder on the Warp Express BokGak', 'La Manchaland Re-opening', 'The Infinite Procession', and 'The Dream Ending' Theme Packs with 'The Manager of La Manchaland Don Quixote''s Identity in your Loadout (Excluding Backup Units; incompletable with Rental Teams)",
+            "points": 30,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Bring the Manager of La Manchaland id and complete all 5 of the listed theme packs. You must use them in combat."
+                },
+                {
+                    "type": "showIds",
+                    "ids": [
+                        "10310"
+                    ]
+                },
+                {
+                    "type": "showThemePacksByFloor",
+                    "themePacks": [
+                        "1106",
+                        "1123",
+                        "1019",
+                        "1020",
+                        "1021"
+                    ]
                 }
             ]
         },
@@ -1066,7 +1063,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Don't be afraid to get repeat gifts from rewards if you don't need the other gifts. Except for the tier 1 vestige, the other vestiges generally sell for more Cost than other gifts of the same tier.\n\nYou can aim for focused or Risky, Focused, or Abnormality encounters to get more gifts (to sell) and Cost, especially early on when they're still easier."
+                    "text": "Don't be afraid to get repeat gifts from rewards if you don't need the other gifts. Except for the tier 1 vestige, the other vestiges generally sell for a decent amount.\n\nYou can aim for focused or Risky, Focused, or Abnormality encounters to get more gifts (to sell) and Cost, especially early on when they're still easier."
                 }
             ]
         },
@@ -1110,7 +1107,7 @@
                 },
                 {
                     "type": "text",
-                    "text": "Don't be afraid to get repeat gifts from rewards if you don't need the others. The vestiges sell for more Cost than other gifts of the same tier. You can also fuse them with unenhanceable gifts to hopefully get enhanceable ones\n\nYou can aim for focused or Risky, Focused, or Abnormality encounters to get more gifts and Cost, especially early on when they're still easier."
+                    "text": "Don't be afraid to get repeat gifts from rewards if you don't need the others. The vestiges do sell for a decent amount. You can also fuse them with unenhanceable gifts to hopefully get enhanceable ones\n\nYou can aim for focused or Risky, Focused, or Abnormality encounters to get more gifts and Cost, especially early on when they're still easier."
                 },
                 {
                     "type": "enhanceCostSummary"
@@ -1130,12 +1127,14 @@
             "text": "Clear Mirror Dungeon at Floor 5 or higher with [count] or more Cost",
             "points": [
                 30,
-                70
+                70,
+                100
             ],
             "replace": {
                 "count": [
                     1000,
-                    3000
+                    3000,
+                    5000
                 ]
             },
             "hardonly": [
@@ -1145,7 +1144,19 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Similar to the other shop achievements, you're going to want to build up as much Cost as you can with Starlight buffs and Cost-related gifts. If you're doing this on normal, you're going to struggle a lot with the 3000 achievement, but on infinity you'll naturally get enough cost as long as you're not buying a lot from the shops trying to get the other achievements.\n\nThe same general tips from the other achievements to build up cost apply:\n- Get Starlight buffs that give you more Cost or free gifts\n- Buy starting gifts that give you more cost\n- Get duplicate gifts when you don't need anything else because vestiges of tier 2 and up sell for a lot\n- Aim for Risky, Focused, or Abnormality encounters, especially on lower floors when they're easier, to get more gifts and Cost"
+                    "text": "Similar to the other shop achievements, you're going to want to build up as much Cost as you can with Starlight buffs and Cost-related gifts. If you're doing this on normal, you're going to struggle a lot with the 5000 achievement, but on infinity or extreme you'll naturally get enough cost as long as you're not buying a lot from the shops trying to get the other achievements.\n\nThe same general tips from the other achievements to build up cost apply:\n- Get Starlight buffs that give you more Cost or free gifts\n- Buy starting gifts that give you more cost\n- Don't ignore chances for duplicate gifts since you can still sell the vestiges.\n- Aim for Risky, Focused, or Abnormality encounters, especially on lower floors when they're easier, to get more gifts and Cost"
+                }
+            ]
+        },
+        {
+            "id": "shp_replace_search",
+            "text": "In a single run, use the ID Skill Search once and clear Mirror Dungeon at Floor 5 or higher",
+            "points": 20,
+            "hardonly": true,
+            "tips": [
+                {
+                    "type": "text",
+                    "text": "Use the skill search function that appears in super shops in hard mode."
                 }
             ]
         },
@@ -1169,7 +1180,7 @@
             "tips": [
                 {
                     "type": "text",
-                    "text": "Unlike the other shop achievements, this doesn't require too much cost unless you're really unlucky with shop refreshes. You just have to get lucky enough with the random sinner that appears in the shop skill replacement enough times in the same run.\n\nReplacing all Skill 1s and 2s with Skill 3s requires exactly 5 skill replacements. On normal, you can only get 1 skill replacement per shop, while on hard you can get 1 per regular shop and 2 per super shop. This means if you're aiming to do this on normal, you're going to have to hope that the same sinner appears in the shop on every single floor. That is technically possible, but don't count on it. Replacing only skill 1s is more doable on normal but it will still require some really lucky rng. On hard, especially if you're doing infinity, you can aim to replace the skills of 2-3 sinners until one of them reaches the needed 5 replacements.\n\nIdeally you'll refresh until you can buy all the skill replacements on the sinners you chose for this on every floor, but if you're going all the way to F10 on infinity, you can probably skip a few floors if you're really unlucky and running out of cost."
+                    "text": "Unlike the other shop achievements, this doesn't require too much cost unless you're really unlucky with shop refreshes. You just have to get lucky enough with the random sinner that appears in the shop skill replacement enough times in the same run. This is even easier on hard now since they introduced the skill search feature.\n\nReplacing all Skill 1s and 2s with Skill 3s requires exactly 5 skill replacements. On normal, you can only get 1 skill replacement per shop, while on hard you can get 1 per regular shop and 2 per super shop. This means if you're aiming to do this on normal, you're going to have to hope that the same sinner appears in the shop on every single floor. That is technically possible, but don't count on it. Replacing only skill 1s is more doable on normal but it will still require some really lucky rng.\n\nIdeally you'll refresh until you can buy all the skill replacements on the sinners you chose for this on every floor, but if you're going all the way to F10 on infinity or F15 on extreme, you can probably skip a few floors if you're really unlucky and running out of cost."
                 }
             ]
         },
@@ -1194,634 +1205,6 @@
                 {
                     "type": "text",
                     "text": "Get as many gifts as you can, even those that don't really matter for your run. See the achievement on clearing while having up to 50 gifts for more tips on getting many gifts.\n\nOn the final floor you're aiming to do, fuse all the gifts you don't need to beat the boss. Fuse them 2 at a time to minimize the number of gifts you need and just keep fusing whatever you get with all the other gifts you don't need.\n\nFor 20 fusions, you only need at most 21 fodder gifts (including vestiges) to fuse. Less if you've already done other fusions for your team's keyword."
-                }
-            ]
-        },
-        {
-            "id": "shp_no_cost",
-            "text": "Clear Mirror Dungeon at Floor 5 or higher with 0 Cost when exiting the Store on your final floor",
-            "points": 100,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This one requires a bit of math and luck to clear. If you're good with numbers or are lucky with refreshes, you can probably figure out a way to spend all your cost from just refreshing and buying gifts, but the easiest and most consistent way I've found is the following:\n\nOn the floor you're planning to end the run on, try to make sure you don't have too much cost to spend, but also not too little that you won't have many options on what you can spend on. You also need to make sure that some of your sinners are damaged or have less than 45SP. If you have a lot of Cost to spend, you may need to have a lot of your sinners damaged.\n\nIf you have any of the gifts that have a chance to refund Cost when enhancing or refreshing in a shop, sell them if you plan to use enhance or refresh.\n\nIf you want to make the numbers slightly easier to compute, you can also sell the gifts that give you 30% discounts on refreshes, enhancements, or skill replacements\n\nYour goal is to buy/sell gifts, buy skill replacements, buy refreshes (both regular and keyword), and buy gift enhancements to make your cost a clean multiple of 100 (i.e. 100, 200, 300, etc). Ideally one that's not too high.\n\nOnce you hit that multiple of 100, you can spam the 'Heal Sinner' option until you have 0 Cost. This only works if you have damaged sinners or sinners at less than 45SP because the game disables the option if you don't. If you have only one damaged or sub-45SP sinner, spam the 'heal all sinners' option to give you more uses. Otherwise, always use the 'heal a specific sinner' option.\n\nIf you run out of sinners to heal but still have exactly 100 Cost, you can use the replace ids option to spend that last 100 Cost. If you still have more Cost, better luck on your next run.\n\nNote: If you plan to finish on F5 and have infinite mode on, the boss will reward you with Cost when you beat it even if you decline to continue into F6. I'm not sure if this will invalidate the achievement, but you might want to turn it off just in case."
-                }
-            ]
-        }
-    ],
-    "Combat": [
-        {
-            "id": "cmb_dmg",
-            "text": "Deal [count]+ Skill damage against an enemy with a single Skill use (Shield HP dmg & dmg dealt On Hit such as Sinking Deluge or Time Moratorium counts; excludes dmg from Keywords and other sources)",
-            "points": [
-                30,
-                40,
-                60,
-                80,
-                100
-            ],
-            "replace": {
-                "count": [
-                    1000,
-                    3000,
-                    5000,
-                    10000,
-                    15000
-                ]
-            },
-            "hardonly": [
-                false,
-                false,
-                false,
-                true,
-                true
-            ],
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "The achievement already tells you the two most straightforward ways to get this achievement: Sinking Deluge and Time Moratorium."
-                },
-                {
-                    "type": "text",
-                    "text": "Sinking Deluge: Having the enemy at 99/99 Sinking will only deal 9801 Gloom damage, meaning you'll need an enemy that's either weak (x1.5) or fatal (x2) to gloom. For weak, Sinking Deluge will deal 14701 damage. The remaining 300 damage will have to be dealt with the damage from Spicebush's s3. For fatal, assuming you have 99 potency, you'll need at least 76 Sinking count for Sinking Deluge to hit over 15000, less if you count the damage from the s3. If you're going to use this strategy, avoid bosses that change phases since most of them have mechanics that counter this (Gasharpoon or Timeripper remove their statuses whenever they change phases, Dong Rang Who Denies All limits damage received before his phase change, Sancho ends turns early if she hits certain HP thresholds, etc). The most ideal bosses to do this on are Shock Centipede and Skin Prophet (or specifically his candles) since they can't die immediately and are both fatal to Gloom. Getting Lunar Memory is recommended if you want to be able to try this against other bosses to make them Gloom fatal."
-                },
-                {
-                    "type": "showIds",
-                    "ids": [
-                        "10104"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "Time Moratorium: This method is probably easier but slightly less predictable than the Sinking Deluge method. Your goal is to apply Time Moratorium on an enemy, deal as much damage as possible, then before the next turn ends, burst all the damage dealt with another Time Moratorium. This will deal 130% of the damage you dealt as Sloth damage, which means you need to have dealt about 11500 damage between the first and second Time Moratorium. It's recommended that you use Amplitude Entanglement with Reverb, Everlasting, and Scorch and Bursting as many times as possible during this time. Since the enemy's HP is locked, this method isn't as restrictive with bosses as the Sinking Deluge method, but it's still recommended to get Lunar Memory."
-                },
-                {
-                    "type": "showIds",
-                    "ids": [
-                        "10309",
-                        "11113",
-                        "10609",
-                        "10512",
-                        "11013"
-                    ]
-                },
-                {
-                    "type": "showEGOs",
-                    "EGOs": [
-                        "20206",
-                        "20606"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "Strong AOE E.G.O (unsure): It might be possible to achieve this using a strong AOE E.G.O like Don's Yearning Mircalla or Hong Lu's Tears of the Tarnished Blood, but you'll need a lot of damage buffing E.G.O Gifts. You'll also need to do this in a fight with a lot of targets that don't die immediately like Skin Prophet's candles. Fights like the Railway Peccatula, Line 3, or Risky Encounters might also work if you pick up a lot of +max HP mounting trials."
-                }
-            ]
-        },
-        {
-            "id": "cmb_lvl",
-            "text": "In a single run, Clear Mirror Dungeon at Floor 5 or higher with all Identities at Level 80+",
-            "points": 80,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Make sure all your identities are max level, then buy the Favor of the Nebulae++ starlight buff, and get the gift Piece of Relationship++. This should be enough for everyone to reach level 80.\n\nAs far as I'm aware, these are the possible sources of levels in md:\n- Base sinner levels: up to 55\n- Favor of the Nebulae: +7 levels at F5, up to +15 levels at F10 at ++ tier\n- Piece of Relationship: +5 levels at base, up to +10 levels at ++\n- Abnormality Events: Dimensional Orbit Stabilizer (+2 levels), Bound King (+3 levels), Portrait of a Certain Day (+2 levels), Clockwork-time Roly-poly (+2 levels)\n\nYou can bring a lower tier of Favor of the Nebulae or Piece of Relationship if you get these events, but both are still required since the events only add up to +9 levels.\n\nNote that this is theoretically possible to do on Normal, but I'm listing it as Hard only because you have to get unrealistically lucky to meet all the conditions (get all 4 events above plus Piece of Relationship by F5)."
-                }
-            ]
-        },
-        {
-            "id": "cmb_crit",
-            "text": "In an Encounter, have 7 Sinners Hit the main target Critically with all of their remaining Coins",
-            "points": 70,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "(Credit to u/ey_lamo on Reddit for their post on this) Apparently there's a mistranslation issue with this achievement. The actual achievement is to critically hit with all coins on the first turn while having 7 sinners. The easiest way to do this is to get the Ragged Bamboo Hat gift from the To Claim Their Bones theme pack and using Blade Lineage ids."
-                },
-                {
-                    "type": "showIds",
-                    "faction": [
-                        "Blade Lineage"
-                    ]
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Ragged Bamboo Hat"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "This guarantees that all Blade Lineage ids will crit as long as they have Poise. Since there are 6 Blade Lineage ids in the game, you only need to get one more Poise id, and having them crit on turn 1 shouldn't be too difficult. If you don't want to use all 6 Blade Lineage ids, there's a few other self-sufficient Poise ids that should be able to replace them without adding too much difficulty. Ideally bring ids with low coin skills that give a lot of Poise Potency. The following are a few example of ids that have skills like that:"
-                },
-                {
-                    "type": "showIds",
-                    "ids": [
-                        "10107",
-                        "10613",
-                        "10611",
-                        "10711",
-                        "11207"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "Using E.G.O that give poise before attacking is also a viable option.\n\nYou'll also need some Poise granting gifts that can give Poise on turn 1 to make this more consistent."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Pendant of Nostalgia",
-                        "Ornamental Horseshoe",
-                        "Emerald Elytra",
-                        "Stone Tomb",
-                        "Nebulizer",
-                        "Endorphin Kit",
-                        "CQC Manual",
-                        "Lucky Pouch",
-                        "Guiding Gas Lamp",
-                        "Cask Spirits"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "cmb_clash",
-            "text": "In an Encounter, reach Clash Power 80 or higher",
-            "points": 80,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Note that the methods below focus on getting this achievement with lower time, cost, and starlight investment. They rely solely on gifts for the relevant keyword and general damage type gifts. 80 clash power is much easier to reach if you get the starlight buffs that make getting gifts easier and get the various gift combos using other keywords. There are also methods using other IDs and E.G.Os that give Coin Power, but those won't be covered here."
-                },
-                {
-                    "type": "text",
-                    "text": "The main option for this achievement is to use The Thumb East Capo IIII Meursault and put together the following:"
-                },
-                {
-                    "type": "table",
-                    "headers": [
-                        "",
-                        "Base Power",
-                        "Clash Power",
-                        "Coin Power"
-                    ],
-                    "cells": [
-                        [
-                            "S3 with Savage Tigermark Rounds (5 coins)",
-                            "3",
-                            "",
-                            "+3\n+2 from conditional\n+2 for 3rd-5th coins from passive"
-                        ],
-                        [
-                            "Starlight Guidance++ (Starlight Buff)",
-                            "",
-                            "+2",
-                            ""
-                        ],
-                        [
-                            "Regret (TETH E.G.O)",
-                            "-1",
-                            "",
-                            "+2"
-                        ],
-                        [
-                            "Crushbound Past (WAW E.G.O)",
-                            "",
-                            "Up to +5\n(from Accumulated Past passive)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Wobbling Keg",
-                                    "Omnivibro-octovecti-bell"
-                                ]
-                            },
-                            "",
-                            "+1",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Crushed Memory"
-                                ]
-                            },
-                            "+2",
-                            "",
-                            "+1"
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "The Book of Vengeance"
-                                ]
-                            },
-                            "",
-                            "+2-3\n(+1 from 3 offense level)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Pocket Watch : Type L",
-                                    "Pocket Watch : Type E",
-                                    "Pocket Watch : Type Y",
-                                    "Pocket Watch : Type P"
-                                ]
-                            },
-                            "",
-                            "(up to +2 for Type P)",
-                            "+2 each (up to +4)"
-                        ],
-                        [
-                            "Total without Accumulated Past: 76\nTotal with Accumulated Past: 81",
-                            "4",
-                            "+6 (without Accumulated Past)\n+11 (with Accumulated Past)",
-                            "+12 for 1st and 2nd coins\n+14 for 3rd-5th coins"
-                        ]
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "The remaining Clash Power can be gotten from more general gift sources."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Tango Marinade",
-                        "Darkflame Smoking Pipe",
-                        "Sunshower",
-                        "Enh. Tattoos - The Middle",
-                        "Dimensional Recycle Bin",
-                        "Temporal Bridle",
-                        "Keenbranch",
-                        "Chalice of Trickle-down"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "I managed to do this at F7 with the following gifts (ignoring the irrelevant ones). I used Crushbound Past on turn 1, Regret on turn 2, then I just defended and clashed with weak skills (to not kill the boss) for a few turns. Meursault has to be deployed first for Darkflame Smoking Pipe to affect him. Accumulated Past is only at 8 stacks here, so there's even more leeway."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Temporal Bridle",
-                        "Crushed Memory",
-                        "Omnivibro-octovecti-bell",
-                        "The Book of Vengeance",
-                        "Chalice of Trickle-down",
-                        "Pocket Watch : Type L",
-                        "Pocket Watch : Type P",
-                        "Darkflame Smoking Pipe",
-                        "Enh. Tattoos - The Middle"
-                    ]
-                },
-                {
-                    "type": "showSample",
-                    "img": "80clash",
-                    "height": "20rem"
-                },
-                {
-                    "type": "text",
-                    "text": "A possible alternative is using Charge. The problem is that most of Charge's Clash Power comes from Offense Levels instead of raw Base/Coin/Clash Power, so if enemies have too high Offense Level (from mounting trials or just from higher floors) they might end up cancelling out the Clash Power bonuses that Charge can get. The following is a list of most of the Charge skills with 4-5 coins (W Meursault's S3 and R Hong Lu's s2 have even lower numbers). Apologies if I have missed or added some numbers wrong (Clash Power won't be exact because of the differing Offense Levels, but the numbers I put should roughly be in that ballpark):"
-                },
-                {
-                    "type": "table",
-                    "nowrap": true,
-                    "headers": [
-                        "",
-                        "Base Power",
-                        "Clash Power",
-                        "Coin Power"
-                    ],
-                    "cells": [
-                        [
-                            "W Don S3 (5 coins)\nW Ryoshu S3 (4 coins)\nW Outis S3 (4 coins)\nR Heathcliff S3 (5 coins)\nR Ishmael S3 (4 coins)\nMulticrack Faust S3 (4 coins)\nMulticrack Heathcliff S3 (4 coins)",
-                            "1\n3\n4\n3, +1 Attack Power from passive\n2\n4\n5",
-                            "\n\n\n\n\n\n+1 from passive",
-                            "+2, +4 from conditional\n+2, +5 from conditional\n+3, +2 from conditional\n+2, +2 from conditional\n+6\n+3, +4 from conditional\n+2, +2 from conditional"
-                        ],
-                        [
-                            "Starlight Guidance++ (Starlight Buff)",
-                            "",
-                            "+2",
-                            ""
-                        ],
-                        [
-                            "W Outis passive buff",
-                            "",
-                            "+1",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "T-1 Perpetual Motion Machine"
-                                ]
-                            },
-                            "Up to +3 Attack Power",
-                            "+1 (up to +4 Offense Level)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "T-5 Perpetual Motion Machine"
-                                ]
-                            },
-                            "+1 Attack Power",
-                            "+3 (up to +10 Offense Level)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Overcharged Battery",
-                                    "Perpetual Generator Servos"
-                                ]
-                            },
-                            "",
-                            "+2\n+1-3 (up to +6 Offense Level)",
-                            "+1\n+1"
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Hearts-powered Jewel",
-                                    "Automated Joints"
-                                ]
-                            },
-                            "",
-                            "",
-                            "+1\n+1-2(2 only for Multicrack)"
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Imitative Generator"
-                                ]
-                            },
-                            "",
-                            "",
-                            "+1 for S3\n+2 at 5+ Base Power"
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Spent Use, Forming Hate"
-                                ]
-                            },
-                            "",
-                            "Up to +3 (+10 Offense Level)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Curriculum Vitae"
-                                ]
-                            },
-                            "+1 if id has a Gloom skill",
-                            "",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Sundered Memory",
-                                    "Punctured Memory",
-                                    "Crushed Memory"
-                                ]
-                            },
-                            "+2",
-                            "",
-                            "+1"
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Broken Greatsword",
-                                    "Dueling Manual Book 3",
-                                    "The Book of Vengeance"
-                                ]
-                            },
-                            "",
-                            "+2-3\n(+1 from 3 offense level)",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Rusted Hilt"
-                                ]
-                            },
-                            "+1 for Slash",
-                            "",
-                            ""
-                        ],
-                        [
-                            {
-                                "gifts": [
-                                    "Resolution",
-                                    "Enh. Tattoos - The Middle",
-                                    "Keenbranch",
-                                    "Torn Bandolier",
-                                    "Overused Whetstone",
-                                    "Dimensional Recycle Bin"
-                                ]
-                            },
-                            "",
-                            "up to +1 each (+2 total)",
-                            ""
-                        ],
-                        [
-                            "W Don S3 Total: 79\nW Ryoshu S3 Total: 74\nW Outis S3 Total: 68\nR Heathcliff S3 Total: 70\nR Ishmael S3 Total: 69\nMulticrack Faust S3 Total: 79\nMulticrack Heathcliff S3 Total: 73",
-                            "9\n10\n12\n10\n9\n11\n12",
-                            "+20\n+20\n+20\n+20\n+20\n+20\n+21",
-                            "+10\n+11\n+9\n+8\n+10\n+12\n+10"
-                        ]
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "As you can see W Don and Multicrack Faust are pretty close to the numbers required, so they theoretically can meet the requirements as well. However, unlike the Tremor method with Capo Meursault (assuming you don't use Accumulated Past), this method needs a long ramp up with everyone spending lots of Charge to get the Offense Level bonuses from the gifts so you'll need to aim for long fights like Railway fights or Jia Qiu from 'The Surrendered Witnessing', and if you do this on an early floor before enemies have too high Offense Level, they might not survive long enough for the ramp up."
-                }
-            ]
-        },
-        {
-            "id": "cmb_imposed_weight",
-            "text": "In a Mirror Dungeon boss fight at Floor 5 or higher, activate the effect of Imposed Weight E.G.O Gift after 2 turns, then clear the Encounter",
-            "points": 100,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You can achieve this by only bringing one sinner for that boss. (Thanks to u/TheParentheticals on Reddit for confirming)"
-                },
-                {
-                    "type": "text",
-                    "text": "If you're struggling with the solo you can bring either bring Fell Bullet Yi Sang with anyone else and kill them or bring a strong id with ids that can retreat (Family Heirarch Candidate Ishmael, Devyat Rodion, or Devyat Sinclair) and have them retreat."
-                }
-            ]
-        },
-        {
-            "id": "cmb_sins",
-            "text": "In a single turn, equip 7+ Skills with different types of Sin Affinities at once",
-            "points": 70,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Just make sure to bring all the sin affinities. You can try doing this in one of the longer unfocused encounters to build up more moves per turn to make this easier."
-                }
-            ]
-        },
-        {
-            "id": "cmb_speed",
-            "text": "In an Encounter, reach a Speed value of 20 or higher with a Sinner",
-            "points": 50,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "There's a chance of this happening naturally using the Mao Heishous on a Rupture run if you have Smoking Gunpowder, Fluorescent Lamp, and Shadow Bamboo Hat."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Smoking Gunpowder",
-                        "Fluorescent Lamp",
-                        "Shadow Bamboo Hat"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "You can try soloing a fight to concentrate Smoking Gunpowder's buffs on one person if it doesn't work out.\n\nThere are also some other gifts that can help like Resolution, Scalpel, Ancient Effigy, Harpoon Prosthetic Leg. 20 speed becomes fairly common when you have these gifts as well."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": [
-                        "Resolution",
-                        "Scalpel",
-                        "Ancient Effigy",
-                        "Harpoon Prosthetic Leg"
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "cmb_burn",
-            "text": "Raise 1 enemy's Burn Potency to 99 (in Focused Encounters, a Part)",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Burn gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_bleed",
-            "text": "Raise 1 enemy's Bleed Potency to 99 (in Focused Encounters, a Part)",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Bleed gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_tremor",
-            "text": "Raise 1 enemy's Tremor Potency to 99 (in Focused Encounters, a Part)",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Tremor gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_rupture",
-            "text": "Raise 1 enemy's Rupture Potency to 99 (in Focused Encounters, a Part)",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Rupture gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_sinking",
-            "text": "Raise 1 enemy's Sinking Potency to 99 (in Focused Encounters, a Part)",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Sinking gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_poise",
-            "text": "Raise 1 ally's Poise Potency to 99",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally on longer fights when you have most of the Poise gifts."
-                }
-            ]
-        },
-        {
-            "id": "cmb_charge",
-            "text": "Raise 1 ally's Charge Potency to 10",
-            "points": 20,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "This will happen naturally when you have longer fights in the later floors of MDI, but may be harder to do in normal or on lower floors. Use Charge ids that can consume large amounts of charge at a time like QoH Don, Kod Rodya, W Ryoshu, or W Outis. If you're doing this on normal, try soloing to give that id more time to ramp up their Charge Potency."
-                }
-            ]
-        },
-        {
-            "id": "cmb_aoe",
-            "text": "Kill 7+ enemies with a single Attack Skill use in an Encounter (Enemies must be alive when the attack starts; can use E.G.O Skills)",
-            "points": 70,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "showThemePacks",
-                    "themePacks": [
-                        "1114"
-                    ]
-                },
-                {
-                    "type": "text",
-                    "text": "Go to the Full-Stopped by a Bullet theme pack at F4 (normal) or F3 (hard). Use Don's Yearning-Mircalla or corrode Hong Lu's Tears of the Tarnished Blood when there are 7+ enemies on screen. Honorable mention to Meursault's Crushbound Past if you can get an enemy to trigger his bonus atk weight. Other AOE E.G.Os can also achieve this, but will likely be less consistent."
-                },
-                {
-                    "type": "showEGOs",
-                    "EGOs": [
-                        "20307",
-                        "20608",
-                        "20508"
-                    ]
                 }
             ]
         }
@@ -2015,11 +1398,11 @@
                 },
                 {
                     "type": "text",
-                    "text": "- Bring easily accessible HP and SP healing. You might struggle to survive the longer fights without it."
+                    "text": "- Bring easily accessible HP and SP healing. You might struggle to survive the longer fights without it. Gifts that help with survivability like Bridle (RR2) or Emergency Investigator Badge (TKT Bokgak) are also incredibly useful."
                 },
                 {
                     "type": "text",
-                    "text": "- Be careful of the order in which you pick the theme packs and also which ones you decide to skip. Some have harder fights that are better done early compared to others. The Clear All Cathy pack (Impenetrable Path) is particularly nasty because the Peccatulum Iraes have unavoidable counters that will stagger or outright kill your sinners if you're not resistant to them."
+                    "text": "- Be careful of the order in which you pick the theme packs and also which ones you decide to skip. Some have harder fights that are better done early compared to others or even skipped completely. The Clear All Cathy pack (Impenetrable Path) is particularly nasty because the Peccatulum Iraes have unavoidable counters that will stagger or outright kill your sinners if you're not resistant to them. Green Dawn is an unfocused encounter, making it difficult to control clashes, and the enemies have counters as well."
                 },
                 {
                     "type": "table",
@@ -2047,155 +1430,39 @@
                 },
                 {
                     "type": "text",
-                    "text": "- Do NOT limit yourself to gifts of one keyword. Bring hybrid keyword identities that can make use of gifts for other keywords. All the better if you can trigger fusions for multiple keywords. Just don't overdo it to the point where the team itself is negatively affected because you're trying to force in an extra keyword. Get all your main keyword/s' gifts early and make sure you don't miss theme pack specific gifts and fusions. After that, get all the gifts you can for your damage types and secondary keywords (and Lunar Memory). They will make a big difference in how powerful your team is. Make sure not to fuse gifts of your secondary keyword if you don't have 5+ sinners to activate them."
+                    "text": "- Do NOT limit yourself to a single keyword. Bring a multi-status team so you can utilize more fusions and gifts, or at least use hybrid keyword identities that can make use of gifts for other keywords. Get all your main keyword(s)' gifts early and make sure you don't miss theme pack specific gifts and fusions. After that, get all the gifts you can for your damage types and secondary keywords (and Lunar Memory). They will make a big difference in how powerful your team is. Make sure not to fuse gifts of other keywords if you don't have 5+ sinners to activate them."
                 },
                 {
                     "type": "text",
-                    "text": "- To add to the previous point, there are also many gifts or gift combinations that can help even when you're not using ids of that keyword. Artistic Sense can give you bonus damage. The Sin Fragments increases the power of EGOs. Red-Stained Gossypium can apply offense and defense level down when combined with a Bleed source like Rusted Muzzle. Melted Eyeball and Bell of Truth can apply offense and defense level down and fragile for free with Downpour. Charge-Type Gloves can give additional buffs with gifts like Wrist Guards. Clear Mirror, Calm Water can give a lot of free damage and offense level up with gifts like Nebulizer, Pendant of Nostalgia, and Ornamental Horseshoe. Try reading the descriptions of gifts you're not too familiar with to make sure you haven't missed anything."
+                    "text": "- To add to the previous point, there are also many gifts or gift combinations that can help even when you're not using ids of that keyword. Artistic Sense can give you bonus damage. The Sin Fragments increases the power of EGOs. Red-Stained Gossypium can apply offense and defense level down when combined with a Bleed source like Rusted Muzzle. Melted Eyeball and Bell of Truth can apply offense and defense level down and fragile for free with Downpour. Charge-Type Gloves can give additional buffs with gifts like Wrist Guards. Clear Mirror, Calm Water can give a lot of free damage and offense level up with gifts like Nebulizer, Pendant of Nostalgia, and Ornamental Horseshoe. Try reading the descriptions of gifts you're not too familiar with to make sure you haven't missed anything. You can refer to the Universal Gifts page if you want suggestions on gifts that you can use regardless of the team you're using."
                 },
                 {
                     "type": "text",
-                    "text": "- Having 30 max SP means rng can hurt you badly. Don't forget you can reset a stage when things don't go your way as long as you still have living sinners."
+                    "text": "- Having 30 max SP means rng can hurt you badly. Don't forget you can reset a stage when things don't go your way as long as you still have living sinners. This max is only for SP healing during a fight, which means you can still heal up to 45 SP in a shop if you want a small boost at the start of a fight."
                 },
                 {
                     "type": "text",
-                    "text": "- Don't forget you have Durante abilities. Superbia isn't very useful later on since you should have more than enough EGO resources, but Pigritia and Morositasis especially could help in certain circumstances."
-                }
-            ]
-        }
-    ],
-    "Completionist": [
-        {
-            "id": "completion",
-            "text": "Complete all Achievements (Not counting Achievements in the \"Hidden\" category)",
-            "points": 0,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "Not much to say here other than good luck!"
-                }
-            ]
-        }
-    ],
-    "Hidden": [
-        {
-            "id": "hid_don",
-            "text": "Clear Hidden Node - Don Quixote",
-            "points": 0,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
+                    "text": "- Don't forget you have Durante abilities. Superbia isn't very useful later on since you should have more than enough EGO resources, but Pigritia, Morositas, and Ira can help in certain circumstances. Having Morositas ready for F15 is especially useful in pretty much every run."
                 },
                 {
                     "type": "text",
-                    "text": "For Don Quixote, just defend with everyone when he throws the gondolas at you. Heal often if you get hit with a lot of bleed. He has a lot of hp \"checkpoints\" so you'll end up skipping a lot of his mechanics if you deal enough damage."
+                    "text": "- If you're struggling on what theme packs to pick, the ones generally considered to be the easiest are Bridle of Infinity, S.E.A. C.R, and Into a Certain Library's Book, with Impenetrable Path and The Dawn of Green being the hardest. Try to leave the easier ones for later."
                 },
                 {
                     "type": "text",
-                    "text": "If you beat him, you'll get \"The Family's Resentment\"."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": ["The Family's Resentment"]
+                    "text": "- It is recommended to get Sharp Needle and Thread if you're planning to pick theme packs with a lot of enemies. Using a strong AOE E.G.O with your first sinner on a turn can deal a lot of damage or even stagger the entire wave if you have Lunar Memory. Try to get it from gift observation at the start of a run since it's difficult to get it from the Hell's Chicken theme pack."
                 }
             ]
         },
         {
-            "id": "hid_lei",
-            "text": "Clear Hidden Node - Lei Heng",
-            "points": 0,
+            "id": "adv_no_lunar",
+            "text": "Clear Floor 15 of the Mirror Dungeon without obtaining the E.G.O Gift 'Lunar Memory'",
+            "points": 100,
             "hardonly": true,
             "tips": [
                 {
                     "type": "text",
-                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
-                },
-                {
-                    "type": "text",
-                    "text": "For Lei Heng, the biggest problem most players had in story mode was the amount of damage he dealt from his red coins due to his ammo and speed passives. Most builds that will survive extreme will probably naturally have sources of haste/bind in their gifts, which already eliminates his speed issue. Try clashing his weaker skills with your faster sinners to make him use up his ammo so he runs out before his stronger skills."
-                },
-                {
-                    "type": "text",
-                    "text": "If you beat him, you'll get \"For the Capo\"."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": ["For the Capo"]
-                }
-            ]
-        },
-        {
-            "id": "hid_ric",
-            "text": "Clear Hidden Node - Ricardo",
-            "points": 0,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
-                },
-                {
-                    "type": "text",
-                    "text": "There's not really much to say about Ricardo. You just have to outclash him. He gets offense level buffs when you hit him or his minions, but at that point in extreme that doesn't really make that big of a difference and it's not really something you can control very well. You can use egos to make yourself resistant to his counter if you want to minimize damage."
-                },
-                {
-                    "type": "text",
-                    "text": "If you beat him, you'll get \"Rules of the Middle\"."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": ["Rules of the Middle"]
-                }
-            ]
-        },
-        {
-            "id": "hid_ver",
-            "text": "Clear Hidden Node - Vergilius",
-            "points": 0,
-            "hardonly": true,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You can't really plan for the hidden bosses since they come up randomly in Extreme event nodes. Just do what you normally do to prepare for extreme. You should be able to deal with them if you have good enough clashing and damage and if you deal with their mechanics where necessary."
-                },
-                {
-                    "type": "text",
-                    "text": "Not much to do for him other than win clashes. He passively gives Candy to the sinners and gets buffed based on how much Candy they have. You can't really control it, but you get more if you hit kkomi. He has a skill that removes candy if he loses the clash, then it gives him Clash Power Down and he loses his Hunger-Rage buff once he takes back 10 candy. Just make sure to win those and try to beat him before he uses Vroom-Vroom at 3 Hunger-Rage."
-                },
-                {
-                    "type": "text",
-                    "text": "If you beat him, you'll get \"Kkomi's Mini-Gift\"."
-                },
-                {
-                    "type": "showGiftList",
-                    "gifts": ["Kkomi's Mini-Gift"]
-                }
-            ]
-        },
-        {
-            "id": "hid_philo",
-            "text": "Obtain EX-Tier E.G.O Gift \"A Certain Philosophy\"",
-            "points": 0,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You need to fuse with a 99% chance to get the keyword you want and fail it to get this gift. Just keep fusing either 3 gifts with the starlight buff to increase the fuse chance or with 4 gifts in a super shop."
-                }
-            ]
-        },
-        {
-            "id": "hid_wealth",
-            "text": "Obtain EX-Tier E.G.O Gift \"Wealth\"",
-            "points": 0,
-            "hardonly": false,
-            "tips": [
-                {
-                    "type": "text",
-                    "text": "You need to encounter the slot machine event and succeed in the 1% chance to get this gift."
+                    "text": "Pretty straightforward requirement. You don't need adversities when doing this if you want to make your life easier."
                 }
             ]
         }

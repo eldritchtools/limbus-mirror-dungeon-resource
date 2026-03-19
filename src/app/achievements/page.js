@@ -145,7 +145,7 @@ function RewardsTab({ totalPoints, columns = 2 }) {
             if (reward.item in acc[0]) acc[0][reward.item] += reward.count;
             else acc[0][reward.item] = reward.count;
 
-            acc[2].push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
+            acc[2].push(<div key={acc[2].length} style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
                 <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{level}</span>
                 <span style={{ textDecoration: "line-through", padding: "0.1rem", border: "1px #666 dotted" }}>{reward.count}x {reward.item}</span>
             </div>);
@@ -153,7 +153,7 @@ function RewardsTab({ totalPoints, columns = 2 }) {
             if (reward.item in acc[1]) acc[1][reward.item] += reward.count;
             else acc[1][reward.item] = reward.count;
 
-            acc[2].push(<div style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
+            acc[2].push(<div key={acc[2].length} style={{ display: "grid", gridTemplateColumns: "1fr 4fr", textAlign: "center" }}>
                 <span style={{ padding: "0.1rem", border: "1px #666 dotted" }}>{level}</span>
                 <span style={{ padding: "0.1rem", border: "1px #666 dotted" }}>{reward.count}x {reward.item}</span>
             </div>);

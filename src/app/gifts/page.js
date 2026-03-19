@@ -163,8 +163,14 @@ function GiftList({ searchString, selectedMainFilters, tagFilter, tagFilterExclu
             `repeat(auto-fill, minmax(${isSmall ? "100%" : "400px"}, 1fr))` :
             "1fr"
 
-    return <div style={{ display: "grid", gridTemplateColumns: columns, width: "100%", rowGap: "0.5rem" }}>
-        {listComponents}
+    return <div style={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center" }}>
+        <h3 style={{ margin: 0 }}>Results: {listComponents.length}</h3>
+        <span style={{fontSize: "0.8rem", color: "#aaa", marginBottom: ".5rem"}}>
+            This count may include gifts that are no longer obtainable or are not part of the gift compendium.
+        </span>
+        <div style={{ display: "grid", gridTemplateColumns: columns, width: "100%", rowGap: "0.5rem" }}>
+            {listComponents}
+        </div>
     </div>
 }
 
@@ -309,7 +315,7 @@ function GiftsTab() {
                     </label>
                 </div>
                 <div />
-                <div style={{display: "flex"}}>
+                <div style={{ display: "flex" }}>
                     <label>
                         <input type="checkbox" checked={showTagStrips} onChange={e => setShowTagStrips(e.target.checked)} />
                         <span {...generalTooltipProps("Display colored strips on gifts to quickly see their tags. (Experimental Feature)")}

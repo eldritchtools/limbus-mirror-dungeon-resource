@@ -177,7 +177,11 @@ function ShowThemePacksByFloorTip({ tip }) {
     const [themePacksData, themePacksLoading] = useData("md_theme_packs");
     const { hard } = useFloorsPerPack();
 
-    const themePacks = Object.entries(themePacksLoading ? {} : themePacksData).filter(([id, themePack]) => themePack.tags.includes(tip.tag));
+    const themePacks = Object.entries(themePacksLoading ? {} : themePacksData).filter(([id, themePack]) => {
+        if(tip.tag) return themePack.tags.includes(tip.tag);
+        if(tip.themePacks) return tip.themePacks.includes(id);
+        return true;
+    });
     const packsByFloor = themePacks.reduce((acc, [id, pack]) => {
         if (id in hard) {
             hard[id].forEach(floor => {
@@ -196,10 +200,10 @@ function ShowThemePacksByFloorTip({ tip }) {
     const components = [];
     ["any", "1", "2", "3", "4", "5", "6-10"].forEach(floor => {
         if (!(floor in packsByFloor)) return;
-        if (floor === "any") components.push(<div style={centerStyle}>Any floor</div>);
-        else components.push(<div style={centerStyle}>Floor {floor}</div>);
+        if (floor === "any") components.push(<div key={components.length} style={centerStyle}>Any floor</div>);
+        else components.push(<div key={components.length} style={centerStyle}>Floor {floor}</div>);
 
-        components.push(<div style={{ ...centerStyle, display: "flex", flexDirection: "column", padding: "0.2rem" }}>
+        components.push(<div key={components.length} style={{ ...centerStyle, display: "flex", flexDirection: "column", padding: "0.2rem" }}>
             {packsByFloor[floor].map(id => {
                 if ("highlight" in tip && floor in tip.highlight && tip.highlight[floor].includes(id))
                     return <ThemePackNameWithTooltip key={id} id={id} style={{ fontWeight: "bold", color: "#4ade80" }} />
