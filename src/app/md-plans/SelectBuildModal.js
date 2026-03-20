@@ -78,7 +78,7 @@ export default function SelectBuildModal({ isOpen, onClose, onSelectBuild }) {
             <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "1rem", alignSelf: "center", marginTop: "0.5rem", marginBottom: "0.5rem" }}>
                 <div style={{ ...tabStyle, color: searchMode === "search" ? "#ddd" : "#777" }} onClick={() => setSearchMode("search")}>Search Builds</div>
                 <div style={{ ...tabStyle, color: searchMode === "user" ? "#ddd" : "#777" }} onClick={() => setSearchMode("user")}>My Builds</div>
-                <div style={{ ...tabStyle, color: searchMode === "draft" ? "#ddd" : "#777" }} onClick={() => setSearchMode("draft")}>My Drafts</div>
+                {/* <div style={{ ...tabStyle, color: searchMode === "draft" ? "#ddd" : "#777" }} onClick={() => setSearchMode("draft")}>My Drafts</div> */}
             </div>
             {searchMode === "search" ?
                 <BuildsSearchComponent options={filters} setFilters={setFilters} /> :
