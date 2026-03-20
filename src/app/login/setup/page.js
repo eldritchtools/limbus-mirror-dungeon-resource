@@ -114,7 +114,9 @@ export default function UsernameSetup() {
             if(mdPlanSync && localMdPlans.length !== 0) {
                 for (const plan of localMdPlans) {
                     try {
-                        const data = await createMdPlan(plan);
+                        const {builds: builds, ...planData} = plan
+                        planData.build_ids = builds.map(build => build.id);
+                        const data = await createMdPlan(planData);
                         if (data) await mdPlansStore.remove(plan.id);
                     } catch (err) {
                         setError("Failed to sync an md plan, try again or cancel syncing.");
