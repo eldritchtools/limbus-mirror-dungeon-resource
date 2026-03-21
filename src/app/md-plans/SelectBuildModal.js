@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../database/authProvider";
 import BuildEntry from "../components/BuildEntry";
 import { getFilteredBuilds } from "../database/builds";
-import BuildsSearchComponent from "./BuildsSearchComponent";
 import { Modal } from "../components/Modal";
 import { tabStyle } from "../styles";
+import BuildsSearchComponent from "./BuildsSearchComponent";
 
 function prepareBuildFilters(filters) {
     return Object.entries(filters).reduce((acc, [f, v]) => {
-        if (f === "title" || f === "username" || f === "tags") acc[f] = v;
+        if (f === "search") acc["query"] = v; 
+        else if(f === "tags") acc[f] = v;
         else if (f === "identities" || f === "egos") {
             const [include, exclude] = v.reduce(([i, e], x) => {
                 if (x[0] === "-") e.push(parseInt(x.slice(1)));
@@ -49,17 +50,17 @@ export default function SelectBuildModal({ isOpen, onClose, onSelectBuild }) {
                     const strictFiltering = filters["strictFiltering"] || false;
                     const newFilters = prepareBuildFilters(filters);
 
-                    const data = await getFilteredBuilds({ ...newFilters, "ignore_block_discovery": true }, true, sortBy, strictFiltering, page, 24);
+                    const data = await getFilteredBuilds({ ...newFilters, "ignore_block_discovery": true, "include_egos": true }, true, sortBy, strictFiltering, page, 24);
 
                     setSearchBuilds(data || []);
                 } else if (searchMode === "user") {
                     if (user) {
-                        const data = await getFilteredBuilds({ "user_id": user.id, "ignore_block_discovery": true }, true, "recency", false, page, 24);
+                        const data = await getFilteredBuilds({ "user_id": user.id, "ignore_block_discovery": true, "include_egos": true }, true, "recency", false, page, 24);
                         setSearchBuilds(data || []);
                     }
                 } else if (searchMode === "draft") {
                     if (user) {
-                        const data = await getFilteredBuilds({ "user_id": user.id, "ignore_block_discovery": true }, false, "recency", false, page, 24);
+                        const data = await getFilteredBuilds({ "user_id": user.id, "ignore_block_discovery": true, "include_egos": true }, false, "recency", false, page, 24);
                         setSearchBuilds(data || []);
                     }
                 }
