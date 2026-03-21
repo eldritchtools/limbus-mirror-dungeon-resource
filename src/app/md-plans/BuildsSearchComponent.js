@@ -46,8 +46,7 @@ function KeywordSelector({ selectedKeywords, setSelectedKeywords }) {
 }
 
 export default function BuildsSearchComponent({ options = {}, setFilters }) {
-    const [title, setTitle] = useState(options.title || "");
-    const [username, setUsername] = useState(options.username || "");
+    const [search, setSearch] = useState(options.search || "");
     const [tags, setTags] = useState((options.tags || []).map(t => tagToTagSelectorOption(t)));
     const [identities, setIdentities] = useState(options.identities || []);
     const [egos, setEgos] = useState(options.egos || []);
@@ -59,8 +58,7 @@ export default function BuildsSearchComponent({ options = {}, setFilters }) {
 
     const applyFilters = () => {
         const searchFilters = {};
-        if (title !== "") searchFilters.title = title;
-        if (username !== "") searchFilters.username = username;
+        if (search !== "") searchFilters.search = search;
         if (tags.length > 0) searchFilters.tags = tags.map(t => t.value);
         if (identities.length > 0) searchFilters.identities = identities;
         if (egos.length > 0) searchFilters.egos = egos;
@@ -73,10 +71,8 @@ export default function BuildsSearchComponent({ options = {}, setFilters }) {
 
     return <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "0.5rem", maxWidth: "940px" }}>
-            <span style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>Title</span>
-            <div style={{ display: "flex" }}><input value={title} onChange={e => setTitle(e.target.value)} style={{ minWidth: "clamp(15rem, 90%, 25rem)", maxWidth: "100%" }} /></div>
-            <span style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>User</span>
-            <div style={{ display: "flex" }}><input value={username} onChange={e => setUsername(e.target.value)} style={{ minWidth: "clamp(15rem, 90%, 25rem)", maxWidth: "100%" }} /></div>
+            <span style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>Search</span>
+            <div style={{ display: "flex" }}><input value={search} onChange={e => setSearch(e.target.value)} style={{ minWidth: "clamp(15rem, 90%, 25rem)", maxWidth: "100%" }} /></div>
             <span style={{ display: "flex", alignItems: "center", justifyContent: "end" }}>Tags</span>
             <TagSelector selected={tags} onChange={setTags} creatable={false} styles={selectStyleVariable} />
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "end", gap: "0.2rem" }}>
