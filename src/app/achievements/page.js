@@ -19,8 +19,8 @@ import ReactTimeAgo from 'react-time-ago';
 function Achievement({ achievement, tracking, setAchievementTracking, isSmall }) {
     const checkboxRef = useRef(null);
 
-    const isChecked = tracking[achievement.id] > achievement.points.length - 1;
-    const isPartial = tracking[achievement.id] > 0 && tracking[achievement.id] <= achievement.points.length - 1;
+    const isChecked = Array.isArray(achievement.points) ? tracking[achievement.id] > achievement.points.length - 1 : tracking[achievement.id] > 0;
+    const isPartial = Array.isArray(achievement.points) ? tracking[achievement.id] > 0 && tracking[achievement.id] <= achievement.points.length - 1 : false;
 
     useEffect(() => {
         if (checkboxRef.current) {
