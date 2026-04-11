@@ -252,7 +252,7 @@ export default function MdPlanPage({ params }) {
             </div>
             <div style={{ display: "flex", flexDirection: "column", width: isMobile ? "100%" : "95%", alignSelf: "center", marginBottom: "1rem", gap: "1rem" }}>
 
-                {plan.recommendation_mode === "list" ? <>
+                {plan.recommendation_mode === "list" || plan.recommendation_mode === "specbuild" ? <>
                     <span style={{ fontSize: "1.2rem" }}>Recommended Identities and E.G.Os</span>
                     <IdEgoDisplay identityIds={plan.identity_ids} egoIds={plan.ego_ids} editable={false} />
                 </> :
