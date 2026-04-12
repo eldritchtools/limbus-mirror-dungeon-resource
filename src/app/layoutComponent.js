@@ -41,9 +41,9 @@ function MigrationNotice() {
     if (hidden) return null;
 
     return <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "1rem" }}>
-        <div style={{ backgroundColor: "#262626", borderBottom: "1px solid #333", maxWidth: "1200px", boxShadow: "0 4px 16px rgba(0,0,0,0.4)" }}>
+        <div style={{ backgroundColor: "#262626", borderRadius: "1rem", border: "1px solid #333", maxWidth: "1200px", boxShadow: "0 4px 16px rgba(0,0,0,0.4)" }}>
             <div style={{ padding: "8px 16px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#d1d1d1" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", color: "#d1d1d1" }}>
                     <span style={{ lineHeight: "1.3" }}>
                         Hi! This site has been combined with the Team Building Hub to make a more convenient and easier to maintain site over at <NoPrefetchLink className="text-link" href="https://limbus.eldritchtools.com">https://limbus.eldritchtools.com</NoPrefetchLink>.
                         <br /> <br />
@@ -51,6 +51,9 @@ function MigrationNotice() {
                         <br /> <br />
                         This site will continue running for some time, but will only receive updates for compatibility with new data. Only the new site will receive new features moving forward. 
                     </span>
+                    <NoPrefetchLink className="text-link" href="https://limbus.eldritchtools.com" style={{ alignSelf: "center" }}>
+                        ➔ Go to the new site <span style={{display: "inline-block", verticalAlign: "middle", transform: "rotate(180deg)"}}>➔</span>
+                    </NoPrefetchLink>
                 </div>
 
                 <button 
